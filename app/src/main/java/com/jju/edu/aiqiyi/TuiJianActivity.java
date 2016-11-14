@@ -1,6 +1,7 @@
 package com.jju.edu.aiqiyi;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
@@ -42,6 +44,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
 
     private ImageView search,history,outline,more;
     private LinearLayout ll_search;
+    private PopupWindow popupWindow;
 
     private static final String[] titles = new String[]{"推荐","梦想的声音","订阅","电视剧","电影","搞笑"};
 
@@ -131,7 +134,15 @@ public class TuiJianActivity extends BaseFragmentActivity{
                     Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.more:
-                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);
+                    popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    //设置背景
+                    popupWindow.setBackgroundDrawable(new ColorDrawable());
+                    //设置为可点击
+                    popupWindow.setFocusable(true);
+                    popupWindow.setContentView(view);
+                    //设置出现在当前点击控件的正下方
+                    popupWindow.showAsDropDown(more);
                     break;
                 case R.id.ll_search:
                     Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
