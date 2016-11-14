@@ -26,7 +26,8 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_toLeftOf="@id/plus"
-            android:background="@drawable/title_search"/>
+            android:background="@drawable/title_search"
+            android:id="@+id/search" />
     </RelativeLayout>
     <TextView
         android:layout_width="match_parent"

@@ -26,22 +26,26 @@
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/title_search"/>
+            android:src="@drawable/title_search"
+            android:id="@+id/search" />
 
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/title_rc"/>
+            android:src="@drawable/title_rc"
+            android:id="@+id/history" />
 
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/title_download"/>
+            android:src="@drawable/title_download"
+            android:id="@+id/outline" />
 
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/title_plus"/>
+            android:src="@drawable/title_plus"
+            android:id="@+id/more" />
     </LinearLayout>
 
 </LinearLayout>

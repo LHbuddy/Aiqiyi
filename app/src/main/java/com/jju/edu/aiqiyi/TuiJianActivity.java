@@ -7,6 +7,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
 import com.jju.edu.aiqiyi.tuijian.DingyueFragment;
@@ -36,12 +40,29 @@ public class TuiJianActivity extends FragmentActivity{
     private Fragment movie_fragment;
     private Fragment gaoxiao_fragment;
 
+    private ImageView search,history,outline,more;
+    private LinearLayout ll_search;
+
     private static final String[] titles = new String[]{"推荐","梦想的声音","订阅","电视剧","电影","搞笑"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuijian_layout);
+
+        search = (ImageView) findViewById(R.id.search);
+        history = (ImageView) findViewById(R.id.history);
+        outline = (ImageView) findViewById(R.id.outline);
+        more = (ImageView) findViewById(R.id.more);
+        ll_search = (LinearLayout) findViewById(R.id.ll_search);
+
+        //设置监听
+        search.setOnClickListener(new myclick());
+        history.setOnClickListener(new myclick());
+        outline.setOnClickListener(new myclick());
+        more.setOnClickListener(new myclick());
+        ll_search.setOnClickListener(new myclick());
+
         initView();
     }
 
@@ -91,6 +112,32 @@ public class TuiJianActivity extends FragmentActivity{
         @Override
         public CharSequence getPageTitle(int position) {
             return titles[position];
+        }
+    }
+
+    //标题栏监听事件
+    class myclick implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.search:
+                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                break;
+                case R.id.history:
+                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.outline:
+                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.more:
+                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_search:
+                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    break;
+
+            }
+
         }
     }
 }
