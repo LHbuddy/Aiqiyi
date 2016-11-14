@@ -1,9 +1,9 @@
 package com.jju.edu.aiqiyi;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,7 +26,7 @@ import java.util.List;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class TuiJianActivity extends FragmentActivity{
+public class TuiJianActivity extends BaseFragmentActivity{
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -88,6 +88,7 @@ public class TuiJianActivity extends FragmentActivity{
 
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(Color.argb(255,16,225,37));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
     }
