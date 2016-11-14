@@ -7,7 +7,6 @@
               android:padding="5dp">
 
     <LinearLayout
-        android:background="@drawable/shape"
         android:id="@+id/ll_search"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -29,12 +28,13 @@
             android:background="#10E125"/>
     </LinearLayout>
     <Button
+
         android:id="@+id/btn_more"
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@drawable/shape"
         android:text="订阅更新"
         android:textColor="#10E125"
         android:textSize="16sp"
