@@ -38,7 +38,7 @@ public class HuiYuanActivity extends BaseFragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tuijian_layout);
+        setContentView(R.layout.huiyuan_layout);
 
         initView();
     }
