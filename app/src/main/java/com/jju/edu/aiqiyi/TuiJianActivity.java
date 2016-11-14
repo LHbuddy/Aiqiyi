@@ -92,6 +92,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.argb(255,16,225,37));
+        tabLayout.setTabTextColors(Color.BLACK,Color.argb(255,16,225,37));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
     }

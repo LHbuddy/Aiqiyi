@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:background="#1b1616">
+        android:background="#1b1616"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -14,7 +17,8 @@
             android:layout_centerInParent="true"
             android:text="爱奇艺VIP会员"
             android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"/>
+
         <ImageView
             android:id="@+id/plus"
             android:layout_width="45dp"
@@ -22,6 +26,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/title_plus"/>
+
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -29,9 +34,17 @@
             android:background="@drawable/title_search"
             android:id="@+id/search" />
     </RelativeLayout>
-    <TextView
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="会员"/>
+        android:layout_height="40dp"
+        android:background="#dfdbdb"
+        app:tabIndicatorColor="#10E125"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 </LinearLayout>
