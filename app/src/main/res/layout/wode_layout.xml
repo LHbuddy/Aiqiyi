@@ -4,17 +4,18 @@
     android:background="#ece9e9"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#312d2d">
+        android:background="#1b1616">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:textColor="#FFFFFF"
-            android:text="我的"/>
-    </LinearLayout>
+            android:text="我的"
+            android:textSize="18sp"/>
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -445,10 +446,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:text="爱奇艺V7.2.1"
                     android:gravity="center"
-                    android:textSize="12sp"/>
+                    android:textSize="10sp"/>
             </LinearLayout>
 
 
