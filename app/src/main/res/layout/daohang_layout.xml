@@ -4,10 +4,12 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#000000">
+        android:layout_height="50dp"
+        android:background="#1b1616"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +20,7 @@
             android:textSize="22sp"/>
 
         <ImageView
-            android:id="@+id/title_img_search"
+            android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -27,26 +29,13 @@
             android:background="@drawable/pinned_search"/>
     </RelativeLayout>
 
-
-    <!--<TableLayout-->
-    <!--android:id="@+id/tablelayout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:stretchColumns="*">-->
-
-
-    <!--</TableLayout>-->
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F0F0F0"
-        android:horizontalSpacing="2dp"
         android:numColumns="3"
-        android:padding="2dp"
-        android:verticalSpacing="2dp">
-
-    </GridView>
+        android:textColor="#F0F0F0"
+        android:textSize="18sp"/>
 
 
 </LinearLayout>
