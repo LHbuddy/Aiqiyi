@@ -1,6 +1,5 @@
 package com.jju.edu.aiqiyi;
 
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,11 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.vipuser.MyVipFragment;
 import com.jju.edu.aiqiyi.vipuser.VipHomeFragment;
@@ -36,20 +30,13 @@ public class HuiYuanActivity extends BaseFragmentActivity{
     private Fragment viphome_fragment;
     private Fragment vipmovie_fragment;
     private Fragment viprecord_fragment;
-    private ImageView search,plus;
-    private PopupWindow popupWindow;
 
     private static final String[] vip_titles = new String[]{"我的VIP会员","会员俱乐部","VIP会员","VIP纪录片"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.huiyuan_layout);
-        search = (ImageView) findViewById(R.id.search);
-        plus = (ImageView) findViewById(R.id.plus);
-        //开始监听
-        search.setOnClickListener(new myclick());
-        plus.setOnClickListener(new myclick());
+        setContentView(R.layout.tuijian_layout);
 
         initView();
     }
@@ -76,35 +63,10 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         tabLayout.setTabTextColors(Color.BLACK,Color.argb(255,16,225,37));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-
-    }
-
-    class myclick implements View.OnClickListener{
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.search:
-                    Toast.makeText(HuiYuanActivity.this, "", Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.plus:
-                    View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);
-                    popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    //设置背景
-                    popupWindow.setBackgroundDrawable(new ColorDrawable());
-                    //设置为可点击
-                    popupWindow.setFocusable(true);
-                    popupWindow.setContentView(view);
-                    //设置出现在当前点击控件的正下方
-                    popupWindow.showAsDropDown(plus);
-                    break;
-            }
-        }
     }
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -117,7 +79,7 @@ public class HuiYuanActivity extends BaseFragmentActivity{
 
         @Override
         public int getCount() {
-            return vip_fragments.size();
+            return vip_titles.length;
         }
 
         @Override
