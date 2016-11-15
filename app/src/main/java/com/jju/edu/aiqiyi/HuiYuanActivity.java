@@ -1,6 +1,5 @@
 package com.jju.edu.aiqiyi;
 
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,11 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.vipuser.MyVipFragment;
 import com.jju.edu.aiqiyi.vipuser.VipHomeFragment;
