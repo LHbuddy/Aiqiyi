@@ -54,9 +54,7 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         vip_fragments.add(viphome_fragment);
         vip_fragments.add(vipmovie_fragment);
         vip_fragments.add(viprecord_fragment);
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setSelectedTabIndicatorColor(Color.argb(255,16,225,37));
