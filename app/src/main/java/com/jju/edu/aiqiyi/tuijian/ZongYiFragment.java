@@ -11,9 +11,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
@@ -99,14 +102,13 @@ public class ZongYiFragment extends Fragment {
                         Elements elements2 = element.getElementsByTag("p");
                         String name = elements2.get(0).text();
                         String desc = elements2.get(1).text();
+                      //  String desc = elements.get(i).getElementsByTag(".p_bt").text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
                        // Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
-
                         util.setVideo_image("http:" + img);
                         util.setVideo_name(name);
                         util.setVideo_desc(desc);
-                        util.setVideo_path(path);
-
+                        util.setVideo_path("http:" +path);
                         list.add(util);
 
                     }
@@ -147,6 +149,7 @@ public class ZongYiFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
+                    grid_view.setOnItemClickListener(listener);
                     break;
                 case 124:
                     //   Log.e("1111111", "" + list.size());
@@ -161,6 +164,7 @@ public class ZongYiFragment extends Fragment {
                         }
                     });
                    // getmessage_02();
+                    grid_view02.setOnItemClickListener(listener);
                     break;
             }
         }
@@ -185,14 +189,11 @@ public class ZongYiFragment extends Fragment {
                         String desc = elements2.get(2).text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
                     //    Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
-
                         util02.setVideo_image("http:" + img);
                         util02.setVideo_name(name);
                         util02.setVideo_desc(desc);
-                        util02.setVideo_path(path);
-
+                        util02.setVideo_path("http:" +path);
                         list02.add(util02);
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -201,6 +202,30 @@ public class ZongYiFragment extends Fragment {
             }
         }.start();
     }
+
+    //grid view 监听事件
+    AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+           // Toast.makeText(getActivity(),""+parent,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(),PlayerActivity.class);
+            String info = "";
+          //  Log.e("********",list.get(position).getVideo_path());
+            switch (parent.getId()){
+                case R.id.grid_view:
+                   // Toast.makeText(getActivity(),"ww"+position,Toast.LENGTH_SHORT).show();
+                    info = list.get(position).getVideo_path();
+                    break;
+                case R.id.grid_view02:
+                   // Toast.makeText(getActivity(),"ss"+position,Toast.LENGTH_SHORT).show();
+                    info = list02.get(position).getVideo_path();
+                    break;
+            }
+            intent.putExtra("path",info);
+            startActivity(intent);
+
+        }
+    };
 
 
 
