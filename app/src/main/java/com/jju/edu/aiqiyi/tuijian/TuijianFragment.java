@@ -110,6 +110,7 @@ public class TuijianFragment extends Fragment {
                     x = event.getX();
                     y = event.getY();
                     isStop = true;
+
                     break;
                 case MotionEvent.ACTION_UP:
                     isStop = false;
