@@ -2,6 +2,8 @@ package com.jju.edu.aiqiyi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -17,8 +19,18 @@ public class PlayerActivity extends BaseActivity {
         setContentView(R.layout.player_layout);
 
         webview = (WebView) findViewById(R.id.webview);
+
+        // 设置WebView属性，能够执行Javascript脚本
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setPluginState(WebSettings.PluginState.ON);
+
+        webview.setVisibility(View.VISIBLE);
+        webview.getSettings().setUseWideViewPort(true);
+
         String path = getIntent().getStringExtra("path");
-        webview.loadUrl(path);
+        String[] path_phone = path.split("http://");
+        String phone_path = "http://m."+path_phone[1];
+        webview.loadUrl(phone_path);
         webview.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
