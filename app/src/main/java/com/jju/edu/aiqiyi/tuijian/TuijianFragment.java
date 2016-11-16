@@ -14,9 +14,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -52,11 +57,26 @@ public class TuijianFragment extends Fragment {
     private boolean isStop = false;
     private int index = 0;
 
+    //今日资讯
+    private List<VideoUtil> jinri_list = new ArrayList<VideoUtil>();
+    private VideoUtil videoUtil_jinri;
+    private Button btn_tuijian_jinri_more;
+    private TextView btn_tuijian_jinri_1, btn_tuijian_jinri_2,btn_tuijian_jinri_3;
+    private LinearLayout ll_tuijian_jinri_1, ll_tuijian_jinri_2,ll_tuijian_jinri_3;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuijian_fragment_layout, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.page);
+        btn_tuijian_jinri_more = (Button) view.findViewById(R.id.btn_tuijian_jinri_more);
+        btn_tuijian_jinri_1 = (TextView) view.findViewById(R.id.btn_tuijian_jinri_1);
+        btn_tuijian_jinri_2 = (TextView) view.findViewById(R.id.btn_tuijian_jinri_2);
+        btn_tuijian_jinri_3 = (TextView) view.findViewById(R.id.btn_tuijian_jinri_3);
+        ll_tuijian_jinri_1 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_1);
+        ll_tuijian_jinri_2 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_2);
+        ll_tuijian_jinri_3 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_3);
         http_image();
+
         return view;
     }
 
@@ -77,6 +97,8 @@ public class TuijianFragment extends Fragment {
                 .showImageOnFail(R.drawable.phone_variety_focus_cover_default_bg)
                 .showImageForEmptyUri(R.drawable.phone_variety_focus_cover_default_bg)
                 .displayer(new RoundedBitmapDisplayer(0)).build();
+
+
     }
 
     public void image_thread() {
@@ -166,6 +188,28 @@ public class TuijianFragment extends Fragment {
                         util.setVideo_path(s1);
                         list.add(util);
                     }
+                    Elements elements_jinri = document.getElementsByClass("w265");
+
+                    Element element_jinri = elements_jinri.get(0);
+                    //获取今日资讯更多
+                    Elements elements_more = element_jinri.getElementsByTag("h5");
+                    String jinri_more_name = elements_more.text();
+                    String jinri_more_path = "http:" + element_jinri.getElementsByTag("a").attr("href");
+                    videoUtil_jinri = new VideoUtil();
+                    videoUtil_jinri.setVideo_name(jinri_more_name);
+                    videoUtil_jinri.setVideo_path(jinri_more_path);
+                    jinri_list.add(videoUtil_jinri);
+                    //获取今日资讯
+                    Elements elements_li = element_jinri.getElementsByTag("li");
+                    for (int i = 0; i < 3; i++) {
+                        videoUtil_jinri = new VideoUtil();
+                        String jinri_li_name = elements_li.get(i).getElementsByTag("a").text();
+                        String jinri_li_path ="http:" + elements_li.get(i).getElementsByTag("a").attr("href");
+                        videoUtil_jinri.setVideo_name(jinri_li_name);
+                        videoUtil_jinri.setVideo_path(jinri_li_path);
+                        jinri_list.add(videoUtil_jinri);
+                    }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -198,18 +242,55 @@ public class TuijianFragment extends Fragment {
             ImageLoader.getInstance().displayImage(uri, imageview, options);
             image_list.add(imageview);
         }
+
+        //给ViewPager添加适配器
         viewPager.setAdapter(pagerAdapter);
+        //设置ViewPager的显示
         viewPager.setCurrentItem(0);
 //        viewPager.setOnPageChangeListener(listener);
+        //设置图片自动轮播
         image_thread();
+        //设置ViewPager的触摸监听
         viewPager.setOnTouchListener(onTouchListener);
+
+        //给今日资讯添加内容
+        btn_tuijian_jinri_more.setText(jinri_list.get(0).getVideo_name());
+        btn_tuijian_jinri_1.setText(jinri_list.get(1).getVideo_name());
+        btn_tuijian_jinri_2.setText(jinri_list.get(2).getVideo_name());
+        btn_tuijian_jinri_3.setText(jinri_list.get(3).getVideo_name());
+        //设置今日资讯的点击事件
+        btn_tuijian_jinri_more.setOnClickListener(jinriOnClick);
+        ll_tuijian_jinri_1.setOnClickListener(jinriOnClick);
+        ll_tuijian_jinri_2.setOnClickListener(jinriOnClick);
+        ll_tuijian_jinri_3.setOnClickListener(jinriOnClick);
     }
+
+    //定义一个点击事件对象
+    private View.OnClickListener jinriOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_tuijian_jinri_more:  //今日资讯--更多
+                         Toast.makeText(getActivity(), jinri_list.get(0).getVideo_path(), Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_tuijian_jinri_1:  //今日资讯--第一个
+                    Toast.makeText(getActivity(), jinri_list.get(1).getVideo_path(), Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_tuijian_jinri_2:  //今日资讯--第二个
+                    Toast.makeText(getActivity(), jinri_list.get(2).getVideo_path(), Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_tuijian_jinri_3:  //今日资讯--第二个
+                    Toast.makeText(getActivity(), jinri_list.get(3).getVideo_path(), Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     //页面轮播适配器
     private PagerAdapter pagerAdapter = new PagerAdapter() {
         @Override
         public int getCount() {
-            return image_list.size()*100;
+            return image_list.size() * 100;
         }
 
         @Override
