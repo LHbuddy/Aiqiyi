@@ -73,7 +73,6 @@ public class DianShiJuFragment extends Fragment {
                     Element element = elements.get(0);
                     String name = element.getElementsByTag("a").get(1).text();
                     String image = element.getElementsByTag("img").first().attr("src");
-                    //  image.substring();
                     Log.i("TAG", image.toString());
                     VideoUtil util = new VideoUtil("", image, name, "");
                     olist.add(util);
