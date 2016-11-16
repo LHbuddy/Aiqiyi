@@ -25,6 +25,7 @@
         <activity android:name=".TuiJianActivity"></activity>
         <activity android:name=".JiaoYouActivity"></activity>
         <activity android:name=".WoDeActivity"></activity>
+        <activity android:name=".PlayerActivity"></activity>
     </application>
 
 </manifest>

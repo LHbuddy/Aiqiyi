@@ -1,5 +1,6 @@
 package com.jju.edu.aiqiyi.tuijian;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
@@ -136,6 +138,15 @@ public class ZongYiFragment extends Fragment {
                         }
                     });
                     getmessage_02();
+
+                    first_head_img.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(),PlayerActivity.class);
+                            intent.putExtra("path","http://tv.sohu.com/20161115/n473212012.shtml");
+                            startActivity(intent);
+                        }
+                    });
                     break;
                 case 124:
                     //   Log.e("1111111", "" + list.size());
@@ -190,6 +201,7 @@ public class ZongYiFragment extends Fragment {
             }
         }.start();
     }
+
 
 
 }
