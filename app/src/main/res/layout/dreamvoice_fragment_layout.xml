@@ -21,13 +21,15 @@
                 <ImageView
                     android:id="@+id/first_head_img"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@drawable/phone_variety_focus_cover_default_bg"/>
+                    android:layout_height="210dp"
+                    />
 
                 <GridView
+                    android:id="@+id/grid_view"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:numColumns="2"></GridView>
+                    android:layout_height="300dp"
+                    android:numColumns="auto_fit"></GridView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
