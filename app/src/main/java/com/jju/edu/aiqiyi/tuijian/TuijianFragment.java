@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -64,10 +66,19 @@ public class TuijianFragment extends Fragment {
     private TextView btn_tuijian_jinri_1, btn_tuijian_jinri_2,btn_tuijian_jinri_3;
     private LinearLayout ll_tuijian_jinri_1, ll_tuijian_jinri_2,ll_tuijian_jinri_3;
 
+    //电视剧
+    private VideoUtil videoUtil_dianshiju;
+    private List<VideoUtil> dianshiju_list = new ArrayList<VideoUtil>();
+    private Button btn_tuijian_dianshiju_more;
+    private GridView gv_tuijian_dianshiju;
+    private VideoGridAdapter adapter_dianshiju;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuijian_fragment_layout, container, false);
+        //初始化ViewPager
         viewPager = (ViewPager) view.findViewById(R.id.page);
+        //初始化今日资讯
         btn_tuijian_jinri_more = (Button) view.findViewById(R.id.btn_tuijian_jinri_more);
         btn_tuijian_jinri_1 = (TextView) view.findViewById(R.id.btn_tuijian_jinri_1);
         btn_tuijian_jinri_2 = (TextView) view.findViewById(R.id.btn_tuijian_jinri_2);
@@ -75,7 +86,12 @@ public class TuijianFragment extends Fragment {
         ll_tuijian_jinri_1 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_1);
         ll_tuijian_jinri_2 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_2);
         ll_tuijian_jinri_3 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_3);
+        //广告轮播
         http_image();
+
+        //初始化电视剧
+        btn_tuijian_dianshiju_more = (Button) view.findViewById(R.id.btn_tuijian_dianshiju_more);
+        gv_tuijian_dianshiju = (GridView) view.findViewById(R.id.gv_tuijian_dianshiju);
 
         return view;
     }
@@ -177,7 +193,9 @@ public class TuijianFragment extends Fragment {
             public void run() {
                 super.run();
                 try {
+                    //获取搜狐主页
                     Document document = Jsoup.connect("http://tv.sohu.com/").get();
+                    //获取搜狐主页的推广信息
                     Elements elements = document.select("div.focusimgs");
                     for (int i = 0; i < elements.size(); i++) {
                         util = new AdvertUtil();
@@ -190,6 +208,7 @@ public class TuijianFragment extends Fragment {
                     }
                     Elements elements_jinri = document.getElementsByClass("w265");
 
+                    //获取今日资讯信息
                     Element element_jinri = elements_jinri.get(0);
                     //获取今日资讯更多
                     Elements elements_more = element_jinri.getElementsByTag("h5");
@@ -208,6 +227,30 @@ public class TuijianFragment extends Fragment {
                         videoUtil_jinri.setVideo_name(jinri_li_name);
                         videoUtil_jinri.setVideo_path(jinri_li_path);
                         jinri_list.add(videoUtil_jinri);
+                    }
+
+                    //获取电视剧信息
+                    Elements elements_dianshiju = document.select("div.con");
+                    Element element_dianshiju = elements_dianshiju.get(4);
+                    //获取电视剧内容
+                    Elements elements_dianshiju_1 = element_dianshiju.getElementsByTag("ul");
+                    for (int i = 0; i <2 ; i++) {
+                        Element element_dianshiju_info = elements_dianshiju_1.get(i);
+                        Elements elements_dianshiju_info = element_dianshiju_info.getElementsByTag("li");
+                        for (int j = 0; j < 2; j++) {
+                            Element e_1 = elements_dianshiju_info.get(j);
+                            String video_path = "http:"+e_1.getElementsByTag("a").first().attr("href");
+                            String image_path = "http:"+e_1.getElementsByTag("img").attr("lazysrc");
+                            String video_name = e_1.getElementsByTag("p").get(0).text();
+                            String video_desc = e_1.getElementsByTag("span").get(1).text()+"--"+
+                                    e_1.getElementsByTag("p").get(1).text();
+                            videoUtil_dianshiju = new VideoUtil();
+                            videoUtil_dianshiju.setVideo_path(video_path);
+                            videoUtil_dianshiju.setVideo_name(video_name);
+                            videoUtil_dianshiju.setVideo_image(image_path);
+                            videoUtil_dianshiju.setVideo_desc(video_desc);
+                            dianshiju_list.add(videoUtil_dianshiju);
+                        }
                     }
 
 
@@ -234,6 +277,7 @@ public class TuijianFragment extends Fragment {
         }
     };
 
+    //根据图片路径加载图片，并添加给ViewPager,设置ViewPager
     public void operation_() {
         initView();
         for (int i = 0; i < list.size(); i++) {
@@ -263,9 +307,19 @@ public class TuijianFragment extends Fragment {
         ll_tuijian_jinri_1.setOnClickListener(jinriOnClick);
         ll_tuijian_jinri_2.setOnClickListener(jinriOnClick);
         ll_tuijian_jinri_3.setOnClickListener(jinriOnClick);
+
+        //电视剧
+        gv_tuijian_dianshiju.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return MotionEvent.ACTION_MOVE == motionEvent.getAction()?true:false;
+            }
+        });
+        adapter_dianshiju = new VideoGridAdapter(dianshiju_list,getActivity());
+        gv_tuijian_dianshiju.setAdapter(adapter_dianshiju);
     }
 
-    //定义一个点击事件对象
+    //定义今日资讯的点击事件对象
     private View.OnClickListener jinriOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

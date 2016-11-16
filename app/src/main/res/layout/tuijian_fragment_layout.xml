@@ -5,134 +5,27 @@
               android:orientation="vertical"
               android:padding="10dp">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/page"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="185dp"></android.support.v4.view.ViewPager>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/cate_25"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="15dp"
-                android:gravity="center"
-                android:text="今日资讯"
-                android:textSize="16sp"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
-
-            <Button
-                android:id="@+id/btn_tuijian_jinri_more"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:text="贾敬龙强拆杀人案准死刑"
-                android:textColor="#919090"
-                android:textSize="14sp"/>
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ebpay_pwd_payway_arrows"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_tuijian_jinri_1"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/card_text_link_arrow_normal"/>
-
-            <TextView
-                android:id="@+id/btn_tuijian_jinri_1"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/page"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center_vertical"
-                android:text="余旭被评烈士 遗体将近期火化并送回故土"
-                android:textColor="#000000"
-                android:textSize="12sp"/>
+                android:layout_height="185dp"
+                android:layout_marginBottom="15dp"></android.support.v4.view.ViewPager>
+
+
+            <include layout="@layout/tuijian_fragment_jinrizixun_layout"/>
+
+            <include layout="@layout/tuijian_fragment_dianshiju_layout"/>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_tuijian_jinri_2"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/card_text_link_arrow_normal"/>
-
-            <TextView
-                android:id="@+id/btn_tuijian_jinri_2"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center_vertical"
-                android:text="男子看到美女一时性起裸露身体被拘留"
-                android:textColor="#000000"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_tuijian_jinri_3"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/card_text_link_arrow_normal"/>
-
-            <TextView
-                android:id="@+id/btn_tuijian_jinri_3"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center_vertical"
-                android:text="十余男子持枪围攻小院 房主被迫天台逃生"
-                android:textColor="#000000"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-
-
-        <GridView
-            android:id="@+id/gv_tuijian_jinri"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"></GridView>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
