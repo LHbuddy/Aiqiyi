@@ -58,4 +58,7 @@ public class VideoUtil {
         this.video_name = video_name;
         this.video_desc = video_desc;
     }
+
+    public VideoUtil() {
+    }
 }
