@@ -56,8 +56,7 @@ public class TuijianFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuijian_fragment_layout, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.page);
-        http_();
-
+        http_image();
         return view;
     }
 
@@ -150,7 +149,7 @@ public class TuijianFragment extends Fragment {
 //        }
 //    };
 
-    public void http_() {
+    public void http_image() {
         new Thread() {
             @Override
             public void run() {
@@ -167,6 +166,7 @@ public class TuijianFragment extends Fragment {
                         util.setVideo_path(s1);
                         list.add(util);
                     }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
