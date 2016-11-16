@@ -104,10 +104,10 @@
 
 
         <GridView
-
+            android:id="@+id/gv_tuijian_jinri"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:numColumns="2"
+            android:numColumns="3"
             android:stretchMode="columnWidth"></GridView>
     </LinearLayout>
 
