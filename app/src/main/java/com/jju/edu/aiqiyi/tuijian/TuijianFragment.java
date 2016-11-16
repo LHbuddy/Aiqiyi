@@ -56,9 +56,7 @@ public class TuijianFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuijian_fragment_layout, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.page);
-
         http_();
-
 
         return view;
     }
