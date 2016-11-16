@@ -1,12 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/page"
         android:layout_width="match_parent"
         android:layout_height="185dp"></android.support.v4.view.ViewPager>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/cate_25"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:text="今日资讯"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
+            <Button
+                android:id="@+id/btn_tuijian_jinri_more"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ebpay_pwd_payway_arrows"
+                android:gravity="center_vertical"
+                android:text="贾敬龙强拆杀人案准死刑"
+                android:textColor="#919090"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_tuijian_jinri_1"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/card_text_link_arrow_normal"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="余旭被评烈士 遗体将近期火化并送回故土"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_tuijian_jinri_2"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="5dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/card_text_link_arrow_normal"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="男子看到美女一时性起裸露身体被拘留"
+            android:textSize="16sp"/>
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"></GridView>
+    </LinearLayout>
 
 </LinearLayout>

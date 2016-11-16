@@ -76,9 +76,9 @@ public class TuijianFragment extends Fragment {
         options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)
                 .imageScaleType(ImageScaleType.EXACTLY)
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
+                .showImageOnLoading(R.drawable.phone_variety_focus_cover_default_bg)
+                .showImageOnFail(R.drawable.phone_variety_focus_cover_default_bg)
+                .showImageForEmptyUri(R.drawable.phone_variety_focus_cover_default_bg)
                 .displayer(new RoundedBitmapDisplayer(0)).build();
     }
 
