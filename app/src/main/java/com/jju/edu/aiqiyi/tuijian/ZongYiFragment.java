@@ -64,6 +64,7 @@ public class ZongYiFragment extends Fragment {
             }
         }.start();
 
+
     }
     public Handler handler = new Handler() {
         @Override
