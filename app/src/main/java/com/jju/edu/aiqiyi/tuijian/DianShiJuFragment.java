@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -71,10 +72,11 @@ public class DianShiJuFragment extends Fragment {
                     Elements elements = doc.select("div.colL");
                     Element element = elements.get(0);
                     String name = element.getElementsByTag("span").text();
-                    String image = element.getElementsByTag("img").first().attr("src");
-                    //  image.substring();
+                    String a = element.getElementsByTag("img").first().attr("src");
+                    String image = a.substring(0, a.length() - 1);
+
                     Log.i("TAG", image.toString());
-                    VideoUtil util = new VideoUtil(name, image, "");
+                    VideoUtil util = new VideoUtil("", image, name, "");
                     olist.add(util);
                     handler.sendEmptyMessage(123);
 
@@ -91,8 +93,7 @@ public class DianShiJuFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 123) {
-                Log.i("TAG", olist.get(0).getVideo_image());
-                ImageLoader.getInstance().displayImage(olist.get(0).getVideo_image(), img_dianshiju, options);
+                Picasso.with(getContext()).load(olist.get(0).getVideo_image()).resize(1000, 400).into(img_dianshiju);
                 tv_dianshiju.setText(olist.get(0).getVideo_name());
             }
         }
@@ -101,22 +102,6 @@ public class DianShiJuFragment extends Fragment {
     private void init_view() {
         tv_dianshiju = (TextView) view.findViewById(R.id.tv_dianshiju);
         img_dianshiju = (ImageView) view.findViewById(R.id.img_dianshiju);
-
-        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(getActivity())
-                .denyCacheImageMultipleSizesInMemory()
-                .diskCacheFileCount(100)
-                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .diskCacheSize(100 * 1024 * 1024)
-                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
-        ImageLoader.getInstance().init(configuration);
-
-        options = new DisplayImageOptions.Builder().cacheInMemory(true)
-                .bitmapConfig(Bitmap.Config.ARGB_8888)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .showImageOnLoading(R.mipmap.ic_launcher)
-                .showImageOnFail(R.mipmap.ic_launcher)
-                .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .displayer(new RoundedBitmapDisplayer(20)).build();
 
     }
 
