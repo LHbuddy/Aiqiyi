@@ -27,6 +27,7 @@ public class VideoGridAdapter extends BaseAdapter {
     private Context oContext;
     private LayoutInflater oInflater;
 
+
     public VideoGridAdapter(List<VideoUtil> oList, Context oContext) {
         this.oList = oList;
         this.oContext = oContext;
