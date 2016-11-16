@@ -69,9 +69,9 @@ public class DianShiJuFragment extends Fragment {
 
                 try {
                     Document doc = Jsoup.connect("http://tv.sohu.com/drama/").get();
-                    Elements elements = doc.select("div.colL");
+                    Elements elements = doc.select("div.colR");
                     Element element = elements.get(0);
-                    String name = element.getElementsByTag("span").text();
+                    String name = element.getElementsByTag("a").get(1).text();
                     String a = element.getElementsByTag("img").first().attr("src");
                     String image = a.substring(0, a.length() - 1);
 
@@ -93,7 +93,7 @@ public class DianShiJuFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 123) {
-                Picasso.with(getContext()).load(olist.get(0).getVideo_image()).resize(1000, 400).into(img_dianshiju);
+                Picasso.with(getContext()).load(olist.get(0).getVideo_image()).placeholder(R.drawable.book_card_icon).resize(900, 400).into(img_dianshiju);
                 tv_dianshiju.setText(olist.get(0).getVideo_name());
             }
         }
