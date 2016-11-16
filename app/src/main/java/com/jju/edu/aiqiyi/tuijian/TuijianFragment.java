@@ -79,7 +79,7 @@ public class TuijianFragment extends Fragment {
                 .showImageOnLoading(R.mipmap.ic_launcher)
                 .showImageOnFail(R.mipmap.ic_launcher)
                 .showImageForEmptyUri(R.mipmap.ic_launcher)
-                .displayer(new RoundedBitmapDisplayer(20)).build();
+                .displayer(new RoundedBitmapDisplayer(0)).build();
     }
 
     public void image_thread() {

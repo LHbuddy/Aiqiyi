@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
 import com.jju.edu.aiqiyi.tuijian.DingyueFragment;
-import com.jju.edu.aiqiyi.tuijian.DreamVoiceFragment;
+import com.jju.edu.aiqiyi.tuijian.ZongYiFragment;
 import com.jju.edu.aiqiyi.tuijian.GaoxiaoFragment;
 import com.jju.edu.aiqiyi.tuijian.MovieFragment;
 import com.jju.edu.aiqiyi.tuijian.TuijianFragment;
@@ -46,7 +46,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
     private LinearLayout ll_search;
     private PopupWindow popupWindow;
 
-    private static final String[] titles = new String[]{"推荐","梦想的声音","订阅","电视剧","电影","搞笑"};
+    private static final String[] titles = new String[]{"推荐","综艺","订阅","电视剧","电影","搞笑"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
         fragments = new ArrayList<>();
 
         tuijian_fragment = new TuijianFragment();
-        dreamvoice_fragment = new DreamVoiceFragment();
+        dreamvoice_fragment = new ZongYiFragment();
         dingyue_fragment = new DingyueFragment();
         dianshiju_fragment = new DianShiJuFragment();
         movie_fragment = new MovieFragment();
