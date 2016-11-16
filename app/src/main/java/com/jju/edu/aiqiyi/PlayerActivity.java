@@ -28,7 +28,7 @@ public class PlayerActivity extends BaseActivity {
         webview.getSettings().setUseWideViewPort(true);
 
         String path = getIntent().getStringExtra("path");
-        String[] path_phone = path.split("http://");
+        String[] path_phone = path.split("//");
         String phone_path = "http://m."+path_phone[1];
         webview.loadUrl(phone_path);
         webview.setWebViewClient(new WebViewClient(){

@@ -25,6 +25,8 @@
 
             <include layout="@layout/tuijian_fragment_dianshiju_layout"/>
 
+            <include layout="@layout/tuijian_fragment_zongyi_layout"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape"
             android:gravity="center"
-            android:text="龙珠超"
+            android:text="搜全网"
             android:textColor="#10E125"
             android:textSize="16sp"
             />
