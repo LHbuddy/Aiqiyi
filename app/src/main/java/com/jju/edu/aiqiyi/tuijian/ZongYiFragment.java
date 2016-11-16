@@ -16,6 +16,8 @@ import com.jju.edu.aiqiyi.R;
 public class ZongYiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dreamvoice_fragment_layout,container,false);
+       View view = inflater.inflate(R.layout.dreamvoice_fragment_layout,container,false);
+        return view;
     }
+    //信息爬取方法
 }
