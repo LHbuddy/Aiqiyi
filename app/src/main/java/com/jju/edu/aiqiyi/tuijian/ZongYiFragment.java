@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
@@ -46,7 +47,9 @@ public class ZongYiFragment extends Fragment {
     private GridView grid_view02;
     private String img_head = "'";
     private String path_head = "";
+    private String desc_head = "";
     private ImageView first_head_img;
+    private TextView text_head;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class ZongYiFragment extends Fragment {
         grid_view = (GridView) view.findViewById(R.id.grid_view);
         grid_view02 = (GridView) view.findViewById(R.id.grid_view02);
         first_head_img = (ImageView) view.findViewById(R.id.first_head_img);
+        text_head = (TextView) view.findViewById(R.id.text_head);
 
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getActivity()).denyCacheImageMultipleSizesInMemory()
@@ -82,6 +86,7 @@ public class ZongYiFragment extends Fragment {
                     Element element_ = elements_.get(0);
                     img_head = "http:" + element_.getElementsByTag("img").attr("data-original");
                     path_head = element_.getElementsByTag("a").attr("href");
+                    desc_head = element_.getElementsByTag("a").text();
 
                     Elements elements = document.select(".lisi");
                     // Log.e("//////////",""+elements.size());
@@ -119,6 +124,7 @@ public class ZongYiFragment extends Fragment {
                 case 123:
                  //   Log.e("1111111", "" + list.size());
                     ImageLoader.getInstance().displayImage(img_head, first_head_img);
+                    text_head.setText(desc_head);
                     adapter = new VideoGridAdapter(list, getActivity());
                     grid_view.setAdapter(adapter);
                     //设置gridview无法滚动
@@ -158,16 +164,16 @@ public class ZongYiFragment extends Fragment {
                 try {
                     Document document = Jsoup.connect("http://tv.sohu.com/show/").get();
                     Elements elements = document.select(".cbox");
-                     Log.e("//////////",""+elements.size());
+                   //  Log.e("//////////",""+elements.size());
                     for (int i = 0; i < 4; i++) {
                         util02 = new VideoUtil();
                         String img = elements.get(i).getElementsByTag("img").attr("data-original");
                         Element element = elements.get(i);
                         Elements elements2 = element.getElementsByTag("a");
                         String name = elements2.get(0).text();
-                        String desc = elements2.get(1).text();
+                        String desc = elements2.get(2).text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
-                        Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
+                    //    Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
 
                         util02.setVideo_image("http:" + img);
                         util02.setVideo_name(name);
