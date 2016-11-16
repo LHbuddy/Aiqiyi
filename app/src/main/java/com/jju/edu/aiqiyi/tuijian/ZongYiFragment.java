@@ -44,12 +44,16 @@ public class ZongYiFragment extends Fragment {
 
     private List<VideoUtil> list = new ArrayList<VideoUtil>();
     private List<VideoUtil> list02 = new ArrayList<VideoUtil>();
+    private List<VideoUtil> list03 = new ArrayList<VideoUtil>();
     private VideoUtil util;
     private VideoUtil util02;
+    private VideoUtil util03;
     private VideoGridAdapter adapter;
     private VideoGridAdapter adapter02;
+    private VideoGridAdapter adapter03;
     private GridView grid_view;
     private GridView grid_view02;
+    private GridView grid_view03;
     private String img_head = "'";
     private String path_head = "";
     private String desc_head = "";
@@ -61,6 +65,7 @@ public class ZongYiFragment extends Fragment {
         View view = inflater.inflate(R.layout.dreamvoice_fragment_layout, container, false);
         grid_view = (GridView) view.findViewById(R.id.grid_view);
         grid_view02 = (GridView) view.findViewById(R.id.grid_view02);
+        grid_view03 = (GridView) view.findViewById(R.id.grid_view03);
         first_head_img = (ImageView) view.findViewById(R.id.first_head_img);
         text_head = (TextView) view.findViewById(R.id.text_head);
 
@@ -94,7 +99,7 @@ public class ZongYiFragment extends Fragment {
                     desc_head = element_.getElementsByTag("a").text();
 
                     Elements elements = document.select(".lisi");
-                    // Log.e("//////////",""+elements.size());
+                    Log.e("//////////",""+elements.size());
                     for (int i = 0; i < 4; i++) {
                         util = new VideoUtil();
                         String img = elements.get(i).getElementsByTag("img").attr("data-original");
@@ -110,7 +115,23 @@ public class ZongYiFragment extends Fragment {
                         util.setVideo_desc(desc);
                         util.setVideo_path("http:" +path);
                         list.add(util);
+                    }
 
+                    for (int i = 4; i < 10; i++) {
+                        util03 = new VideoUtil();
+                        String img = elements.get(i).getElementsByTag("img").attr("data-original");
+                        Element element = elements.get(i);
+                        Elements elements2 = element.getElementsByTag("p");
+                        String name = elements2.get(0).text();
+                        String desc = elements2.get(1).text();
+                        //  String desc = elements.get(i).getElementsByTag(".p_bt").text();
+                        String path = elements.get(i).getElementsByTag("a").attr("href");
+                        // Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
+                        util03.setVideo_image("http:" + img);
+                        util03.setVideo_name(name);
+                        util03.setVideo_desc(desc);
+                        util03.setVideo_path("http:" +path);
+                        list03.add(util03);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -150,12 +171,23 @@ public class ZongYiFragment extends Fragment {
                         }
                     });
                     grid_view.setOnItemClickListener(listener);
+                    //第三块
+                    adapter03 = new VideoGridAdapter(list03, getActivity());
+                    grid_view03.setAdapter(adapter03);
+                    //设置gridview无法滚动
+                    grid_view03.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            return MotionEvent.ACTION_MOVE == event.getAction() ? true
+                                    : false;
+                        }
+                    });
+                    grid_view03.setOnItemClickListener(listener);
                     break;
                 case 124:
                     //   Log.e("1111111", "" + list.size());
                     adapter02 = new VideoGridAdapter(list02, getActivity());
                     grid_view02.setAdapter(adapter02);
-                    //设置gridview无法滚动
                     grid_view02.setOnTouchListener(new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View v, MotionEvent event) {
@@ -163,7 +195,6 @@ public class ZongYiFragment extends Fragment {
                                     : false;
                         }
                     });
-                   // getmessage_02();
                     grid_view02.setOnItemClickListener(listener);
                     break;
             }
@@ -175,7 +206,6 @@ public class ZongYiFragment extends Fragment {
             @Override
             public void run() {
                 super.run();
-
                 try {
                     Document document = Jsoup.connect("http://tv.sohu.com/show/").get();
                     Elements elements = document.select(".cbox");
@@ -203,6 +233,7 @@ public class ZongYiFragment extends Fragment {
         }.start();
     }
 
+
     //grid view 监听事件
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
@@ -213,12 +244,13 @@ public class ZongYiFragment extends Fragment {
           //  Log.e("********",list.get(position).getVideo_path());
             switch (parent.getId()){
                 case R.id.grid_view:
-                   // Toast.makeText(getActivity(),"ww"+position,Toast.LENGTH_SHORT).show();
                     info = list.get(position).getVideo_path();
                     break;
                 case R.id.grid_view02:
-                   // Toast.makeText(getActivity(),"ss"+position,Toast.LENGTH_SHORT).show();
                     info = list02.get(position).getVideo_path();
+                    break;
+                case R.id.grid_view03:
+                    info = list03.get(position).getVideo_path();
                     break;
             }
             intent.putExtra("path",info);
