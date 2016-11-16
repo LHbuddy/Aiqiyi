@@ -24,11 +24,10 @@
                     android:layout_height="150dp"
                     android:background="@drawable/phone_variety_focus_cover_default_bg"/>
 
-
-
-
-
-
+                <GridView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="2"></GridView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
