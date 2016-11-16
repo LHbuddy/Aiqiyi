@@ -62,8 +62,9 @@ public class VideoGridAdapter extends BaseAdapter {
         } else {
             oholder = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(oList.get(position).getVideo_image(),oholder.image);
+        ImageLoader.getInstance().displayImage(oList.get(position).getVideo_image(), oholder.image);
         oholder.name.setText(oList.get(position).getVideo_name());
+        oholder.name.setText(oList.get(position).getVideo_desc());
         oholder.desc.setText(oList.get(position).getVideo_desc());
         return convertView;
     }
