@@ -27,6 +27,7 @@
             android:layout_marginTop="5dp"
             android:text="正在加载"
             android:textSize="12sp"/>
+
     </LinearLayout>
 
 </LinearLayout>
