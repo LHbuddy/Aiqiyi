@@ -18,17 +18,66 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/first_head_img"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
-                    />
-
+                    android:layout_height="210dp">
+                    <ImageView
+                        android:id="@+id/first_head_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        />
+                    <TextView
+                        android:id="@+id/text_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:text="谢霆锋现场脱衣引尖"/>
+                </RelativeLayout>
                 <GridView
                     android:id="@+id/grid_view"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="294dp"
+                    android:numColumns="auto_fit"></GridView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#dcd5d5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#161616"
+                        android:text="王牌节目"
+                        android:textSize="15sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:text="更多"/>
+                </RelativeLayout>
+                <GridView
+                    android:id="@+id/grid_view02"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="294dp"
                     android:numColumns="auto_fit"></GridView>
             </LinearLayout>
         </LinearLayout>
