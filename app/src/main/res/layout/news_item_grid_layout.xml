@@ -11,7 +11,7 @@
         android:text="新闻"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="15sp"
+        android:textSize="12sp"
         android:textColor="#464444"/>
 
 </LinearLayout>

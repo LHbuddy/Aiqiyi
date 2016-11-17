@@ -23,6 +23,7 @@ import com.jju.edu.aiqiyi.tuijian.MovieFragment;
 import com.jju.edu.aiqiyi.tuijian.TuijianFragment;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
+import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.search:
-                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(TuiJianActivity.this, SearchActivity.class));
                 break;
                 case R.id.history:
                     startActivity(new Intent(TuiJianActivity.this, PlayHistoryActivity.class));

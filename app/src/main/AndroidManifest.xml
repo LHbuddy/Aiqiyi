@@ -31,6 +31,7 @@
         <activity android:name=".VideoActivity"></activity>
         <activity android:name=".wode.LocalVideoActivity"></activity>
         <activity android:name=".wode.PlayHistoryActivity"></activity>
+        <activity android:name=".wode.SearchActivity"></activity>
     </application>
 
 </manifest>

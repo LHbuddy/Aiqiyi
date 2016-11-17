@@ -68,11 +68,11 @@ public class JiaoYouActivity extends BaseActivity{
                 try {
                     Document document = Jsoup.connect("http://tv.sohu.com/news/").get();
                     Elements elements = document.select(".ni");
-                    Log.e("//////////",""+elements.size());
+                   // Log.e("//////////",""+elements.size());
                     for (int i = 0; i < elements.size(); i++) {
                         String name = elements.get(i).getElementsByTag("a").text();
 
-                        Log.e("*********",""+name);
+                     //   Log.e("*********",""+name);
                         list.add(name);
 
                     }
