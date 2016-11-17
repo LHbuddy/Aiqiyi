@@ -30,6 +30,7 @@
         <activity android:name=".PlayerActivity"></activity>
         <activity android:name=".VideoActivity"></activity>
         <activity android:name=".wode.LocalVideoActivity"></activity>
+        <activity android:name=".wode.PlayHistoryActivity"></activity>
     </application>
 
 </manifest>
