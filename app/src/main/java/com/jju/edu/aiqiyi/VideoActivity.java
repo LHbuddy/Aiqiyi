@@ -1,11 +1,14 @@
 package com.jju.edu.aiqiyi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,17 +73,17 @@ public class VideoActivity extends Activity {
                 try {
                     Document doc = Jsoup.connect(path).get();
                     Elements e = doc.getElementsByTag("li");
-                    for (int i = 21; i < e.size(); i++) {
+                    for (int i = 18; i < e.size(); i++) {
                         videoUtil = new VideoUtil();
                         Element element = e.get(i);
-                        String video_path = element.getElementsByTag("a").first().attr("href");
+                        String path = element.getElementsByTag("a").get(2).attr("href");
                         String image_path = element.getElementsByTag("img").attr("src");
                         String video_name = element.getElementsByTag("a").get(2).attr("title");
                         String video_desc = element.select("p.actor").text();
-                        System.out.println(video_path);
-                        System.out.println(image_path);
-                        System.out.println("video_name-----"+video_name);
-                        System.out.println(video_desc);
+                        Document document = Jsoup.connect(path).get();
+                        Elements e_1 = document.getElementsByTag("a");
+                        Elements elements_1 = e_1.select("[location=play]");
+                        String video_path = elements_1.get(0).attr("href");
                         videoUtil.setVideo_name(video_name);
                         videoUtil.setVideo_image(image_path);
                         videoUtil.setVideo_path(video_path);
@@ -91,7 +94,6 @@ public class VideoActivity extends Activity {
                     e.printStackTrace();
                 }
                 handler.sendEmptyMessage(234);
-
             }
         }.start();
     }
@@ -111,8 +113,18 @@ public class VideoActivity extends Activity {
     private void loadInfo() {
         adapter = new VideoGridAdapter(list,VideoActivity.this);
         gv_video.setAdapter(adapter);
-
+        gv_video.setOnItemClickListener(gridViewOnItemClick);
     }
+
+    private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            String path = list.get(i).getVideo_path();
+            Intent intent_play = new Intent(VideoActivity.this, PlayerActivity.class);
+            intent_play.putExtra("path", path);
+            startActivity(intent_play);
+        }
+    };
 
     private void initView() {
         tv_video_title_center = (TextView) findViewById(R.id.tv_video_title_center);
