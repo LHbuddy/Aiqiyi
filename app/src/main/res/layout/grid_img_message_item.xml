@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:textColor="#0d0d0d"
             android:layout_marginTop="5dp"
+            android:maxLines="1"
             android:text="正在加载"
             android:textSize="15sp"/>
         <TextView
@@ -28,6 +29,7 @@
             android:textColor="#998f8f"
             android:layout_marginTop="5dp"
             android:text="正在加载"
+            android:maxLines="1"
             android:textSize="12sp"/>
 
     </LinearLayout>

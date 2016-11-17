@@ -64,6 +64,44 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:textColor="#161616"
+                        android:text="今日最热"
+                        android:textSize="15sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:text="更多"
+                        android:id="@+id/text_more01" />
+                </RelativeLayout>
+                <GridView
+                    android:id="@+id/grid_view03"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="441dp"
+                    android:numColumns="auto_fit"></GridView>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#dcd5d5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#161616"
                         android:text="王牌节目"
                         android:textSize="15sp"/>
                     <TextView
@@ -71,7 +109,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"/>
+                        android:text="更多"
+                        android:id="@+id/text_more02" />
                 </RelativeLayout>
                 <GridView
                     android:id="@+id/grid_view02"
@@ -80,6 +119,47 @@
                     android:layout_height="294dp"
                     android:numColumns="auto_fit"></GridView>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#dcd5d5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#161616"
+                        android:text="其他"
+                        android:textSize="15sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:text="更多"
+                        android:id="@+id/text_more03" />
+                </RelativeLayout>
+                <GridView
+                    android:id="@+id/grid_view04"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="294dp"
+                    android:numColumns="auto_fit"></GridView>
+            </LinearLayout>
+
+
+
+
         </LinearLayout>
     </ScrollView>
 
