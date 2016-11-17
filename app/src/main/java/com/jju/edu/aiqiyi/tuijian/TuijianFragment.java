@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.VideoActivity;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
@@ -120,12 +121,19 @@ public class TuijianFragment extends Fragment {
         ll_tuijian_jinri_1 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_1);
         ll_tuijian_jinri_2 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_2);
         ll_tuijian_jinri_3 = (LinearLayout) view.findViewById(R.id.ll_tuijian_jinri_3);
-        //广告轮播
+        //获取资源
         http_image();
 
         //初始化电视剧
         btn_tuijian_dianshiju_more = (Button) view.findViewById(R.id.btn_tuijian_dianshiju_more);
         gv_tuijian_dianshiju = (GridView) view.findViewById(R.id.gv_tuijian_dianshiju);
+        btn_tuijian_dianshiju_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_more = new Intent(getActivity(), VideoActivity.class);
+                startActivity(intent_more);
+            }
+        });
 
         //初始化综艺
         btn_tuijian_zongyi_more = (Button) view.findViewById(R.id.btn_tuijian_zongyi_more);
