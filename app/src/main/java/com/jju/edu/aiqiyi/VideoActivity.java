@@ -66,16 +66,16 @@ public class VideoActivity extends Activity {
         setContentView(R.layout.video_layout);
 
         initView();
-        http_();
+        http_(path);
     }
 
     //加载视频信息
-    private void http_() {
+    private void http_(final String uri) {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    Document doc = Jsoup.connect(path).get();
+                    Document doc = Jsoup.connect(uri).get();
                     Elements e = doc.getElementsByTag("li");
                     for (int i = 18; i < e.size(); i++) {
                         videoUtil = new VideoUtil();
