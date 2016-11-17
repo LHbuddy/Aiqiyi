@@ -80,7 +80,7 @@ public class PageActivity extends BaseActivity{
         image5 = (ImageView) view5.findViewById(R.id.img);
         text5 = (TextView) view5.findViewById(R.id.text);
         image5.setBackgroundResource(R.drawable.phone_navi_friend);
-        text5.setText("交友");
+        text5.setText("发现");
         text5.setTextColor(Color.GRAY);
         TabHost.TabSpec spec5 = tab_host.newTabSpec("fivespec").setIndicator(view5).setContent(intent5);
         tab_host.addTab(spec5);
