@@ -13,6 +13,8 @@ import android.webkit.WebViewClient;
 
 public class PlayerActivity extends BaseActivity {
     private WebView webview;
+    private String phone_path;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +30,13 @@ public class PlayerActivity extends BaseActivity {
         webview.getSettings().setUseWideViewPort(true);
 
         String path = getIntent().getStringExtra("path");
-        String[] path_phone = path.split("http://");
-        String phone_path = "http://m."+path_phone[1];
+        if (path.split("//my").length==2){
+            phone_path = "http://m" +  path.split("//my")[1];
+        }else {
+            String[] path_phone = path.split("//");
+            phone_path = "http://m."+path_phone[1];
+        }
+
         webview.loadUrl(phone_path);
         webview.setWebViewClient(new WebViewClient(){
             @Override

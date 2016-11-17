@@ -12,14 +12,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.TuiJianActivity;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
@@ -48,13 +51,16 @@ import java.util.Map;
  */
 
 public class DianShiJuFragment extends Fragment {
+
     private ImageView img_dianshiju;
     private TextView tv_dianshiju;
+    private LinearLayout linear_dianshiju;
     private DisplayImageOptions options;
     private View view;
     private List<VideoUtil> olist = new ArrayList<VideoUtil>();
     private GridView gridView;
     private VideoGridAdapter dianshiju_adapter;
+    private VideoUtil video_first;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,22 +81,29 @@ public class DianShiJuFragment extends Fragment {
 
                 try {
                     Document doc = Jsoup.connect("http://tv.sohu.com/drama/").get();
-                    Elements elements = doc.select("div.colR");
-                    Element element = elements.get(0);
-                    Elements elements1 = element.getElementsByTag("li");
 
-                    Log.i("TAG", "elements  " + elements.size());
-                    for (int i = 0; i < elements1.size(); i++) {
-                        Element element1 = elements1.get(i);
-                        Log.i("TAG", "element  " + element1.toString());
+                    Element element_first = doc.getElementById("modC");
+                    Elements elements_first = element_first.select("div.colL");
+                    Element element_ = elements_first.first();
+                    String name_first = element_.getElementsByTag("span").last().text();
+                    String image_first = "http://" + element_.getElementsByTag("img").attr("src").split("//")[1];
+                    String path_first = "http://" + element_.getElementsByTag("a").last().attr("href").split("//")[1];
 
-                        String name = element1.getElementsByTag("a").get(1).text();
-                        String a = element1.getElementsByTag("img").first().attr("src");
-                        String image = "http:" + a;
-                        Log.i("TAG", "image" + image);
+                    video_first = new VideoUtil(path_first, image_first, name_first, "");
 
-                        VideoUtil util = new VideoUtil("", image, name, "");
-                        olist.add(util);
+                    Elements elements = doc.select(".con");
+                    Element element = elements.get(2);
+                    Elements elements_li = element.getElementsByTag("li");
+                    for (int i = 0; i < elements_li.size(); i++) {
+                        Element element_li = elements_li.get(i);
+                        String name = element_li.getElementsByTag("p").first().text();
+                        String image = "http://" + element_li.getElementsByTag("img").attr("src").split("//")[1];
+                        String desc = element_li.getElementsByTag("span").tagName("lisTx").text();
+                        String path = "http://" + element_li.getElementsByTag("p").first().getElementsByTag("a").first().attr("href").split("//")[1];
+
+                        VideoUtil video = new VideoUtil(path, image, name, desc);
+                        olist.add(video);
+
                     }
 
                     handler.sendEmptyMessage(123);
@@ -108,21 +121,54 @@ public class DianShiJuFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 123) {
-                //  Log.i("TAG", olist.get(0).getVideo_image());
-                tv_dianshiju.setText(olist.get(0).getVideo_name());
-                Picasso.with(getContext()).load(olist.get(0).getVideo_image()).placeholder(R.drawable.book_card_icon).resize(680, 400).into(img_dianshiju);
+                tv_dianshiju.setText(video_first.getVideo_name());
+                Picasso.with(getContext()).load(video_first.getVideo_image()).placeholder(R.drawable.book_card_icon).resize(680, 400).into(img_dianshiju);
                 dianshiju_adapter = new VideoGridAdapter(olist, getContext());
-                Log.i("TAG", "olist" + olist.size());
                 gridView.setAdapter(dianshiju_adapter);
+
+                gridView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return MotionEvent.ACTION_MOVE == event.getAction() ? true
+                                : false;
+                    }
+                });
+                gridView.setOnItemClickListener(listener);
+                linear_dianshiju.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String path_dianshiju = video_first.getVideo_path();
+                        Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
+                        intent_dianshiju.putExtra("path", path_dianshiju);
+                        startActivity(intent_dianshiju);
+                    }
+                });
 
             }
         }
     };
 
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            switch (parent.getId()) {
+                case R.id.gridview_dianshiju:
+                    String path_dianshiju = olist.get(position).getVideo_path();
+                    Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dianshiju.putExtra("path", path_dianshiju);
+                    startActivity(intent_dianshiju);
+                    break;
+            }
+        }
+    };
+
+
     private void init_view() {
         tv_dianshiju = (TextView) view.findViewById(R.id.tv_dianshiju);
         img_dianshiju = (ImageView) view.findViewById(R.id.img_dianshiju);
         gridView = (GridView) view.findViewById(R.id.gridview_dianshiju);
+        linear_dianshiju = (LinearLayout) view.findViewById(R.id.linear_dianshiju);
+
 
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
