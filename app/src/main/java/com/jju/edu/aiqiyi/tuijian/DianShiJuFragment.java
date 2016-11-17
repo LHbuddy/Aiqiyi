@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
@@ -50,8 +51,10 @@ import java.util.Map;
  */
 
 public class DianShiJuFragment extends Fragment {
+
     private ImageView img_dianshiju;
     private TextView tv_dianshiju;
+    private LinearLayout linear_dianshiju;
     private DisplayImageOptions options;
     private View view;
     private List<VideoUtil> olist = new ArrayList<VideoUtil>();
@@ -131,6 +134,15 @@ public class DianShiJuFragment extends Fragment {
                     }
                 });
                 gridView.setOnItemClickListener(listener);
+                linear_dianshiju.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String path_dianshiju = video_first.getVideo_path();
+                        Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
+                        intent_dianshiju.putExtra("path", path_dianshiju);
+                        startActivity(intent_dianshiju);
+                    }
+                });
 
             }
         }
@@ -155,6 +167,8 @@ public class DianShiJuFragment extends Fragment {
         tv_dianshiju = (TextView) view.findViewById(R.id.tv_dianshiju);
         img_dianshiju = (ImageView) view.findViewById(R.id.img_dianshiju);
         gridView = (GridView) view.findViewById(R.id.gridview_dianshiju);
+        linear_dianshiju = (LinearLayout) view.findViewById(R.id.linear_dianshiju);
+
 
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
