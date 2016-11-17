@@ -32,16 +32,16 @@
         <Button
             android:id="@+id/btn_tuijian_jinri_more"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:text="贾敬龙强拆杀人案准死刑"
+            android:text="更多"
             android:textColor="#919090"
             android:textSize="14sp"/>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@drawable/ebpay_pwd_payway_arrows"/>
     </LinearLayout>
 
