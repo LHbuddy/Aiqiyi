@@ -65,56 +65,58 @@ public class DianShiJuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dianshiju_fragment_layout, container, false);
-
-
         init_view();
         jsoup_();
-
-
         return view;
     }
 
+    //抓取视频
     public void jsoup_() {
         new Thread() {
             @Override
             public void run() {
-
                 try {
                     Document doc = Jsoup.connect("http://tv.sohu.com/drama/").get();
-
                     Element element_first = doc.getElementById("modC");
                     Elements elements_first = element_first.select("div.colL");
                     Element element_ = elements_first.first();
                     String name_first = element_.getElementsByTag("span").last().text();
                     String image_first = "http://" + element_.getElementsByTag("img").attr("src").split("//")[1];
                     String path_first = "http://" + element_.getElementsByTag("a").last().attr("href").split("//")[1];
-
                     video_first = new VideoUtil(path_first, image_first, name_first, "");
 
-                    Elements elements = doc.select(".con");
-                    Element element = elements.get(2);
-                    Elements elements_li = element.getElementsByTag("li");
-                    for (int i = 0; i < elements_li.size(); i++) {
-                        Element element_li = elements_li.get(i);
-                        String name = element_li.getElementsByTag("p").first().text();
-                        String image = "http://" + element_li.getElementsByTag("img").attr("src").split("//")[1];
-                        String desc = element_li.getElementsByTag("span").tagName("lisTx").text();
-                        String path = "http://" + element_li.getElementsByTag("p").first().getElementsByTag("a").first().attr("href").split("//")[1];
-
-                        VideoUtil video = new VideoUtil(path, image, name, desc);
-                        olist.add(video);
-
-                    }
-
+                    get_USdrama();
                     handler.sendEmptyMessage(123);
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }.start();
     }
+
+    /**
+     * 抓取美剧
+     */
+    private void get_USdrama() {
+        try {
+            Document doc = Jsoup.connect("http://tv.sohu.com/drama/").get();
+            Elements elements = doc.select(".con");
+            Element element = elements.get(2);
+            Elements elements_li = element.getElementsByTag("li");
+            for (int i = 0; i < elements_li.size(); i++) {
+                Element element_li = elements_li.get(i);
+                String name = element_li.getElementsByTag("p").first().text();
+                String image = "http://" + element_li.getElementsByTag("img").attr("src").split("//")[1];
+                String desc = element_li.getElementsByTag("span").tagName("lisTx").text();
+                String path = "http://" + element_li.getElementsByTag("p").first().getElementsByTag("a").first().attr("href").split("//")[1];
+                VideoUtil video = new VideoUtil(path, image, name, desc);
+                olist.add(video);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public Handler handler = new Handler() {
         @Override
@@ -152,7 +154,7 @@ public class DianShiJuFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (parent.getId()) {
-                case R.id.gridview_dianshiju:
+                case R.id.gridview_dianshiju_USdrama:
                     String path_dianshiju = olist.get(position).getVideo_path();
                     Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
                     intent_dianshiju.putExtra("path", path_dianshiju);
@@ -162,14 +164,11 @@ public class DianShiJuFragment extends Fragment {
         }
     };
 
-
     private void init_view() {
         tv_dianshiju = (TextView) view.findViewById(R.id.tv_dianshiju);
         img_dianshiju = (ImageView) view.findViewById(R.id.img_dianshiju);
-        gridView = (GridView) view.findViewById(R.id.gridview_dianshiju);
+        gridView = (GridView) view.findViewById(R.id.gridview_dianshiju_USdrama);
         linear_dianshiju = (LinearLayout) view.findViewById(R.id.linear_dianshiju);
-
-
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getActivity()).denyCacheImageMultipleSizesInMemory()
@@ -178,7 +177,6 @@ public class DianShiJuFragment extends Fragment {
                 .diskCacheSize(100 * 1024 * 1024)
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(configuration);
-
         options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)
                 .imageScaleType(ImageScaleType.EXACTLY)
@@ -186,8 +184,6 @@ public class DianShiJuFragment extends Fragment {
                 .showImageOnFail(R.drawable.phone_variety_focus_cover_default_bg)
                 .showImageForEmptyUri(R.drawable.phone_variety_focus_cover_default_bg)
                 .displayer(new RoundedBitmapDisplayer(0)).build();
-
     }
-
 
 }
