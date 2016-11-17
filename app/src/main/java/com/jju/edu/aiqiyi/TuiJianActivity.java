@@ -46,7 +46,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
     private LinearLayout ll_search;
     private PopupWindow popupWindow;
 
-    private static final String[] titles = new String[]{"推荐","综艺","订阅","电视剧","电影","搞笑"};
+    private static final String[] titles = new String[]{"推荐","综艺","动漫","电视剧","电影","搞笑"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
