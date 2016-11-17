@@ -48,6 +48,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.util.Log.e;
+
 /**
  * Created by Administrator on 2016/11/14.
  */
@@ -92,6 +94,18 @@ public class TuijianFragment extends Fragment {
     private Button btn_tuijian_dongman_more;
     private GridView gv_tuijian_dongman;
     private VideoGridAdapter adapter_dongman;
+    //电影
+    private VideoUtil videoUtil_dianying;
+    private List<VideoUtil> dianying_list = new ArrayList<VideoUtil>();
+    private Button btn_tuijian_dianying_more;
+    private GridView gv_tuijian_dianying;
+    private VideoGridAdapter adapter_dianying;
+    //搞笑
+    private VideoUtil videoUtil_gaoxiao;
+    private List<VideoUtil> gaoxiao_list = new ArrayList<VideoUtil>();
+    private Button btn_tuijian_gaoxiao_more;
+    private GridView gv_tuijian_gaoxiao;
+    private VideoGridAdapter adapter_gaoxiao;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,6 +134,14 @@ public class TuijianFragment extends Fragment {
         //初始化动漫
         btn_tuijian_dongman_more = (Button) view.findViewById(R.id.btn_tuijian_dongman_more);
         gv_tuijian_dongman = (GridView) view.findViewById(R.id.gv_tuijian_dongman);
+
+        //初始化电影
+        btn_tuijian_dianying_more = (Button) view.findViewById(R.id.btn_tuijian_dianying_more);
+        gv_tuijian_dianying = (GridView) view.findViewById(R.id.gv_tuijian_dianying);
+
+        //初始化搞笑
+        btn_tuijian_gaoxiao_more = (Button) view.findViewById(R.id.btn_tuijian_gaoxiao_more);
+        gv_tuijian_gaoxiao = (GridView) view.findViewById(R.id.gv_tuijian_gaoxiao);
 
         return view;
     }
@@ -270,6 +292,8 @@ public class TuijianFragment extends Fragment {
                         for (int j = 0; j < 2; j++) {
                             Element e_1 = elements_dianshiju_info.get(j);
                             String video_path = "http:" + e_1.getElementsByTag("a").first().attr("href");
+//                            Document document1 = Jsoup.connect(video_path).get();
+
                             String image_path = "http:" + e_1.getElementsByTag("img").attr("lazysrc");
                             String video_name = e_1.getElementsByTag("p").get(0).text();
                             String video_desc = e_1.getElementsByTag("span").get(1).text() + "--" +
@@ -308,7 +332,7 @@ public class TuijianFragment extends Fragment {
 
                     //获取动漫
                     Element element_dongman = elements_video.get(7);
-                    //获取综艺节目内容
+                    //获取动漫内容
                     Elements elements_dongman_1 = element_dongman.getElementsByTag("ul");
                     for (int i = 0; i < 2; i++) {
                         Element element_dongman_info = elements_dongman_1.get(i);
@@ -328,6 +352,51 @@ public class TuijianFragment extends Fragment {
                             dongman_list.add(videoUtil_dongman);
                         }
                     }
+
+                    //获取电影
+                    Element element_dianying = elements_video.get(12);
+                    //获取电影内容
+                    Elements elements_dianying_1 = element_dianying.getElementsByTag("ul");
+                    for (int i = 0; i < 4; i++) {
+                        Element element_dianying_info = elements_dianying_1.get(i);
+                        Elements elements_dianying_info = element_dianying_info.getElementsByTag("li");
+                        for (int j = 0; j < 2; j++) {
+                            Element e_1 = elements_dianying_info.get(j);
+                            //"http:" +
+                            String video_path = e_1.getElementsByTag("a").first().attr("href");
+                            String image_path = e_1.getElementsByTag("img").attr("lazysrc");
+
+                            String video_name = e_1.getElementsByTag("p").get(0).text();
+                            //e_1.getElementsByTag("a").get(1).text() + "--" +
+                            String video_desc = e_1.getElementsByTag("p").get(1).text();
+                            videoUtil_dianying = new VideoUtil();
+                            videoUtil_dianying.setVideo_path(video_path);
+                            videoUtil_dianying.setVideo_name(video_name);
+                            videoUtil_dianying.setVideo_image(image_path);
+                            videoUtil_dianying.setVideo_desc(video_desc);
+                            dianying_list.add(videoUtil_dianying);
+                        }
+                    }
+
+                    //搞笑
+                    Elements elements_gaoxiao_ = document.select("div.weBox");
+                    Element element_gaoxiao_ = elements_gaoxiao_.get(1);
+                    Element element_gaoxiao = element_gaoxiao_.getElementsByTag("ul").get(1);
+                    Elements elements_gaoxiao = element_gaoxiao.getElementsByTag("li");
+                    for (int i = 1; i < 5; i++) {
+                        Element gaoxiao = elements_gaoxiao.get(i);
+                        String image_path = "http:" + gaoxiao.getElementsByTag("img").attr("lazysrc");
+                        String video_path = "http:" + gaoxiao.getElementsByTag("a").first().attr("href");
+                        String video_name = gaoxiao.getElementsByTag("a").get(1).text();
+                        String video_desc = gaoxiao.getElementsByTag("a").get(2).text();
+                        videoUtil_gaoxiao = new VideoUtil();
+                        videoUtil_gaoxiao.setVideo_image(image_path);
+                        videoUtil_gaoxiao.setVideo_path(video_path);
+                        videoUtil_gaoxiao.setVideo_name(video_name);
+                        videoUtil_gaoxiao.setVideo_desc(video_desc);
+                        gaoxiao_list.add(videoUtil_gaoxiao);
+                    }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -361,7 +430,7 @@ public class TuijianFragment extends Fragment {
             Uri uri = Uri.parse(uri_path);
 //            ImageLoader.getInstance().displayImage(uri, imageview, options);
             Picasso.with(getContext()).load(uri).placeholder(R.drawable.phone_variety_focus_cover_default_bg)
-                    .resize(0,185).into(imageview);
+                    .resize(0, 185).into(imageview);
             image_list.add(imageview);
         }
 
@@ -404,6 +473,18 @@ public class TuijianFragment extends Fragment {
         adapter_dongman = new VideoGridAdapter(dongman_list, getActivity());
         gv_tuijian_dongman.setAdapter(adapter_dongman);
         gv_tuijian_dongman.setOnItemClickListener(gridViewOnItemClick);
+
+        //电影
+        gv_tuijian_dianying.setOnTouchListener(gridViewOnTouch);
+        adapter_dianying = new VideoGridAdapter(dianying_list, getActivity());
+        gv_tuijian_dianying.setAdapter(adapter_dianying);
+        gv_tuijian_dianying.setOnItemClickListener(gridViewOnItemClick);
+
+        //搞笑
+        gv_tuijian_gaoxiao.setOnTouchListener(gridViewOnTouch);
+        adapter_gaoxiao = new VideoGridAdapter(gaoxiao_list, getActivity());
+        gv_tuijian_gaoxiao.setAdapter(adapter_gaoxiao);
+        gv_tuijian_gaoxiao.setOnItemClickListener(gridViewOnItemClick);
     }
 
     //GridView的点击事件
@@ -414,20 +495,32 @@ public class TuijianFragment extends Fragment {
                 case R.id.gv_tuijian_dianshiju:
                     String path_dianshiju = dianshiju_list.get(i).getVideo_path();
                     Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
-                    intent_dianshiju.putExtra("path",path_dianshiju);
+                    intent_dianshiju.putExtra("path", path_dianshiju);
                     startActivity(intent_dianshiju);
                     break;
                 case R.id.gv_tuijian_zongyi:
                     String path_zongyi = zongyi_list.get(i).getVideo_path();
                     Intent intent_zongyi = new Intent(getActivity(), PlayerActivity.class);
-                    intent_zongyi.putExtra("path",path_zongyi);
+                    intent_zongyi.putExtra("path", path_zongyi);
                     startActivity(intent_zongyi);
                     break;
                 case R.id.gv_tuijian_dongman:
                     String path_dongman = dongman_list.get(i).getVideo_path();
                     Intent intent_dongman = new Intent(getActivity(), PlayerActivity.class);
-                    intent_dongman.putExtra("path",path_dongman);
+                    intent_dongman.putExtra("path", path_dongman);
                     startActivity(intent_dongman);
+                    break;
+                case R.id.gv_tuijian_dianying:
+                    String path_dianying = dianying_list.get(i).getVideo_path();
+                    Intent intent_dianying = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dianying.putExtra("path", path_dianying);
+                    startActivity(intent_dianying);
+                    break;
+                case R.id.gv_tuijian_gaoxiao:
+                    String path_gaoxiao = gaoxiao_list.get(i).getVideo_path();
+                    Intent intent_gaoxiao = new Intent(getActivity(), PlayerActivity.class);
+                    intent_gaoxiao.putExtra("path", path_gaoxiao);
+                    startActivity(intent_gaoxiao);
                     break;
             }
         }
@@ -447,23 +540,23 @@ public class TuijianFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_tuijian_jinri_more:  //今日资讯--更多
-                    Intent intent1 = new Intent(getActivity(),PlayerActivity.class);
-                    intent1.putExtra("path",jinri_list.get(0).getVideo_path());
+                    Intent intent1 = new Intent(getActivity(), PlayerActivity.class);
+                    intent1.putExtra("path", jinri_list.get(0).getVideo_path());
                     startActivity(intent1);
                     break;
                 case R.id.ll_tuijian_jinri_1:  //今日资讯--第一个
-                    Intent intent2 = new Intent(getActivity(),PlayerActivity.class);
-                    intent2.putExtra("path",jinri_list.get(1).getVideo_path());
+                    Intent intent2 = new Intent(getActivity(), PlayerActivity.class);
+                    intent2.putExtra("path", jinri_list.get(1).getVideo_path());
                     startActivity(intent2);
                     break;
                 case R.id.ll_tuijian_jinri_2:  //今日资讯--第二个
-                    Intent intent3 = new Intent(getActivity(),PlayerActivity.class);
-                    intent3.putExtra("path",jinri_list.get(2).getVideo_path());
+                    Intent intent3 = new Intent(getActivity(), PlayerActivity.class);
+                    intent3.putExtra("path", jinri_list.get(2).getVideo_path());
                     startActivity(intent3);
                     break;
                 case R.id.ll_tuijian_jinri_3:  //今日资讯--第二个
-                    Intent intent4 = new Intent(getActivity(),PlayerActivity.class);
-                    intent4.putExtra("path",jinri_list.get(3).getVideo_path());
+                    Intent intent4 = new Intent(getActivity(), PlayerActivity.class);
+                    intent4.putExtra("path", jinri_list.get(3).getVideo_path());
                     startActivity(intent4);
                     break;
             }
@@ -504,8 +597,8 @@ public class TuijianFragment extends Fragment {
             image_list.get(position).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent_image = new Intent(getActivity(),PlayerActivity.class);
-                    intent_image.putExtra("path",list.get(image_position).getVideo_path());
+                    Intent intent_image = new Intent(getActivity(), PlayerActivity.class);
+                    intent_image.putExtra("path", list.get(image_position).getVideo_path());
                     startActivity(intent_image);
                 }
             });
