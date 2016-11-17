@@ -63,6 +63,7 @@ public class ZongYiFragment extends Fragment {
     private String desc_head = "";
     private ImageView first_head_img;
     private TextView text_head;
+    private TextView text_more01,text_more02,text_more03;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,6 +74,13 @@ public class ZongYiFragment extends Fragment {
         grid_view04 = (GridView) view.findViewById(R.id.grid_view04);
         first_head_img = (ImageView) view.findViewById(R.id.first_head_img);
         text_head = (TextView) view.findViewById(R.id.text_head);
+        text_more01 = (TextView) view.findViewById(R.id.text_more01);
+        text_more02 = (TextView) view.findViewById(R.id.text_more02);
+        text_more03 = (TextView) view.findViewById(R.id.text_more03);
+
+        text_more01.setOnClickListener(new myonclick());
+        text_more02.setOnClickListener(new myonclick());
+        text_more03.setOnClickListener(new myonclick());
 
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getActivity()).denyCacheImageMultipleSizesInMemory()
@@ -316,6 +324,14 @@ public class ZongYiFragment extends Fragment {
 
         }
     };
+    //更多按钮监听事件
+    class myonclick implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(),"",Toast.LENGTH_SHORT).show();
+
+        }
+    }
 
 
 

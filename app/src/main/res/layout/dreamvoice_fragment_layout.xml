@@ -71,7 +71,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"/>
+                        android:text="更多"
+                        android:id="@+id/text_more01" />
                 </RelativeLayout>
                 <GridView
                     android:id="@+id/grid_view03"
@@ -108,7 +109,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"/>
+                        android:text="更多"
+                        android:id="@+id/text_more02" />
                 </RelativeLayout>
                 <GridView
                     android:id="@+id/grid_view02"
@@ -144,7 +146,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"/>
+                        android:text="更多"
+                        android:id="@+id/text_more03" />
                 </RelativeLayout>
                 <GridView
                     android:id="@+id/grid_view04"
