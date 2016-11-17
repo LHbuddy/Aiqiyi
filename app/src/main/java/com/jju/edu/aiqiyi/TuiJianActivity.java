@@ -22,6 +22,7 @@ import com.jju.edu.aiqiyi.tuijian.GaoxiaoFragment;
 import com.jju.edu.aiqiyi.tuijian.MovieFragment;
 import com.jju.edu.aiqiyi.tuijian.TuijianFragment;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
+import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
                     Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
                 break;
                 case R.id.history:
-                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(TuiJianActivity.this, PlayHistoryActivity.class));
                     break;
                 case R.id.outline:
                     startActivity(new Intent(TuiJianActivity.this, LocalVideoActivity.class));
