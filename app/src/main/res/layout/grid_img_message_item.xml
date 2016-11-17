@@ -20,6 +20,7 @@
             android:textColor="#0d0d0d"
             android:layout_marginTop="5dp"
             android:maxLines="1"
+            android:ellipsize="end"
             android:text="正在加载"
             android:textSize="15sp"/>
         <TextView
@@ -30,6 +31,7 @@
             android:layout_marginTop="5dp"
             android:text="正在加载"
             android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="12sp"/>
 
     </LinearLayout>

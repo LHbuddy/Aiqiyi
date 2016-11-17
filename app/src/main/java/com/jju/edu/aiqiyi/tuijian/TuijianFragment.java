@@ -231,8 +231,6 @@ public class TuijianFragment extends Fragment {
                         util = new AdvertUtil();
                         String s1 = elements.get(i).getElementsByTag("a").attr("href");
                         String s2 = elements.get(i).getElementsByTag("img").attr("src");
-                        System.out.println("----"+s1);
-                        System.out.println("----"+s2);
                         util.setImg_path(s2);
                         util.setVideo_path(s1);
                         list.add(util);
