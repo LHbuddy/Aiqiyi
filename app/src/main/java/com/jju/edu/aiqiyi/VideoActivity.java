@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -58,6 +59,10 @@ public class VideoActivity extends Activity {
     private VideoGridAdapter adapter;
     //是否已经加载好视频播放地址，判断点击事件是否执行
     private boolean isReady = false;
+    //下一页的地址
+    private String next_path;
+    //设置一个FLAG，获得list的大小，设置GridView显示的item
+    private int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,9 @@ public class VideoActivity extends Activity {
                         videoUtil.setVideo_desc(video_desc);
                         list.add(videoUtil);
                     }
+                    //获得下一页的地址
+                    Elements elements_next = doc.select("[title=下一页]");
+                    next_path = "http://so.tv.sohu.com" + elements_next.attr("href");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -114,26 +122,31 @@ public class VideoActivity extends Activity {
 
     //加载信息
     private void loadInfo() {
-        adapter = new VideoGridAdapter(list,VideoActivity.this);
+        adapter = new VideoGridAdapter(list, VideoActivity.this);
         gv_video.setAdapter(adapter);
+        gv_video.smoothScrollByOffset(flag);
         loadmoreInfo();
         gv_video.setOnItemClickListener(gridViewOnItemClick);
+        gv_video.setOnTouchListener(gridViewOnTouch);
     }
 
     //加载视频播放地址
     private void loadmoreInfo() {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 super.run();
                 try {
-                    for (int i = 0; i <list.size() ; i++) {
+                    //通过FLAG的值来获取视频播放地址
+                    for (int i = flag; i < list.size(); i++) {
                         String path_ = list.get(i).getVideo_path();  //获取视频简介地址
                         Document document = Jsoup.connect(path_).get();  //加载视频简介地址
                         Elements e_1 = document.getElementsByTag("a");
                         Elements elements_1 = e_1.select("[location=play]");
-                        String video_path = elements_1.get(0).attr("href");
-                        list.get(i).setVideo_path(video_path);  //设置视频播放地址
+                        if (elements_1.size() > 0) {  //如果没有获得，跳过
+                            String video_path = elements_1.get(0).attr("href");
+                            list.get(i).setVideo_path(video_path);  //设置视频播放地址
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -143,18 +156,55 @@ public class VideoActivity extends Activity {
         }.start();
     }
 
+    //GridView的触摸下拉刷新和上拉加载事件
+    private View.OnTouchListener gridViewOnTouch = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            GridView gridView = (GridView) view;
+            float y = 0;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    y = motionEvent.getY();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if ((motionEvent.getY() - y) <= -8) {  //下拉
+                        if (gridView.getFirstVisiblePosition() == 0 && gridView.getChildAt(0).getTop() >= 0) {
+                            //滑到顶部,刷新
+                            //再次加载内容
+                            //清空List集合中的内容
+//                            list.clear();
+//                            list = null;
+                            http_(path);
+                        }
+                    } else if ((motionEvent.getY() - y) >= 8) {  //上拉
+                        if (gridView.getLastVisiblePosition() == (gridView.getCount() - 1)
+                                && gridView.getChildAt(gridView.getLastVisiblePosition() -
+                                gridView.getFirstVisiblePosition()).getBottom() <= gridView.getMeasuredHeight()) {
+                            //滑到底部，加载更多
+                            //设置一个FLAG，获得list的大小，设置GridView显示的item
+                            flag = list.size();
+                            http_(next_path);
+                        }
+                    }
+                    break;
+            }
+            return false;
+        }
+    };
+
+    //GridView的点击事件
     private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             //判断视频播放地址是否加载完成
-            if (isReady){  //加载完成跳转
-                String path = list.get(i).getVideo_path();
-                System.out.println("视频播放地址：-----"+path);
+            if (isReady) {  //加载完成跳转
+                String play_path = list.get(i).getVideo_path();
+                System.out.println("视频播放地址：-----" + play_path);
                 Intent intent_play = new Intent(VideoActivity.this, PlayerActivity.class);
-                intent_play.putExtra("path", path);
+                intent_play.putExtra("path", play_path);
                 startActivity(intent_play);
-            }else {   //加载未完成提示
-                Toast.makeText(VideoActivity.this, "请稍等，正在加载中！", Toast.LENGTH_SHORT).show();
+            } else {   //加载未完成提示
+                Toast.makeText(VideoActivity.this, "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
             }
         }
     };
