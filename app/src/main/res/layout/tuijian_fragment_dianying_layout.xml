@@ -14,14 +14,14 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/cate_6"/>
+            android:src="@drawable/cate_1"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:gravity="center"
-            android:text="综艺"
+            android:text="电影"
             android:textSize="16sp"/>
 
         <LinearLayout
@@ -30,9 +30,9 @@
             android:layout_weight="1"></LinearLayout>
 
         <Button
-            android:id="@+id/btn_tuijian_zongyi_more"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:id="@+id/btn_tuijian_dianying_more"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
             android:text="更多"
@@ -40,16 +40,16 @@
             android:textSize="14sp"/>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@drawable/ebpay_pwd_payway_arrows"/>
     </LinearLayout>
 
     <GridView
-        android:id="@+id/gv_tuijian_zongyi"
+        android:id="@+id/gv_tuijian_dianying"
         android:layout_width="match_parent"
         android:layout_height="310dp"
-        android:numColumns="2"
+        android:numColumns="4"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"
         android:stretchMode="columnWidth"></GridView>

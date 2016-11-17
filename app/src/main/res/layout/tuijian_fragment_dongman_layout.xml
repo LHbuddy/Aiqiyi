@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginBottom="15dp"
+              android:layout_marginBottom="10dp"
               android:orientation="vertical">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/cate_2"/>
+            android:src="@drawable/cate_4"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
     <GridView
         android:id="@+id/gv_tuijian_dongman"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="310dp"
         android:numColumns="2"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"
