@@ -45,15 +45,19 @@ public class ZongYiFragment extends Fragment {
     private List<VideoUtil> list = new ArrayList<VideoUtil>();
     private List<VideoUtil> list02 = new ArrayList<VideoUtil>();
     private List<VideoUtil> list03 = new ArrayList<VideoUtil>();
+    private List<VideoUtil> list04 = new ArrayList<VideoUtil>();
     private VideoUtil util;
     private VideoUtil util02;
     private VideoUtil util03;
+    private VideoUtil util04;
     private VideoGridAdapter adapter;
     private VideoGridAdapter adapter02;
     private VideoGridAdapter adapter03;
+    private VideoGridAdapter adapter04;
     private GridView grid_view;
     private GridView grid_view02;
     private GridView grid_view03;
+    private GridView grid_view04;
     private String img_head = "'";
     private String path_head = "";
     private String desc_head = "";
@@ -66,6 +70,7 @@ public class ZongYiFragment extends Fragment {
         grid_view = (GridView) view.findViewById(R.id.grid_view);
         grid_view02 = (GridView) view.findViewById(R.id.grid_view02);
         grid_view03 = (GridView) view.findViewById(R.id.grid_view03);
+        grid_view04 = (GridView) view.findViewById(R.id.grid_view04);
         first_head_img = (ImageView) view.findViewById(R.id.first_head_img);
         text_head = (TextView) view.findViewById(R.id.text_head);
 
@@ -99,7 +104,7 @@ public class ZongYiFragment extends Fragment {
                     desc_head = element_.getElementsByTag("a").text();
 
                     Elements elements = document.select(".lisi");
-                    Log.e("//////////",""+elements.size());
+                  //  Log.e("//////////",""+elements.size());
                     for (int i = 0; i < 4; i++) {
                         util = new VideoUtil();
                         String img = elements.get(i).getElementsByTag("img").attr("data-original");
@@ -196,6 +201,20 @@ public class ZongYiFragment extends Fragment {
                         }
                     });
                     grid_view02.setOnItemClickListener(listener);
+                    getmessage_03();
+                    break;
+                case 125:
+                    //   Log.e("1111111", "" + list.size());
+                    adapter04 = new VideoGridAdapter(list04, getActivity());
+                    grid_view04.setAdapter(adapter04);
+                    grid_view04.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            return MotionEvent.ACTION_MOVE == event.getAction() ? true
+                                    : false;
+                        }
+                    });
+                    grid_view04.setOnItemClickListener(listener);
                     break;
             }
         }
@@ -232,6 +251,42 @@ public class ZongYiFragment extends Fragment {
             }
         }.start();
     }
+    //信息爬取方法
+    public void getmessage_03() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Document document = Jsoup.connect("http://tv.sohu.com/show/").get();
+                    Elements elements = document.select(".colM");
+                    Log.e("//////////---",""+elements.size());
+                    Element element = elements.get(1);
+                    Elements elements2 = element.select(".lisi");
+                    Log.e("***********",""+elements2.size());
+                    for(int i = 0; i < elements2.size(); i++){
+                        util04 = new VideoUtil();
+                        String img = elements2.get(i).getElementsByTag("img").attr("data-original");
+                        Element element2 = elements2.get(i);
+                        Elements elements3 = element2.getElementsByTag("p");
+                        String name = elements3.get(0).text();
+                        String desc = elements3.get(1).text();
+                        String path = elements2.get(i).getElementsByTag("a").attr("href");
+                        Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
+
+                        util04.setVideo_image("http:" + img);
+                        util04.setVideo_name(name);
+                        util04.setVideo_desc(desc);
+                        util04.setVideo_path("http:" +path);
+                        list04.add(util04);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(125);
+            }
+        }.start();
+    }
 
 
     //grid view 监听事件
@@ -251,6 +306,9 @@ public class ZongYiFragment extends Fragment {
                     break;
                 case R.id.grid_view03:
                     info = list03.get(position).getVideo_path();
+                    break;
+                case R.id.grid_view04:
+                    info = list04.get(position).getVideo_path();
                     break;
             }
             intent.putExtra("path",info);
