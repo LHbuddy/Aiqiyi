@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
@@ -55,6 +56,8 @@ public class VideoActivity extends Activity {
     private VideoUtil videoUtil;
     private List<VideoUtil> list = new ArrayList<VideoUtil>();
     private VideoGridAdapter adapter;
+    //是否已经加载好视频播放地址，判断点击事件是否执行
+    private boolean isReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,7 @@ public class VideoActivity extends Activity {
         http_();
     }
 
+    //加载视频信息
     private void http_() {
         new Thread() {
             @Override
@@ -80,13 +84,9 @@ public class VideoActivity extends Activity {
                         String image_path = element.getElementsByTag("img").attr("src");
                         String video_name = element.getElementsByTag("a").get(2).attr("title");
                         String video_desc = element.select("p.actor").text();
-                        Document document = Jsoup.connect(path).get();
-                        Elements e_1 = document.getElementsByTag("a");
-                        Elements elements_1 = e_1.select("[location=play]");
-                        String video_path = elements_1.get(0).attr("href");
                         videoUtil.setVideo_name(video_name);
                         videoUtil.setVideo_image(image_path);
-                        videoUtil.setVideo_path(video_path);
+                        videoUtil.setVideo_path(path);
                         videoUtil.setVideo_desc(video_desc);
                         list.add(videoUtil);
                     }
@@ -105,6 +105,9 @@ public class VideoActivity extends Activity {
                 case 234:
                     loadInfo();
                     break;
+                case 235:
+                    isReady = true;
+                    break;
             }
         }
     };
@@ -113,16 +116,46 @@ public class VideoActivity extends Activity {
     private void loadInfo() {
         adapter = new VideoGridAdapter(list,VideoActivity.this);
         gv_video.setAdapter(adapter);
+        loadmoreInfo();
         gv_video.setOnItemClickListener(gridViewOnItemClick);
+    }
+
+    //加载视频播放地址
+    private void loadmoreInfo() {
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    for (int i = 0; i <list.size() ; i++) {
+                        String path_ = list.get(i).getVideo_path();  //获取视频简介地址
+                        Document document = Jsoup.connect(path_).get();  //加载视频简介地址
+                        Elements e_1 = document.getElementsByTag("a");
+                        Elements elements_1 = e_1.select("[location=play]");
+                        String video_path = elements_1.get(0).attr("href");
+                        list.get(i).setVideo_path(video_path);  //设置视频播放地址
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(235);
+            }
+        }.start();
     }
 
     private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            String path = list.get(i).getVideo_path();
-            Intent intent_play = new Intent(VideoActivity.this, PlayerActivity.class);
-            intent_play.putExtra("path", path);
-            startActivity(intent_play);
+            //判断视频播放地址是否加载完成
+            if (isReady){  //加载完成跳转
+                String path = list.get(i).getVideo_path();
+                System.out.println("视频播放地址：-----"+path);
+                Intent intent_play = new Intent(VideoActivity.this, PlayerActivity.class);
+                intent_play.putExtra("path", path);
+                startActivity(intent_play);
+            }else {   //加载未完成提示
+                Toast.makeText(VideoActivity.this, "请稍等，正在加载中！", Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
