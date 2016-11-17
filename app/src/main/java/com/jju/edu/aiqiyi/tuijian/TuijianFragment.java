@@ -517,7 +517,7 @@ public class TuijianFragment extends Fragment {
                     startActivity(intent_dianying);
                     break;
                 case R.id.gv_tuijian_gaoxiao:
-                    String path_gaoxiao = dianying_list.get(i).getVideo_path();
+                    String path_gaoxiao = gaoxiao_list.get(i).getVideo_path();
                     Intent intent_gaoxiao = new Intent(getActivity(), PlayerActivity.class);
                     intent_gaoxiao.putExtra("path", path_gaoxiao);
                     startActivity(intent_gaoxiao);
