@@ -268,10 +268,10 @@ public class ZongYiFragment extends Fragment {
                 try {
                     Document document = Jsoup.connect("http://tv.sohu.com/show/").get();
                     Elements elements = document.select(".colM");
-                    Log.e("//////////---",""+elements.size());
+                  //  Log.e("//////////---",""+elements.size());
                     Element element = elements.get(1);
                     Elements elements2 = element.select(".lisi");
-                    Log.e("***********",""+elements2.size());
+                   // Log.e("***********",""+elements2.size());
                     for(int i = 0; i < elements2.size(); i++){
                         util04 = new VideoUtil();
                         String img = elements2.get(i).getElementsByTag("img").attr("data-original");
@@ -280,7 +280,7 @@ public class ZongYiFragment extends Fragment {
                         String name = elements3.get(0).text();
                         String desc = elements3.get(1).text();
                         String path = elements2.get(i).getElementsByTag("a").attr("href");
-                        Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
+                      //  Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
 
                         util04.setVideo_image("http:" + img);
                         util04.setVideo_name(name);
