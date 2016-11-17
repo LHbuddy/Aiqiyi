@@ -21,7 +21,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
             android:gravity="center"
-            android:text="电视剧"
+            android:text="动漫"
             android:textSize="16sp"/>
 
         <LinearLayout
@@ -30,7 +30,7 @@
             android:layout_weight="1"></LinearLayout>
 
         <Button
-            android:id="@+id/btn_tuijian_dianshiju_more"
+            android:id="@+id/btn_tuijian_dongman_more"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:background="@null"
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <GridView
-        android:id="@+id/gv_tuijian_dianshiju"
+        android:id="@+id/gv_tuijian_dongman"
         android:layout_width="match_parent"
         android:layout_height="330dp"
         android:numColumns="2"

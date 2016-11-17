@@ -29,6 +29,7 @@ import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -36,7 +37,9 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.squareup.picasso.Picasso;
 
+import org.apache.http.params.HttpParams;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -83,6 +86,12 @@ public class TuijianFragment extends Fragment {
     private Button btn_tuijian_zongyi_more;
     private GridView gv_tuijian_zongyi;
     private VideoGridAdapter adapter_zongyi;
+    //动漫
+    private VideoUtil videoUtil_dongman;
+    private List<VideoUtil> dongman_list = new ArrayList<VideoUtil>();
+    private Button btn_tuijian_dongman_more;
+    private GridView gv_tuijian_dongman;
+    private VideoGridAdapter adapter_dongman;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,17 +117,23 @@ public class TuijianFragment extends Fragment {
         btn_tuijian_zongyi_more = (Button) view.findViewById(R.id.btn_tuijian_zongyi_more);
         gv_tuijian_zongyi = (GridView) view.findViewById(R.id.gv_tuijian_zongyi);
 
+        //初始化动漫
+        btn_tuijian_dongman_more = (Button) view.findViewById(R.id.btn_tuijian_dongman_more);
+        gv_tuijian_dongman = (GridView) view.findViewById(R.id.gv_tuijian_dongman);
+
         return view;
     }
 
     private void initView() {
+
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getActivity()).denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileCount(100)
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                 .diskCacheSize(100 * 1024 * 1024)
-                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .memoryCache(new WeakMemoryCache()).build();
         ImageLoader.getInstance().init(configuration);
 
         options = new DisplayImageOptions.Builder().cacheInMemory(true)
@@ -272,7 +287,7 @@ public class TuijianFragment extends Fragment {
 
                     //获取综艺节目
                     Element element_zongyi = elements_video.get(10);
-                    //获取藏医节目内容
+                    //获取综艺节目内容
                     Elements elements_zongyi_1 = element_zongyi.getElementsByTag("ul");
                     for (int i = 0; i < 2; i++) {
                         Element element_zongyi_info = elements_zongyi_1.get(i);
@@ -293,6 +308,28 @@ public class TuijianFragment extends Fragment {
                         }
                     }
 
+                    //获取动漫
+                    Element element_dongman = elements_video.get(7);
+                    //获取综艺节目内容
+                    Elements elements_dongman_1 = element_dongman.getElementsByTag("ul");
+                    for (int i = 0; i < 2; i++) {
+                        Element element_dongman_info = elements_dongman_1.get(i);
+                        Elements elements_dongman_info = element_dongman_info.getElementsByTag("li");
+                        for (int j = 0; j < 2; j++) {
+                            Element e_1 = elements_dongman_info.get(j);
+                            String video_path = "http:" + e_1.getElementsByTag("a").first().attr("href");
+                            String image_path = "http:" + e_1.getElementsByTag("img").attr("lazysrc");
+                            String video_name = e_1.getElementsByTag("p").get(0).text();
+                            String video_desc = e_1.getElementsByTag("span").get(1).text() + "--" +
+                                    e_1.getElementsByTag("p").get(1).text();
+                            videoUtil_dongman = new VideoUtil();
+                            videoUtil_dongman.setVideo_path(video_path);
+                            videoUtil_dongman.setVideo_name(video_name);
+                            videoUtil_dongman.setVideo_image(image_path);
+                            videoUtil_dongman.setVideo_desc(video_desc);
+                            dongman_list.add(videoUtil_dongman);
+                        }
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -322,9 +359,11 @@ public class TuijianFragment extends Fragment {
         initView();
         for (int i = 0; i < list.size(); i++) {
             ImageView imageview = new ImageView(getContext());
-            String uri = "http:" + list.get(i).getImg_path();
-            System.out.println(i + ":-----------" + uri);
-            ImageLoader.getInstance().displayImage(uri, imageview, options);
+            String uri_path = "http:" + list.get(i).getImg_path();
+            Uri uri = Uri.parse(uri_path);
+//            ImageLoader.getInstance().displayImage(uri, imageview, options);
+            Picasso.with(getContext()).load(uri).placeholder(R.drawable.phone_variety_focus_cover_default_bg)
+                    .resize(0,185).into(imageview);
             image_list.add(imageview);
         }
 
@@ -361,6 +400,12 @@ public class TuijianFragment extends Fragment {
         adapter_zongyi = new VideoGridAdapter(zongyi_list, getActivity());
         gv_tuijian_zongyi.setAdapter(adapter_zongyi);
         gv_tuijian_zongyi.setOnItemClickListener(gridViewOnItemClick);
+
+        //动漫
+        gv_tuijian_dongman.setOnTouchListener(gridViewOnTouch);
+        adapter_dongman = new VideoGridAdapter(dongman_list, getActivity());
+        gv_tuijian_dongman.setAdapter(adapter_dongman);
+        gv_tuijian_dongman.setOnItemClickListener(gridViewOnItemClick);
     }
 
     //GridView的点击事件
@@ -379,6 +424,12 @@ public class TuijianFragment extends Fragment {
                     Intent intent_zongyi = new Intent(getActivity(), PlayerActivity.class);
                     intent_zongyi.putExtra("path",path_zongyi);
                     startActivity(intent_zongyi);
+                    break;
+                case R.id.gv_tuijian_dongman:
+                    String path_dongman = dongman_list.get(i).getVideo_path();
+                    Intent intent_dongman = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dongman.putExtra("path",path_dongman);
+                    startActivity(intent_dongman);
                     break;
             }
         }
@@ -456,7 +507,6 @@ public class TuijianFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent_image = new Intent(getActivity(),PlayerActivity.class);
-                    System.out.println("image--OnClick---"+list.get(image_position).getVideo_path());
                     intent_image.putExtra("path",list.get(image_position).getVideo_path());
                     startActivity(intent_image);
                 }
