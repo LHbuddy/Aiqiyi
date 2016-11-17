@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#b6b0b0"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:background="#1b1616">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="45dp"
+            android:background="@drawable/phone_account_back_small_selected"
+            android:id="@+id/back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="本地视频"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/update"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/phone_search_scanning_p"/>
+
+    </RelativeLayout>
+</LinearLayout>

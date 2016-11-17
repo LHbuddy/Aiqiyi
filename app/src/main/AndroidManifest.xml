@@ -29,6 +29,7 @@
         <activity android:name=".WoDeActivity"></activity>
         <activity android:name=".PlayerActivity"></activity>
         <activity android:name=".VideoActivity"></activity>
+        <activity android:name=".wode.LocalVideoActivity"></activity>
     </application>
 
 </manifest>
