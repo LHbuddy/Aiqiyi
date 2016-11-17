@@ -48,9 +48,17 @@ public class JiaoYouActivity extends BaseActivity{
         news_more02.setOnClickListener(new myonclick());
 
 
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getmessage_01();
 
     }
+
     //信息爬取方法
     public void getmessage_01() {
         new Thread() {

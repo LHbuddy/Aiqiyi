@@ -156,4 +156,9 @@ public class PageActivity extends BaseActivity{
         return super.onTouchEvent(event);
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        manager.dispatchResume();
+    }
 }
