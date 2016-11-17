@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -75,22 +76,29 @@ public class DianShiJuFragment extends Fragment {
 
                 try {
                     Document doc = Jsoup.connect("http://tv.sohu.com/drama/").get();
-                    Elements elements = doc.select("div.colR");
-                    Element element = elements.get(0);
-                    Elements elements1 = element.getElementsByTag("li");
-
-                    Log.i("TAG", "elements  " + elements.size());
-                    for (int i = 0; i < elements1.size(); i++) {
-                        Element element1 = elements1.get(i);
-                        Log.i("TAG", "element  " + element1.toString());
-
-                        String name = element1.getElementsByTag("a").get(1).text();
-                        String a = element1.getElementsByTag("img").first().attr("src");
+                    Elements elements = doc.select(".con");
+                    Log.i("TAG", "elements:" + elements.size());
+                    Element element = elements.get(2);
+                    Elements elements_li = element.getElementsByTag("li");
+                    for (int i = 0; i < elements_li.size(); i++) {
+                        Element element_li = elements_li.get(i);
+                        String name = element_li.getElementsByTag("p").first().text();
+                        String a = element_li.getElementsByTag("img").attr("src");
                         String image = "http:" + a;
-                        Log.i("TAG", "image" + image);
+                        String desc = element_li.getElementsByTag("span").tagName("lisTx").text();
+                        String path = element_li.getElementsByTag("p").first().getElementsByTag("a").first().attr("href");
 
-                        VideoUtil util = new VideoUtil("", image, name, "");
-                        olist.add(util);
+                        VideoUtil video = new VideoUtil(path, image, name, desc);
+                        olist.add(video);
+                        // String img = elements.get(i).getElementsByTag("img").attr("data-original");
+                        //Element element = elements.get(i);
+                        //Elements elements2 = element.getElementsByTag("p");
+                        //    String name = elements2.get(0).text();
+                        //  String desc = elements2.get(1).text();
+                        //  String desc = elements.get(i).getElementsByTag(".p_bt").text();
+                        // String path = elements.get(i).getElementsByTag("a").attr("href");
+                        // Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
+
                     }
 
                     handler.sendEmptyMessage(123);
@@ -108,12 +116,18 @@ public class DianShiJuFragment extends Fragment {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 123) {
-                //  Log.i("TAG", olist.get(0).getVideo_image());
                 tv_dianshiju.setText(olist.get(0).getVideo_name());
                 Picasso.with(getContext()).load(olist.get(0).getVideo_image()).placeholder(R.drawable.book_card_icon).resize(680, 400).into(img_dianshiju);
                 dianshiju_adapter = new VideoGridAdapter(olist, getContext());
-                Log.i("TAG", "olist" + olist.size());
                 gridView.setAdapter(dianshiju_adapter);
+
+                gridView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return MotionEvent.ACTION_MOVE == event.getAction() ? true
+                                : false;
+                    }
+                });
 
             }
         }
