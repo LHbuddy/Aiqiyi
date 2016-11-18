@@ -12,7 +12,7 @@ import com.jju.edu.aiqiyi.R;
  * Created by Administrator on 2016/11/14.
  */
 
-public class VipMovieFragment extends Fragment {
+public class VipLifeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.vipmovie_vipuser_fragment_layout,container,false);
