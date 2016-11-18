@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -97,15 +96,12 @@ public class GaoxiaoFragment extends Fragment {
                     Document document = Jsoup.connect("http://tv.sohu.com/ugc/fun/").get();
 
                     Elements elements_ = document.select("div.fla1");
-                   // Log.e("^^^^^^^^^", "" + elements_.text());
                     Element element_ = elements_.get(0);
                     img_head = "http:" + element_.getElementsByTag("img").attr("src");
                     path_head ="http:" + element_.getElementsByTag("a").attr("href");
                     desc_head = element_.getElementsByTag("p").text();
-                   // Log.e("^^^^^^^^^", img_head+"******"+ path_head+"**********"+desc_head);
 
                     Elements elements = document.select("li[data-pb-other]");
-                  //  Log.e("//////////",""+elements.size());
                     for (int i = 0; i < 12; i++) {
                         util = new VideoUtil();
                         String img = elements.get(i).getElementsByTag("img").attr("src");
@@ -116,7 +112,6 @@ public class GaoxiaoFragment extends Fragment {
                         String name = elements.get(i).getElementsByTag("a").text();
                         String desc = elements.get(i).getElementsByTag("h3").text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
-                     //   Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
                         util.setVideo_image(img);
                         util.setVideo_name(name);
                         util.setVideo_desc("");
@@ -134,7 +129,6 @@ public class GaoxiaoFragment extends Fragment {
                         String name = elements.get(i).getElementsByTag("a").text();
                         String desc = elements.get(i).getElementsByTag("h3").text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
-                    //    Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
                         util02.setVideo_image(img);
                         util02.setVideo_name(name);
                         util02.setVideo_desc("");
@@ -156,7 +150,6 @@ public class GaoxiaoFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 123:
-                    //   Log.e("1111111", "" + list.size());
                     ImageLoader.getInstance().displayImage(img_head, first_head_img);
                     text_head.setText(desc_head);
                     adapter = new VideoGridAdapter(list, getActivity());
@@ -222,7 +215,6 @@ public class GaoxiaoFragment extends Fragment {
                 try {
                     Document document = Jsoup.connect("http://tv.sohu.com/ugc/fun/").get();
                     Elements elements = document.select(".col3");
-                    Log.e("//////////",""+elements.size());
                     for (int i = 11; i < elements.size(); i++) {
                         util03 = new VideoUtil();
                         String img = elements.get(i).getElementsByTag("img").attr("src");
@@ -230,10 +222,7 @@ public class GaoxiaoFragment extends Fragment {
                         Elements elements2 = element.getElementsByTag("a");
                         String name = elements2.get(2).text();
                         String desc = elements2.get(1).text();
-//                        String name = elements.get(i).getElementsByTag("a").text();
-//                        String desc = elements.get(i).getElementsByTag("h3").text();
                         String path = elements.get(i).getElementsByTag("a").attr("href");
-                        Log.e("222222", "" + img + "******" + name + "******" + desc + "******" + path);
                         util03.setVideo_image(img);
                         util03.setVideo_name(name);
                         util03.setVideo_desc("");
@@ -257,7 +246,6 @@ public class GaoxiaoFragment extends Fragment {
             // Toast.makeText(getActivity(),""+parent,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(),PlayerActivity.class);
             String info = "";
-            //  Log.e("********",list.get(position).getVideo_path());
             switch (parent.getId()){
                 case R.id.grid_view:
                     info = list.get(position).getVideo_path();

@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +15,7 @@ import android.widget.ListView;
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.adapter.MovieGridAdapter;
-import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.MovieUtil;
-import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.http_data;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -98,7 +94,6 @@ public class MovieFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view,
                                 int position, long id) {
             String url = olist.get(position).getVideo_path();
-            Log.e("url_", url);
             Intent intent = new Intent();
             intent.putExtra("path", url);
             intent.setClass(getContext(),PlayerActivity.class);
