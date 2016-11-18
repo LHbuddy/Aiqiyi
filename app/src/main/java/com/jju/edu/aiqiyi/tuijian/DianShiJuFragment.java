@@ -64,7 +64,7 @@ public class DianShiJuFragment extends Fragment {
     private GridView gridView;
     private VideoGridAdapter dianshiju_adapter;
     private VideoUtil video_first;
-    private String path_more;
+    private static String path_more;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

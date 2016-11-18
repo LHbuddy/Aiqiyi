@@ -162,8 +162,8 @@ public class VideoActivity extends Activity {
                         if (document.select("a.btn-playFea").size() > 0) {  //如果没有获得，跳过
                             Elements e_1 = document.select("a.btn-playFea");
                             video_path = e_1.get(0).attr("href");
-                              //设置视频播放地址
-                        }else if (document.getElementById("hisPlay")!=null){
+                            //设置视频播放地址
+                        } else if (document.getElementById("hisPlay") != null) {
                             Element element = document.getElementById("hisPlay");
                             video_path = element.attr("href");
                         }
