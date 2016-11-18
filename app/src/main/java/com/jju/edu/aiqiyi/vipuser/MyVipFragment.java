@@ -11,16 +11,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.adapter.SportsAdapter;
+import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.SportUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
@@ -38,138 +42,188 @@ import java.util.List;
  */
 
 public class MyVipFragment extends Fragment {
+    private View view;
 
-    private String img_head = "'";
-    private String path_head = "";
-    private String desc_head = "";
-    private ImageView first_head_img;
-    private TextView text_head;
-    private List<SportUtil> list = new ArrayList<SportUtil>();
-    private SportUtil util;
-    private SportsAdapter adapter;
-    private ListView sport_list_view;
+    private GridView gv_video;
+
+    //图片加载配置
+    private DisplayImageOptions options;
+
+    //加载路径
+    private String path = "http://so.tv.sohu.com/list_p1197_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html";
+
+    //一次加载的数量
+    private int count = 0;
+    private VideoUtil videoUtil;
+    private List<VideoUtil> list = new ArrayList<VideoUtil>();
+    private VideoGridAdapter adapter;
+    //是否已经加载好视频播放地址，判断点击事件是否执行
+    private boolean isReady = false;
+    //下一页的地址
+    private String next_path;
+    //设置一个FLAG，获得list的大小，设置GridView显示的item
+    private int flag = 0;
+    //判断是否是刷新，如果是就清空list集合中的内容
+    private boolean isReflash;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.myvip_vipuser_fragment_layout,container,false);
-
-        first_head_img = (ImageView) view.findViewById(R.id.first_head_img);
-        text_head = (TextView) view.findViewById(R.id.text_head);
-        sport_list_view = (ListView) view.findViewById(R.id.sport_list_view);
-
-        first_head_img.setOnClickListener(new myonclick());
-
-        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
-                getActivity()).denyCacheImageMultipleSizesInMemory()
-                .diskCacheFileCount(100)
-                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .diskCacheSize(50 * 1024 * 1024)
-                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
-        ImageLoader.getInstance().init(configuration);
-
-        getmessage_();
-
+        View view = inflater.inflate(R.layout.myvip_vipuser_fragment_layout, container, false);
+        gv_video = (GridView) view.findViewById(R.id.gridview_vipsports);
+        http_(path);
         return view;
     }
 
-    //信息爬取方法
-    public void getmessage_() {
+    //加载视频信息
+    private void http_(final String uri) {
         new Thread() {
             @Override
             public void run() {
-                super.run();
-
                 try {
-                    Document document = Jsoup.connect("http://tv.sohu.com/sports/").get();
+                    Document doc = Jsoup.connect(uri).get();
+                    Elements e = doc.getElementsByTag("li");
 
-                    Elements elements_ = document.select("div.scr_pic");
-                  //  Log.e("^^^^^^^^^", "" + elements_.size());
-                    Element element_ = elements_.get(0);
-                    img_head = "http:" + element_.getElementsByTag("img").attr("src");
-                    path_head ="http:" +  element_.getElementsByTag("a").attr("href");
-                    desc_head = element_.getElementsByTag("span ").text();
-                   // Log.e("***********", "" + img_head+"********"+path_head+"*********"+desc_head);
+                    for (int i = 18; i < e.size(); i++) {
+                        videoUtil = new VideoUtil();
+                        Element element = e.get(i);
+                        String path = element.getElementsByTag("a").get(0).attr("href");
+                        String image_path = element.getElementsByTag("img").attr("src");
+                        String video_name = element.getElementsByTag("img").attr("alt");
+                        String video_desc = element.getElementsByTag("p").first().text();
 
-                    Elements elements = document.select("li.scvs");
-                  //  Log.e("//////////",""+elements.size());
-                    for (int i = 1; i < 6; i++) {
-                        util = new SportUtil();
-                        Element element = elements.get(i);
-                        Elements elements2 = element.getElementsByTag("p");
-                        String time = elements2.get(0).text();
-                        String team = elements2.get(1).text();
-                        Elements elements3 = element.getElementsByTag("span");
-                        String img1 ="http:" +elements3.get(0).getElementsByTag("img").attr("src");
-                        String img2 ="http:" +elements3.get(2).getElementsByTag("img").attr("src");
-                        String path = elements.get(i).getElementsByTag("a").attr("href");
-                      //  Log.e("***********", "" + time+"********"+team+"*********"+img1+"*********"+img2+"*********"+path);
-                        util.setTime(time);
-                        util.setTeam(team);
-                        util.setImg_left(img1);
-                        util.setImg_right(img2);
-                        util.setPath(path);
-                        list.add(util);
+
+                        videoUtil.setVideo_name(video_name);
+                        videoUtil.setVideo_image(image_path);
+                        videoUtil.setVideo_path(path);
+                        videoUtil.setVideo_desc(video_desc);
+                        if (isReflash) {  //判断是否是刷新，是则清除list集合中的内容
+                            //再次加载内容
+                            //清空List集合中的内容
+                            list.clear();
+                            list = null;
+                        }
+                        list.add(videoUtil);
                     }
-
-
-
+                    //获得下一页的地址
+                    Elements elements_next = doc.select("a[title]");
+                    next_path = "http://so.tv.sohu.com" + elements_next.get(elements_next.size() - 1).attr("href");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                handler.sendEmptyMessage(123);
+                handler.sendEmptyMessage(234);
             }
         }.start();
     }
 
-    Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 123:
-                    ImageLoader.getInstance().displayImage(img_head, first_head_img);
-                    text_head.setText(desc_head);
-                    adapter = new SportsAdapter(list,getActivity());
-                    sport_list_view.setAdapter(adapter);
-
-                    sport_list_view.setOnItemClickListener(listener);
-
-                    sport_list_view.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            return MotionEvent.ACTION_MOVE == event.getAction() ? true
-                                    : false;
-                        }
-                    });
-
+            switch (msg.what) {
+                case 234:
+                    loadInfo();
                     break;
-
+                case 235:
+                    isReady = true;
+                    break;
             }
         }
     };
 
-    AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getActivity(), PlayerActivity.class);
-            intent.putExtra("path",list.get(position).getPath());
-            startActivity(intent);
-        }
-    };
+    //加载信息
+    private void loadInfo() {
+        adapter = new VideoGridAdapter(list, getContext());
 
-    //图片点击事件
-    class myonclick implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.first_head_img:
-                    Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                    intent.putExtra("path",desc_head);
-                    startActivity(intent);
-                    break;
-
-            }
-
-        }
+        gv_video.setAdapter(adapter);
+        gv_video.smoothScrollByOffset(flag);
+        isReady = false;
+        loadmoreInfo();
+        gv_video.setOnItemClickListener(gridViewOnItemClick);
+        gv_video.setOnTouchListener(gridViewOnTouch);
     }
+
+    //加载视频播放地址
+    private void loadmoreInfo() {
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    if (flag != 0) {
+                        flag -= 1;
+                    }
+                    //通过FLAG的值来获取视频播放地址
+                    for (int i = flag; i < list.size(); i++) {
+                        String path_ = list.get(i).getVideo_path();  //获取视频简介地址
+                        String video_path = path_;
+                        Document document = Jsoup.connect(path_).get();  //加载视频简介地址
+                        if (document.select("a.btn-playFea").size() > 0) {  //如果没有获得，跳过
+                            Elements e_1 = document.select("a.btn-playFea");
+                            video_path = e_1.get(0).attr("href");
+                            //设置视频播放地址
+                        } else if (document.getElementById("hisPlay") != null) {
+                            Element element = document.getElementById("hisPlay");
+                            video_path = element.attr("href");
+                        }
+                        list.get(i).setVideo_path(video_path);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                handler.sendEmptyMessage(235);
+            }
+        }.start();
+    }
+
+    //GridView的触摸下拉刷新和上拉加载事件
+    private View.OnTouchListener gridViewOnTouch = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            GridView gridView = (GridView) view;
+            float y = 0;
+            switch (motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    y = motionEvent.getY();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if ((motionEvent.getY() - y) <= -8) {  //下拉
+                        if (gridView.getFirstVisiblePosition() == 0 && gridView.getChildAt(0).getTop() >= 0) {
+                            //滑到顶部,刷新
+                            //刷新
+                            isReflash = true;
+                            http_(path);
+                        }
+                    } else if ((motionEvent.getY() - y) >= 8) {  //上拉
+                        if (gridView.getLastVisiblePosition() == (gridView.getCount() - 1)
+                                && gridView.getChildAt(gridView.getLastVisiblePosition() -
+                                gridView.getFirstVisiblePosition()).getBottom() <= gridView.getMeasuredHeight()) {
+                            //滑到底部，加载更多
+                            //设置一个FLAG，获得list的大小，设置GridView显示的item
+                            flag = list.size();
+                            http_(next_path);
+                        }
+                    }
+                    break;
+            }
+            return false;
+        }
+    };
+
+    //GridView的点击事件
+    private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            //判断视频播放地址是否加载完成
+            if (isReady) {  //加载完成跳转
+                String play_path = list.get(i).getVideo_path();
+                System.out.println("视频播放地址：-----" + play_path);
+                Intent intent_play = new Intent(getContext(), PlayerActivity.class);
+                intent_play.putExtra("path", play_path);
+                startActivity(intent_play);
+            } else {   //加载未完成提示
+                Toast.makeText(getContext(), "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
 }
