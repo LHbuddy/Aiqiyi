@@ -3,9 +3,11 @@ package com.jju.edu.aiqiyi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -50,8 +52,7 @@ public class VideoActivity extends Activity {
     private DisplayImageOptions options;
 
     //加载路径
-    private String path =
-            "http://so.tv.sohu.com/list_p1101_p20_p3_u5185_u5730_p40_p5_p6_p77_p80_p9_2d1_p10_p11_p12_p13.html";
+    private String path = "";
 
     //一次加载的数量
     private int count = 0;
@@ -72,6 +73,8 @@ public class VideoActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.video_layout);
+        path = getIntent().getStringExtra("path");
+        Log.i("TAG", "lujing --------" + path);
 
         initView();
         http_(path);

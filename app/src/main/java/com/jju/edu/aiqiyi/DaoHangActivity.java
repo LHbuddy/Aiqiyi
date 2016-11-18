@@ -1,11 +1,14 @@
 package com.jju.edu.aiqiyi;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.jju.edu.aiqiyi.adapter.GridAdapter;
 import com.jju.edu.aiqiyi.entity.DaohangUtil;
+import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +50,22 @@ public class DaoHangActivity extends BaseActivity {
 
         adapter = new GridAdapter(olist, DaoHangActivity.this);
         gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(onItemClick);
 
 
         //设置监听
         search.setOnClickListener(new myclick());
 
     }
+
+    private AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            Intent intent = new Intent(DaoHangActivity.this, DianShiJuFragment.class);
+//            startActivity(intent);
+            Toast.makeText(DaoHangActivity.this, olist.get(position).getName(), Toast.LENGTH_SHORT).show();
+        }
+    };
 
     //标题按钮监听事件
     class myclick implements View.OnClickListener {
