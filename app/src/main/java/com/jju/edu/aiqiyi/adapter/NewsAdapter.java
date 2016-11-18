@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.entity.DaohangUtil;
+import com.jju.edu.aiqiyi.util.NewsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,11 @@ import java.util.List;
 
 public class NewsAdapter extends BaseAdapter {
 
-    private List<String> oList = new ArrayList<String>();
+    private List<NewsUtil> oList = new ArrayList<NewsUtil>();
     private Context oContext;
     private LayoutInflater oInflater;
 
-    public NewsAdapter(List<String> oList, Context oContext) {
+    public NewsAdapter(List<NewsUtil> oList, Context oContext) {
         this.oList = oList;
         this.oContext = oContext;
         oInflater = LayoutInflater.from(oContext);
@@ -61,7 +62,7 @@ public class NewsAdapter extends BaseAdapter {
             oholder = (ViewHolder) convertView.getTag();
         }
         //Log.e("&&&&&&&&&&&","'"+oholder.name.getText());
-        oholder.name.setText(oList.get(position));
+        oholder.name.setText(oList.get(position).getName());
         return convertView;
     }
 
