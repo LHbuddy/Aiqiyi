@@ -115,7 +115,6 @@ public class VideoActivity extends Activity {
                             list = null;
                         }
                         list.add(videoUtil);
-
                     }
                     //获得下一页的地址
                     Elements elements_next = doc.select("a[title]");

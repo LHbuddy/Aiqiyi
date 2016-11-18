@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:numColumns="4"
         android:scrollbars="none"
+        android:horizontalSpacing="15dp"
         android:verticalSpacing="15dp"></GridView>
 
 </LinearLayout>
