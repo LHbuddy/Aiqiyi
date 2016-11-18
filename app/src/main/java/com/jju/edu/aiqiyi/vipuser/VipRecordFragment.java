@@ -87,7 +87,7 @@ public class VipRecordFragment extends Fragment {
                     Document document = Jsoup.connect("http://tv.sohu.com/documentary/").get();
 
                     Elements elements = document.select("li.lisi");
-                    Log.e("//////////",""+elements.size());
+                //    Log.e("//////////",""+elements.size());
                     for (int i = 0; i < 6; i++) {
                         util01 = new VideoUtil();
                         Element element = elements.get(i);
@@ -98,7 +98,7 @@ public class VipRecordFragment extends Fragment {
                         String desc = elements3.get(1).text();
                         String path = "http:" +elements.get(i).getElementsByTag("a").attr("href");
                         String image = "http:" +elements.get(i).getElementsByTag("img").attr("data-original");
-                        Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
+                    //    Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
                         util01.setVideo_image(image);
                         util01.setVideo_name(name);
                         util01.setVideo_desc(desc);
@@ -116,7 +116,7 @@ public class VipRecordFragment extends Fragment {
                         String desc = elements3.get(1).text();
                         String path = "http:" +elements.get(i).getElementsByTag("a").attr("href");
                         String image = "http:" +elements.get(i).getElementsByTag("img").attr("data-original");
-                        Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
+                     //   Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
                         util02.setVideo_image(image);
                         util02.setVideo_name(name);
                         util02.setVideo_desc(desc);
@@ -134,7 +134,7 @@ public class VipRecordFragment extends Fragment {
                         String desc = elements3.get(1).text();
                         String path = "http:" +elements.get(i).getElementsByTag("a").attr("href");
                         String image = "http:" +elements.get(i).getElementsByTag("img").attr("data-original");
-                        Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
+                      //  Log.e("***********", "" + image+"********"+name+"*********"+desc+"*********"+path);
                         util03.setVideo_image(image);
                         util03.setVideo_name(name);
                         util03.setVideo_desc(desc);
