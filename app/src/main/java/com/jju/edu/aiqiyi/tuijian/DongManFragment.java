@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.VideoActivity;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.MovieUtil;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
@@ -245,8 +246,8 @@ public class DongManFragment extends Fragment {
 
 
         text_more01 = (TextView) view.findViewById(R.id.dm_text_more01);
-        text_more02 = (TextView) view.findViewById(R.id.dm_text_more02);
-//        text_more01.setOnClickListener(new ZongYiFragment.myonclick());
+//        text_more02 = (TextView) view.findViewById(R.id.dm_text_more02);
+       text_more01.setOnClickListener( listenter_more);
 //        text_more02.setOnClickListener(new ZongYiFragment.myonclick());
 //        text_more03.setOnClickListener(new ZongYiFragment.myonclick());
 
@@ -268,4 +269,16 @@ public class DongManFragment extends Fragment {
                 .displayer(new RoundedBitmapDisplayer(0)).build();
 
     }
+
+   private View.OnClickListener listenter_more = new View.OnClickListener() {
+       @Override
+       public void onClick(View view) {
+           String path = "http://so.tv.sohu.com/list_p1115_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html?lcode=AAAAXI_-1SzNcuUrjz4IX80Fsov7PkQ-_9HcfhP5CqXXjp0R8XfYZkr4y7lONiSf97pAsyIIUrQWfRQxqQVNGmCbWAMSePteYrBsqLZ_EWa-JV8681rfKbWwtZkwmTubY1aVEA..cf6&lqd=10051";
+           Intent intent = new Intent(getActivity(), VideoActivity.class);
+           intent.putExtra("path",path);
+           startActivity(intent);
+
+       }
+   };
+
 }
