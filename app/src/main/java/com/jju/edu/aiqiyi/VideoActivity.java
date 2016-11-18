@@ -74,7 +74,6 @@ public class VideoActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.video_layout);
         path = getIntent().getStringExtra("path");
-        Log.i("TAG", "lujing --------" + path);
 
         initView();
         http_(path);
@@ -88,13 +87,14 @@ public class VideoActivity extends Activity {
                 try {
                     Document doc = Jsoup.connect(uri).get();
                     Elements e = doc.getElementsByTag("li");
+
                     for (int i = 18; i < e.size(); i++) {
                         videoUtil = new VideoUtil();
                         Element element = e.get(i);
-                        String path = element.getElementsByTag("a").get(2).attr("href");
+                        String path = element.getElementsByTag("a").get(0).attr("href");
                         String image_path = element.getElementsByTag("img").attr("src");
                         String video_name = element.getElementsByTag("a").get(2).attr("title");
-                        String video_desc = element.select("p.actor").text();
+                        String video_desc = element.getElementsByTag("p").first().text();
                         videoUtil.setVideo_name(video_name);
                         videoUtil.setVideo_image(image_path);
                         videoUtil.setVideo_path(path);
@@ -157,13 +157,17 @@ public class VideoActivity extends Activity {
                     //通过FLAG的值来获取视频播放地址
                     for (int i = flag; i < list.size(); i++) {
                         String path_ = list.get(i).getVideo_path();  //获取视频简介地址
+                        String video_path = path_;
                         Document document = Jsoup.connect(path_).get();  //加载视频简介地址
-                        Elements e_1 = document.getElementsByTag("a");
-                        Elements elements_1 = e_1.select("[location=play]");
-                        if (elements_1.size() > 0) {  //如果没有获得，跳过
-                            String video_path = elements_1.get(0).attr("href");
-                            list.get(i).setVideo_path(video_path);  //设置视频播放地址
+                        if (document.select("a.btn-playFea").size() > 0) {  //如果没有获得，跳过
+                            Elements e_1 = document.select("a.btn-playFea");
+                            video_path = e_1.get(0).attr("href");
+                              //设置视频播放地址
+                        }else if (document.getElementById("hisPlay")!=null){
+                            Element element = document.getElementById("hisPlay");
+                            video_path = element.attr("href");
                         }
+                        list.get(i).setVideo_path(video_path);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

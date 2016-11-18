@@ -127,13 +127,6 @@ public class TuijianFragment extends Fragment {
         //初始化电视剧
         btn_tuijian_dianshiju_more = (Button) view.findViewById(R.id.btn_tuijian_dianshiju_more);
         gv_tuijian_dianshiju = (GridView) view.findViewById(R.id.gv_tuijian_dianshiju);
-        btn_tuijian_dianshiju_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_more = new Intent(getActivity(), VideoActivity.class);
-                startActivity(intent_more);
-            }
-        });
 
         //初始化综艺
         btn_tuijian_zongyi_more = (Button) view.findViewById(R.id.btn_tuijian_zongyi_more);
@@ -142,6 +135,15 @@ public class TuijianFragment extends Fragment {
         //初始化动漫
         btn_tuijian_dongman_more = (Button) view.findViewById(R.id.btn_tuijian_dongman_more);
         gv_tuijian_dongman = (GridView) view.findViewById(R.id.gv_tuijian_dongman);
+        btn_tuijian_dongman_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_dongman_more = new Intent(getActivity(), VideoActivity.class);
+                String path_dongman = "http://so.tv.sohu.com/list_p1115_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html?lcode=AAAAXI_-1SzNcuUrjz4IX80Fsov7PkQ-_9HcfhP5CqXXjp0R8XfYZkr4y7lONiSf97pAsyIIUrQWfRQxqQVNGmCbWAMSePteYrBsqLZ_EWa-JV8681rfKbWwtZkwmTubY1aVEA..cf6&lqd=10051";
+                intent_dongman_more.putExtra("path",path_dongman);
+                startActivity(intent_dongman_more);
+            }
+        });
 
         //初始化电影
         btn_tuijian_dianying_more = (Button) view.findViewById(R.id.btn_tuijian_dianying_more);
