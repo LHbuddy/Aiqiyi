@@ -67,6 +67,8 @@ public class VideoActivity extends Activity {
     private int flag = 0;
     //判断是否是刷新，如果是就清空list集合中的内容
     private boolean isReflash;
+    //判断是否是搞笑界面，如果是就加载另一个布局
+    private boolean isGaoXiao = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,14 @@ public class VideoActivity extends Activity {
                         String path = element.getElementsByTag("a").get(0).attr("href");
                         String image_path = element.getElementsByTag("img").attr("src");
                         String video_name = element.getElementsByTag("a").get(2).attr("title");
-                        String video_desc = element.getElementsByTag("p").first().text();
+                        String video_desc = "";
+                        if (element.getElementsByTag("p").size() !=0 ){
+                            isGaoXiao = false;
+                            video_desc = element.getElementsByTag("p").first().text();
+                        }else {
+                            isGaoXiao = true;
+                            video_desc = element.getElementsByTag("h3").text();
+                        }
                         videoUtil.setVideo_name(video_name);
                         videoUtil.setVideo_image(image_path);
                         videoUtil.setVideo_path(path);
@@ -136,6 +145,9 @@ public class VideoActivity extends Activity {
     //加载信息
     private void loadInfo() {
         adapter = new VideoGridAdapter(list, VideoActivity.this);
+        if (isGaoXiao){
+            gv_video.setNumColumns(2);
+        }
         gv_video.setAdapter(adapter);
         gv_video.smoothScrollByOffset(flag);
         isReady = false;
