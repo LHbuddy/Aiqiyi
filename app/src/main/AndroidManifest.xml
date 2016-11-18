@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jju.edu.aiqiyi">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+<manifest package="com.jju.edu.aiqiyi"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -13,9 +15,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".PageActivity">
@@ -26,6 +28,10 @@
         <activity android:name=".JiaoYouActivity"></activity>
         <activity android:name=".WoDeActivity"></activity>
         <activity android:name=".PlayerActivity"></activity>
+        <activity android:name=".VideoActivity"></activity>
+        <activity android:name=".wode.LocalVideoActivity"></activity>
+        <activity android:name=".wode.PlayHistoryActivity"></activity>
+        <activity android:name=".wode.SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.jju.edu.aiqiyi;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -32,9 +31,11 @@ public class PlayerActivity extends BaseActivity {
         String path = getIntent().getStringExtra("path");
         if (path.split("//my").length==2){
             phone_path = "http://m" +  path.split("//my")[1];
-        }else {
+        }else if (path.split("//").length==2){
             String[] path_phone = path.split("//");
             phone_path = "http://m."+path_phone[1];
+        }else {
+            phone_path = path;
         }
 
         webview.loadUrl(phone_path);
