@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.TuiJianActivity;
+import com.jju.edu.aiqiyi.VideoActivity;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -54,6 +56,7 @@ public class DianShiJuFragment extends Fragment {
 
     private ImageView img_dianshiju;
     private TextView tv_dianshiju;
+    private Button btn_more;
     private LinearLayout linear_dianshiju;
     private DisplayImageOptions options;
     private View view;
@@ -61,6 +64,7 @@ public class DianShiJuFragment extends Fragment {
     private GridView gridView;
     private VideoGridAdapter dianshiju_adapter;
     private VideoUtil video_first;
+    private String path_more;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -169,6 +173,16 @@ public class DianShiJuFragment extends Fragment {
         img_dianshiju = (ImageView) view.findViewById(R.id.img_dianshiju);
         gridView = (GridView) view.findViewById(R.id.gridview_dianshiju_USdrama);
         linear_dianshiju = (LinearLayout) view.findViewById(R.id.linear_dianshiju);
+        btn_more = (Button) view.findViewById(R.id.btn_dianshiju_quanqiu_more);
+        btn_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), VideoActivity.class);
+                path_more = "http://so.tv.sohu.com/list_p1101_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html";
+                intent.putExtra("path", path_more);
+                startActivity(intent);
+            }
+        });
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getActivity()).denyCacheImageMultipleSizesInMemory()
