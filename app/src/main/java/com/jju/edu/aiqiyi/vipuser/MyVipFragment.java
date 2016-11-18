@@ -103,15 +103,15 @@ public class MyVipFragment extends Fragment {
                         String img2 ="http:" +elements3.get(2).getElementsByTag("img").attr("src");
                         String path = elements.get(i).getElementsByTag("a").attr("href");
                       //  Log.e("***********", "" + time+"********"+team+"*********"+img1+"*********"+img2+"*********"+path);
-
                         util.setTime(time);
                         util.setTeam(team);
                         util.setImg_left(img1);
                         util.setImg_right(img2);
                         util.setPath(path);
                         list.add(util);
-
                     }
+
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
