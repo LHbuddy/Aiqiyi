@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -88,16 +87,11 @@ public class DongManFragment extends Fragment {
                     Document doc = Jsoup.connect("http://tv.sohu.com/comic/").get();
                     Elements elements = doc.select("#modA");
                     Elements li = elements.select("li.lisi");
-                    Log.e("size", "" + li.size());
                     for (int i = 0; i < li.size(); i++) {
                         String video_path = "http:" + li.get(i).select("a").first().attr("href");
-                        Log.e("video_path", video_path);
                         String video_image = "http:" + li.get(i).select("img").attr("lazysrc");
-                        Log.e("video_image", video_image);
                         String video_name = li.get(i).select("img").attr("alt");
-                        Log.e("video_name", video_name);
                         String time = li.get(i).select("span.lisTx").text();
-                        Log.e("time", time);
                         VideoUtil util = new VideoUtil(video_path, video_image, video_name, time);
                         olist.add(util);
 
@@ -122,16 +116,11 @@ public class DongManFragment extends Fragment {
                     Document doc = Jsoup.connect("http://tv.sohu.com/comic/").get();
                     Elements elements = doc.select("#modB");
                     Elements li = elements.select("li.lisi");
-                    Log.e("size", "" + li.size());
                     for (int i = 1; i < 7; i++) {
                         String video_path = "http:" + li.get(i).select("a").first().attr("href");
-                        Log.e("video_path", video_path);
                         String video_image = "http:" + li.get(i).select("img").attr("lazysrc");
-                        Log.e("video_image", video_image);
                         String video_name = li.get(i).select("p.p_bt").text();
-                        Log.e("video_name", video_name);
                         String time = li.get(i).select("span.lisTx").text();
-                        Log.e("time", time);
                         VideoUtil util = new VideoUtil(video_path, video_image, video_name, time);
                         list01.add(util);
 
