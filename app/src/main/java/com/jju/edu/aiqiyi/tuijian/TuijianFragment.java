@@ -146,6 +146,7 @@ public class TuijianFragment extends Fragment {
         //初始化搞笑
         btn_tuijian_gaoxiao_more = (Button) view.findViewById(R.id.btn_tuijian_gaoxiao_more);
         gv_tuijian_gaoxiao = (GridView) view.findViewById(R.id.gv_tuijian_gaoxiao);
+        btn_tuijian_gaoxiao_more.setOnClickListener(onClickMoreInfo);
 
         return view;
     }
@@ -172,7 +173,12 @@ public class TuijianFragment extends Fragment {
                     intent_zongyi_more.putExtra("path", path_zongyi);
                     startActivity(intent_zongyi_more);
                     break;
-
+                case R.id.btn_tuijian_gaoxiao_more:
+                    Intent intent_gaoxiao_more = new Intent(getActivity(), VideoActivity.class);
+                    String path_gaoxiao = "http://so.tv.sohu.com/list_p1133_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html";
+                    intent_gaoxiao_more.putExtra("path", path_gaoxiao);
+                    startActivity(intent_gaoxiao_more);
+                    break;
             }
         }
     };
