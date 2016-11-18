@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.VideoActivity;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
@@ -328,7 +329,9 @@ public class ZongYiFragment extends Fragment {
     class myonclick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(),"",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), VideoActivity.class);
+            intent.putExtra("path","http://so.tv.sohu.com/list_p1106_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html");
+            startActivity(intent);
 
         }
     }

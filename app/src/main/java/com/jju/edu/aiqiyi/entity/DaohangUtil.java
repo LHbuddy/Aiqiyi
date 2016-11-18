@@ -7,6 +7,15 @@ package com.jju.edu.aiqiyi.entity;
 public class DaohangUtil {
     private String name;
     private int image;
+    private String path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public String getName() {
         return name;
@@ -29,6 +38,7 @@ public class DaohangUtil {
         return "DaohangUtil{" +
                 "name='" + name + '\'' +
                 ", image=" + image +
+                ", path='" + path + '\'' +
                 '}';
     }
 }

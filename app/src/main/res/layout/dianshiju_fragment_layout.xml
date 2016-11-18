@@ -31,20 +31,42 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="电视剧"
                     android:textColor="#b6000000"
                     android:textSize="16sp"/>
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="全球追剧"
-                android:textSize="22sp"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text="全球追剧"
+                    android:textColor="#aa000000"
+                    android:textSize="18sp"/>
+
+                <Button
+                    android:id="@+id/btn_dianshiju_quanqiu_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="更多"
+                    android:textColor="#8b111111"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
 
             <GridView
-                android:id="@+id/gridview_dianshiju"
+                android:id="@+id/gridview_dianshiju_USdrama"
                 android:layout_width="match_parent"
                 android:layout_height="1485dp"
                 android:layout_marginLeft="10dp"
