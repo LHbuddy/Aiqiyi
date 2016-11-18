@@ -53,6 +53,11 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         search.setOnClickListener(new myonclick());
         plus.setOnClickListener(new myonclick());
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initView();
     }
 
