@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
 import com.jju.edu.aiqiyi.tuijian.DingyueFragment;
+import com.jju.edu.aiqiyi.tuijian.DongManFragment;
 import com.jju.edu.aiqiyi.tuijian.ZongYiFragment;
 import com.jju.edu.aiqiyi.tuijian.GaoxiaoFragment;
 import com.jju.edu.aiqiyi.tuijian.MovieFragment;
@@ -80,7 +81,7 @@ public class TuiJianActivity extends BaseFragmentActivity{
 
         tuijian_fragment = new TuijianFragment();
         dreamvoice_fragment = new ZongYiFragment();
-        dingyue_fragment = new DingyueFragment();
+        dingyue_fragment = new DongManFragment();
         dianshiju_fragment = new DianShiJuFragment();
         movie_fragment = new MovieFragment();
         gaoxiao_fragment = new GaoxiaoFragment();
