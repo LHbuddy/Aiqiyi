@@ -66,9 +66,9 @@ public class DongManFragment extends Fragment {
     private VideoGridAdapter adapter02;
     private VideoGridAdapter adapter03;
     private VideoGridAdapter adapter04;
-    private TextView text_more01,text_more02,text_more03;
+    private TextView text_more01, text_more02, text_more03;
 
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dongman_fragment_layout, container, false);
 
 
@@ -76,7 +76,6 @@ public class DongManFragment extends Fragment {
         jsoup_();
 
         return view;
-
 
 
     }
@@ -89,17 +88,17 @@ public class DongManFragment extends Fragment {
                     Document doc = Jsoup.connect("http://tv.sohu.com/comic/").get();
                     Elements elements = doc.select("#modA");
                     Elements li = elements.select("li.lisi");
-                    Log.e("size",""+li.size());
-                    for(int i=0;i<li.size();i++){
-                        String video_path = "http:"+li.get(i).select("a").first().attr("href");
-                        Log.e("video_path",video_path);
-                        String video_image = "http:"+li.get(i).select("img").attr("lazysrc");
-                        Log.e("video_image",video_image);
+                    Log.e("size", "" + li.size());
+                    for (int i = 0; i < li.size(); i++) {
+                        String video_path = "http:" + li.get(i).select("a").first().attr("href");
+                        Log.e("video_path", video_path);
+                        String video_image = "http:" + li.get(i).select("img").attr("lazysrc");
+                        Log.e("video_image", video_image);
                         String video_name = li.get(i).select("img").attr("alt");
-                        Log.e("video_name",video_name);
+                        Log.e("video_name", video_name);
                         String time = li.get(i).select("span.lisTx").text();
-                        Log.e("time",time);
-                        VideoUtil util = new VideoUtil(video_path,  video_image, video_name,  time);
+                        Log.e("time", time);
+                        VideoUtil util = new VideoUtil(video_path, video_image, video_name, time);
                         olist.add(util);
 
                     }
@@ -115,7 +114,7 @@ public class DongManFragment extends Fragment {
         }.start();
     }
 
-    public void getData(){
+    public void getData() {
         new Thread() {
             @Override
             public void run() {
@@ -123,17 +122,17 @@ public class DongManFragment extends Fragment {
                     Document doc = Jsoup.connect("http://tv.sohu.com/comic/").get();
                     Elements elements = doc.select("#modB");
                     Elements li = elements.select("li.lisi");
-                    Log.e("size",""+li.size());
-                    for(int i=1;i<7;i++){
-                        String video_path = "http:"+li.get(i).select("a").first().attr("href");
-                        Log.e("video_path",video_path);
-                        String video_image = "http:"+li.get(i).select("img").attr("lazysrc");
-                        Log.e("video_image",video_image);
+                    Log.e("size", "" + li.size());
+                    for (int i = 1; i < 7; i++) {
+                        String video_path = "http:" + li.get(i).select("a").first().attr("href");
+                        Log.e("video_path", video_path);
+                        String video_image = "http:" + li.get(i).select("img").attr("lazysrc");
+                        Log.e("video_image", video_image);
                         String video_name = li.get(i).select("p.p_bt").text();
-                        Log.e("video_name",video_name);
+                        Log.e("video_name", video_name);
                         String time = li.get(i).select("span.lisTx").text();
-                        Log.e("time",time);
-                        VideoUtil util = new VideoUtil(video_path,  video_image, video_name,  time);
+                        Log.e("time", time);
+                        VideoUtil util = new VideoUtil(video_path, video_image, video_name, time);
                         list01.add(util);
 
                     }
@@ -148,11 +147,12 @@ public class DongManFragment extends Fragment {
 
 
     }
-    public void getData2(){
+
+    public void getData2() {
         new Thread() {
             @Override
             public void run() {
-                for(int i=9;i<18;i++){
+                for (int i = 9; i < 18; i++) {
                     list02.add(olist.get(i));
                 }
                 handler.sendEmptyMessage(125);
@@ -162,37 +162,38 @@ public class DongManFragment extends Fragment {
 
 
     }
+
     public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 123:
-                tv_dongman.setText(olist.get(0).getVideo_name());
-                Picasso.with(getContext()).load(olist.get(0).getVideo_image()).placeholder(R.drawable.book_card_icon).resize(680, 350).into(img_dongman);
-                for(int i=1;i<7;i++){
-                    olist_.add(olist.get(i));
-                }
-                dongman_adapter = new VideoGridAdapter(olist_, getContext());
-                gridView.setAdapter(dongman_adapter);
+                    tv_dongman.setText(olist.get(0).getVideo_name());
+                    Picasso.with(getContext()).load(olist.get(0).getVideo_image()).placeholder(R.drawable.book_card_icon).resize(680, 350).into(img_dongman);
+                    for (int i = 1; i < 7; i++) {
+                        olist_.add(olist.get(i));
+                    }
+                    dongman_adapter = new VideoGridAdapter(olist_, getContext());
+                    gridView.setAdapter(dongman_adapter);
                     getData();
-                gridView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return MotionEvent.ACTION_MOVE == event.getAction() ? true
-                                : false;
-                    }
-                });
-                gridView.setOnItemClickListener(listener);
-                linear_dongman.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    gridView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            return MotionEvent.ACTION_MOVE == event.getAction() ? true
+                                    : false;
+                        }
+                    });
+                    gridView.setOnItemClickListener(listener);
+                    linear_dongman.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                        Intent intent_dongmna = new Intent(getActivity(), PlayerActivity.class);
-                       //intent_dongmna.putExtra("path", path_dianshiju);
-                        startActivity(intent_dongmna);
-                    }
-                });
+                            Intent intent_dongmna = new Intent(getActivity(), PlayerActivity.class);
+                            //intent_dongmna.putExtra("path", path_dianshiju);
+                            startActivity(intent_dongmna);
+                        }
+                    });
 
                     break;
                 case 124:
@@ -226,7 +227,7 @@ public class DongManFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (parent.getId()) {
-                case R.id.gridview_dianshiju:
+                case R.id.gridview_dianshiju_USdrama:
                     String path_dianshiju = olist.get(position).getVideo_path();
                     Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
                     intent_dianshiju.putExtra("path", path_dianshiju);
@@ -247,7 +248,7 @@ public class DongManFragment extends Fragment {
 
         text_more01 = (TextView) view.findViewById(R.id.dm_text_more01);
 //        text_more02 = (TextView) view.findViewById(R.id.dm_text_more02);
-       text_more01.setOnClickListener( listenter_more);
+        text_more01.setOnClickListener(listenter_more);
 //        text_more02.setOnClickListener(new ZongYiFragment.myonclick());
 //        text_more03.setOnClickListener(new ZongYiFragment.myonclick());
 
@@ -270,15 +271,15 @@ public class DongManFragment extends Fragment {
 
     }
 
-   private View.OnClickListener listenter_more = new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           String path = "http://so.tv.sohu.com/list_p1115_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html?lcode=AAAAXI_-1SzNcuUrjz4IX80Fsov7PkQ-_9HcfhP5CqXXjp0R8XfYZkr4y7lONiSf97pAsyIIUrQWfRQxqQVNGmCbWAMSePteYrBsqLZ_EWa-JV8681rfKbWwtZkwmTubY1aVEA..cf6&lqd=10051";
-           Intent intent = new Intent(getActivity(), VideoActivity.class);
-           intent.putExtra("path",path);
-           startActivity(intent);
+    private View.OnClickListener listenter_more = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String path = "http://so.tv.sohu.com/list_p1115_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html?lcode=AAAAXI_-1SzNcuUrjz4IX80Fsov7PkQ-_9HcfhP5CqXXjp0R8XfYZkr4y7lONiSf97pAsyIIUrQWfRQxqQVNGmCbWAMSePteYrBsqLZ_EWa-JV8681rfKbWwtZkwmTubY1aVEA..cf6&lqd=10051";
+            Intent intent = new Intent(getActivity(), VideoActivity.class);
+            intent.putExtra("path", path);
+            startActivity(intent);
 
-       }
-   };
+        }
+    };
 
 }
