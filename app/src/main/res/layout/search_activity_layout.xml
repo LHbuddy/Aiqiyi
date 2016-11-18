@@ -49,6 +49,7 @@
                     android:background="@null"
                     android:hint="熊出没"
                     android:textSize="13sp"
+                    android:textColor="#FFFFFF"
                     android:textColorHint="#c1baba"/>
                 <ImageView
                     android:layout_width="25dp"
