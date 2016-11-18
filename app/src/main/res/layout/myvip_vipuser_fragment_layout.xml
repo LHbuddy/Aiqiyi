@@ -34,6 +34,22 @@
                     android:textSize="12sp"
                     android:text="谢霆锋现场脱衣引尖"/>
             </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="15sp"
+                    android:textColor="#2b2a2a"
+                    android:text="CBA赛事"/>
+
+            </LinearLayout>
             <ListView
                 android:id="@+id/sport_list_view"
                 android:layout_width="match_parent"
