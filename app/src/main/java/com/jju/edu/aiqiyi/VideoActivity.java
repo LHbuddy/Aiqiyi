@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
+import com.jju.edu.aiqiyi.wode.SearchActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -31,7 +32,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,7 @@ import java.util.List;
 
 public class VideoActivity extends Activity {
 
+    private ImageView iv_video_title_left;
     private TextView tv_video_title_center;
     private ImageView iv_video_title_search;
     private GridView gv_video;
@@ -63,6 +64,8 @@ public class VideoActivity extends Activity {
     private String next_path;
     //设置一个FLAG，获得list的大小，设置GridView显示的item
     private int flag = 0;
+    //判断是否是刷新，如果是就清空list集合中的内容
+    private boolean isReflash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +96,18 @@ public class VideoActivity extends Activity {
                         videoUtil.setVideo_image(image_path);
                         videoUtil.setVideo_path(path);
                         videoUtil.setVideo_desc(video_desc);
+                        if (isReflash) {  //判断是否是刷新，是则清除list集合中的内容
+                            //再次加载内容
+                            //清空List集合中的内容
+                            list.clear();
+                            list = null;
+                        }
                         list.add(videoUtil);
+
                     }
                     //获得下一页的地址
-                    Elements elements_next = doc.select("[title=下一页]");
-                    next_path = "http://so.tv.sohu.com" + elements_next.attr("href");
+                    Elements elements_next = doc.select("a[title]");
+                    next_path = "http://so.tv.sohu.com" + elements_next.get(elements_next.size() - 1).attr("href");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,6 +135,7 @@ public class VideoActivity extends Activity {
         adapter = new VideoGridAdapter(list, VideoActivity.this);
         gv_video.setAdapter(adapter);
         gv_video.smoothScrollByOffset(flag);
+        isReady = false;
         loadmoreInfo();
         gv_video.setOnItemClickListener(gridViewOnItemClick);
         gv_video.setOnTouchListener(gridViewOnTouch);
@@ -137,6 +148,9 @@ public class VideoActivity extends Activity {
             public void run() {
                 super.run();
                 try {
+                    if (flag != 0) {
+                        flag -= 1;
+                    }
                     //通过FLAG的值来获取视频播放地址
                     for (int i = flag; i < list.size(); i++) {
                         String path_ = list.get(i).getVideo_path();  //获取视频简介地址
@@ -170,10 +184,8 @@ public class VideoActivity extends Activity {
                     if ((motionEvent.getY() - y) <= -8) {  //下拉
                         if (gridView.getFirstVisiblePosition() == 0 && gridView.getChildAt(0).getTop() >= 0) {
                             //滑到顶部,刷新
-                            //再次加载内容
-                            //清空List集合中的内容
-//                            list.clear();
-//                            list = null;
+                            //刷新
+                            isReflash = true;
                             http_(path);
                         }
                     } else if ((motionEvent.getY() - y) >= 8) {  //上拉
@@ -209,10 +221,30 @@ public class VideoActivity extends Activity {
         }
     };
 
+    //头部的点击事件
+    private View.OnClickListener onClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.iv_video_title_left:
+                    finish();
+                    break;
+                case R.id.iv_video_title_search:
+                    Intent intent_search = new Intent(VideoActivity.this, SearchActivity.class);
+                    startActivity(intent_search);
+                    break;
+            }
+        }
+    };
+
     private void initView() {
+        iv_video_title_left = (ImageView) findViewById(R.id.iv_video_title_left);
         tv_video_title_center = (TextView) findViewById(R.id.tv_video_title_center);
         iv_video_title_search = (ImageView) findViewById(R.id.iv_video_title_search);
         gv_video = (GridView) findViewById(R.id.gv_video);
+
+        iv_video_title_left.setOnClickListener(onClick);
+        iv_video_title_search.setOnClickListener(onClick);
 
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
