@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.adapter.NewsAdapter;
+import com.jju.edu.aiqiyi.util.AdvertUtil;
+import com.jju.edu.aiqiyi.util.NewsUtil;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,10 +29,12 @@ import java.util.List;
 
 public class JiaoYouActivity extends BaseActivity{
 
-    private List<String> list = new ArrayList<String>();
-    private List<String> list02 = new ArrayList<String>();
+    private List<NewsUtil> list = new ArrayList<NewsUtil>();
+    private List<NewsUtil> list02 = new ArrayList<NewsUtil>();
     private NewsAdapter adapter;
     private NewsAdapter adapter02;
+    private NewsUtil util;
+    private NewsUtil util02;
     private GridView grid_view_news;
     private GridView grid_view_news02;
     private TextView news_more01,news_more02;
@@ -71,9 +75,12 @@ public class JiaoYouActivity extends BaseActivity{
                    // Log.e("//////////",""+elements.size());
                     for (int i = 0; i < elements.size(); i++) {
                         String name = elements.get(i).getElementsByTag("a").text();
-
-                     //   Log.e("*********",""+name);
-                        list.add(name);
+                        String path = elements.get(i).getElementsByTag("a").attr("href");
+                       // Log.e("@@@@@@@@@@@",""+path);
+                        util = new NewsUtil();
+                        util.setName(name);
+                        util.setPath("http:"+path);
+                        list.add(util);
 
                     }
                 } catch (Exception e) {
@@ -90,7 +97,7 @@ public class JiaoYouActivity extends BaseActivity{
             super.handleMessage(msg);
             switch (msg.what){
                 case 124:
-                    Log.e("**********list_size",""+list.size());
+                   // Log.e("**********list_size",""+list.size());
                     adapter = new NewsAdapter(list,JiaoYouActivity.this);
                     grid_view_news.setAdapter(adapter);
                     grid_view_news.setOnItemClickListener(listener);
@@ -112,7 +119,9 @@ public class JiaoYouActivity extends BaseActivity{
 
     public void init(){
         for (int i = 0;i<video.length;i++){
-            list02.add(video[i]);
+            util02 = new NewsUtil();
+            util02.setName(video[i]);
+            list02.add(util02);
         }
         adapter02 = new NewsAdapter(list02,JiaoYouActivity.this);
         grid_view_news02.setAdapter(adapter02);
@@ -131,14 +140,15 @@ public class JiaoYouActivity extends BaseActivity{
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-          //  Intent intent = new Intent(JiaoYouActivity.this,PlayerActivity.class);
-          //  String info = "";
+            Intent intent = new Intent(JiaoYouActivity.this,PlayerActivity.class);
+            String info = "";
             switch (parent.getId()){
                 case R.id.grid_view_news:
-                    break;
-                case R.id.grid_view_news02:
+                    info = list.get(position).getPath();
                     break;
             }
+            intent.putExtra("path",info);
+            startActivity(intent);
         }
     };
 
