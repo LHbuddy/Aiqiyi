@@ -16,7 +16,7 @@ import android.widget.PopupWindow;
 
 import com.jju.edu.aiqiyi.vipuser.MyVipFragment;
 import com.jju.edu.aiqiyi.vipuser.VipGameFragment;
-import com.jju.edu.aiqiyi.vipuser.VipLifeFragment;
+import com.jju.edu.aiqiyi.vipuser.VipTechnologyFragment;
 import com.jju.edu.aiqiyi.vipuser.VipRecordFragment;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 
@@ -27,7 +27,7 @@ import java.util.List;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class HuiYuanActivity extends BaseFragmentActivity{
+public class HuiYuanActivity extends BaseFragmentActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -38,10 +38,10 @@ public class HuiYuanActivity extends BaseFragmentActivity{
     private Fragment vipmovie_fragment;
     private Fragment viprecord_fragment;
 
-    private ImageView search,plus;
+    private ImageView search, plus;
     private PopupWindow popupWindow;
 
-    private static final String[] vip_titles = new String[]{"  VIP体育  ","  VIP游戏  ","  VIP生活  ","  VIP纪录片  "};
+    private static final String[] vip_titles = new String[]{"  VIP体育  ", "  VIP游戏  ", "  VIP科技  ", "  VIP纪录片  "};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class HuiYuanActivity extends BaseFragmentActivity{
 
         myvip_fragment = new MyVipFragment();
         viphome_fragment = new VipGameFragment();
-        vipmovie_fragment = new VipLifeFragment();
+        vipmovie_fragment = new VipTechnologyFragment();
         viprecord_fragment = new VipRecordFragment();
         vip_fragments.add(myvip_fragment);
         vip_fragments.add(viphome_fragment);
@@ -77,8 +77,8 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setSelectedTabIndicatorColor(Color.argb(255,16,225,37));
-        tabLayout.setTabTextColors(Color.BLACK,Color.argb(255,16,225,37));
+        tabLayout.setSelectedTabIndicatorColor(Color.argb(255, 16, 225, 37));
+        tabLayout.setTabTextColors(Color.BLACK, Color.argb(255, 16, 225, 37));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
     }
@@ -106,10 +106,10 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         }
     }
 
-    class myonclick implements View.OnClickListener{
+    class myonclick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.search:
                     startActivity(new Intent(HuiYuanActivity.this, SearchActivity.class));
                     break;
