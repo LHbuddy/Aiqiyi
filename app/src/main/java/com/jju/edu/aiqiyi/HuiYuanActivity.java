@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.jju.edu.aiqiyi.vipuser.MyVipFragment;
-import com.jju.edu.aiqiyi.vipuser.VipHomeFragment;
-import com.jju.edu.aiqiyi.vipuser.VipMovieFragment;
+import com.jju.edu.aiqiyi.vipuser.VipGameFragment;
+import com.jju.edu.aiqiyi.vipuser.VipLifeFragment;
 import com.jju.edu.aiqiyi.vipuser.VipRecordFragment;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 
@@ -67,8 +67,8 @@ public class HuiYuanActivity extends BaseFragmentActivity{
         vip_fragments = new ArrayList<>();
 
         myvip_fragment = new MyVipFragment();
-        viphome_fragment = new VipHomeFragment();
-        vipmovie_fragment = new VipMovieFragment();
+        viphome_fragment = new VipGameFragment();
+        vipmovie_fragment = new VipLifeFragment();
         viprecord_fragment = new VipRecordFragment();
         vip_fragments.add(myvip_fragment);
         vip_fragments.add(viphome_fragment);
