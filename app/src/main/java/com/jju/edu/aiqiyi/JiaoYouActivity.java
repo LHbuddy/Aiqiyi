@@ -9,12 +9,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.adapter.NewsAdapter;
 import com.jju.edu.aiqiyi.util.AdvertUtil;
 import com.jju.edu.aiqiyi.util.NewsUtil;
+import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -39,7 +41,10 @@ public class JiaoYouActivity extends BaseActivity{
     private GridView grid_view_news02;
     private TextView news_more01,news_more02;
     private String[] video = new String[]{"电视剧","电影","动漫","综艺","搞笑","新闻"};
+    private String[] video_path = new String[]{"http://so.tv.sohu.com/list_p1101_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html","http://so.tv.sohu.com/list_p1100_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html","http://so.tv.sohu.com/list_p1115_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html?lcode=AAAAXI_-1SzNcuUrjz4IX80Fsov7PkQ-_9HcfhP5CqXXjp0R8XfYZkr4y7lONiSf97pAsyIIUrQWfRQxqQVNGmCbWAMSePteYrBsqLZ_EWa-JV8681rfKbWwtZkwmTubY1aVEA..cf6&lqd=10051","http://so.tv.sohu.com/list_p1106_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html","http://so.tv.sohu.com/list_p1133_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html","http://so.tv.sohu.com/list_p1122_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html"};
 
+
+    private RelativeLayout re_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +53,10 @@ public class JiaoYouActivity extends BaseActivity{
         grid_view_news02 = (GridView) findViewById(R.id.grid_view_news02);
         news_more01 = (TextView) findViewById(R.id.news_more01);
         news_more02 = (TextView) findViewById(R.id.news_more02);
+        re_button = (RelativeLayout) findViewById(R.id.re_button);
         news_more01.setOnClickListener(new myonclick());
         news_more02.setOnClickListener(new myonclick());
-
-
-
+        re_button.setOnClickListener(new myonclick());
 
     }
 
@@ -140,15 +144,24 @@ public class JiaoYouActivity extends BaseActivity{
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(JiaoYouActivity.this,PlayerActivity.class);
-            String info = "";
+
             switch (parent.getId()){
                 case R.id.grid_view_news:
+                    Intent intent = new Intent(JiaoYouActivity.this,PlayerActivity.class);
+                    String info = "";
                     info = list.get(position).getPath();
+                    intent.putExtra("path",info);
+                    startActivity(intent);
+                    break;
+                case R.id.grid_view_news02:
+                    Intent intent02 = new Intent(JiaoYouActivity.this,VideoActivity.class);
+                    String info02 = "";
+                    info02 = list02.get(position).getPath();
+                    intent02.putExtra("path",info02);
+                    startActivity(intent02);
                     break;
             }
-            intent.putExtra("path",info);
-            startActivity(intent);
+
         }
     };
 
@@ -156,7 +169,18 @@ public class JiaoYouActivity extends BaseActivity{
     class myonclick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            Toast.makeText(JiaoYouActivity.this,"",Toast.LENGTH_SHORT).show();
+            switch (v.getId()){
+                case R.id.re_button:
+                    startActivity(new Intent(JiaoYouActivity.this,SearchActivity.class));
+                    break;
+                case R.id.news_more01:
+                    Intent intent02 = new Intent(JiaoYouActivity.this,VideoActivity.class);
+                    String info02 = "http://so.tv.sohu.com/list_p1122_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html";
+                    intent02.putExtra("path",info02);
+                    startActivity(intent02);
+                    break;
+
+            }
 
         }
     }
