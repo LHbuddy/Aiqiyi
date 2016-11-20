@@ -130,16 +130,16 @@ public class TuiJianActivity extends BaseFragmentActivity{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.search:
+                case R.id.search:  //搜索
                     startActivity(new Intent(TuiJianActivity.this, SearchActivity.class));
-                break;
-                case R.id.history:
+                    break;
+                case R.id.history:  //播放记录
                     startActivity(new Intent(TuiJianActivity.this, PlayHistoryActivity.class));
                     break;
-                case R.id.outline:
+                case R.id.outline:   //本地视频
                     startActivity(new Intent(TuiJianActivity.this, LocalVideoActivity.class));
                     break;
-                case R.id.more:
+                case R.id.more:  //pop_window
                     View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);
                     popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     //设置背景

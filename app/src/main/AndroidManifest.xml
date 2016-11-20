@@ -32,6 +32,7 @@
         <activity android:name=".wode.LocalVideoActivity"></activity>
         <activity android:name=".wode.PlayHistoryActivity"></activity>
         <activity android:name=".wode.SearchActivity"></activity>
+        <activity android:name=".wode.SearchResultActivity"></activity>
     </application>
 
 </manifest>

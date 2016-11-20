@@ -12,6 +12,7 @@ import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.entity.DaohangUtil;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,10 @@ public class VideoGridAdapter extends BaseAdapter {
         } else {
             oholder = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(oList.get(position).getVideo_image(), oholder.image);
+//        ImageLoader.getInstance().displayImage(oList.get(position).getVideo_image(), oholder.image);
+        Picasso.with(oContext).load(oList.get(position).getVideo_image())
+                .placeholder(R.drawable.phone_variety_focus_cover_default_bg)
+                .resize(0, 185).into(oholder.image);
         oholder.name.setText(oList.get(position).getVideo_name());
         oholder.desc.setText(oList.get(position).getVideo_desc());
         return convertView;

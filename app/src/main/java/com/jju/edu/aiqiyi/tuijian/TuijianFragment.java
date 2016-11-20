@@ -396,7 +396,7 @@ public class TuijianFragment extends Fragment {
                             Element e_1 = elements_dianying_info.get(j);
                             //"http:" +
                             String video_path = e_1.getElementsByTag("a").first().attr("href");
-                            String image_path = e_1.getElementsByTag("img").attr("lazysrc");
+                            String image_path = "http:"+e_1.getElementsByTag("img").attr("lazysrc");
 
                             String video_name = e_1.getElementsByTag("p").get(0).text();
                             //e_1.getElementsByTag("a").get(1).text() + "--" +
