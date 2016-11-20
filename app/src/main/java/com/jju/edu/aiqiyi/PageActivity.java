@@ -2,6 +2,7 @@ package com.jju.edu.aiqiyi;
 
 import android.app.LocalActivityManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.jju.edu.aiqiyi.sqlite.MySqliteOpenHelper;
 
 /**
  * Created by 凌浩 on 2016/11/14.
@@ -21,11 +24,16 @@ public class PageActivity extends BaseActivity{
     private ImageView image1, image2, image3, image4,image5;
     private TextView text1, text2, text3, text4,text5;
     public static LocalActivityManager manager;
+    private MySqliteOpenHelper mySqliteOpenHelper;
+    public static SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_layout);
+
+        mySqliteOpenHelper = new MySqliteOpenHelper(PageActivity.this,"message.db",null,1);
+        db = mySqliteOpenHelper.getReadableDatabase();
 
 
         tab_host = (TabHost) findViewById(R.id.table_host);
