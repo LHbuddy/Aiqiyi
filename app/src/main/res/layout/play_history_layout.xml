@@ -23,7 +23,21 @@
             android:text="播放记录"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
-
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/history_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="暂无播放记录"
+            android:textSize="20sp"/>
+        <ListView
+            android:id="@+id/history_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
 
     </RelativeLayout>
 </LinearLayout>

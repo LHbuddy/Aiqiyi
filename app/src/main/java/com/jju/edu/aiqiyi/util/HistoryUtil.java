@@ -10,8 +10,17 @@ public class HistoryUtil {
     private String name;
     private String desc;
     private String path;
+    private String time;
 
     public HistoryUtil() {
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public HistoryUtil(String img, String name, String desc, String path) {
