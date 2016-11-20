@@ -137,6 +137,7 @@ public class TuijianFragment extends Fragment {
         //初始化电影
         btn_tuijian_dianying_more = (Button) view.findViewById(R.id.btn_tuijian_dianying_more);
         gv_tuijian_dianying = (GridView) view.findViewById(R.id.gv_tuijian_dianying);
+        btn_tuijian_dianying_more.setOnClickListener(onClickMoreInfo);
 
         //初始化搞笑
         btn_tuijian_gaoxiao_more = (Button) view.findViewById(R.id.btn_tuijian_gaoxiao_more);
@@ -173,6 +174,12 @@ public class TuijianFragment extends Fragment {
                     String path_gaoxiao = "http://so.tv.sohu.com/list_p1133_p2_p3_p4_p5_p6_p7_p8_p9_p10_p11_p12_p13.html";
                     intent_gaoxiao_more.putExtra("path", path_gaoxiao);
                     startActivity(intent_gaoxiao_more);
+                    break;
+                case R.id.btn_tuijian_dianying_more:
+                    Intent intent_dianying_more = new Intent(getActivity(), VideoActivity.class);
+                    String path_dianying = "http://so.tv.sohu.com/list_p1100_p2_p31000_p4_p5_p6_p7_p8_p91_p10_p11_p12_p13.html";
+                    intent_dianying_more.putExtra("path", path_dianying);
+                    startActivity(intent_dianying_more);
                     break;
             }
         }

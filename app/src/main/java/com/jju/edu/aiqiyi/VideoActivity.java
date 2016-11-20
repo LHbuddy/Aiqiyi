@@ -69,6 +69,9 @@ public class VideoActivity extends Activity {
     private boolean isReflash;
     //判断是否是搞笑界面，如果是就加载另一个布局
     private boolean isGaoXiao = false;
+    //获取标题
+    private String title_center;
+    private String title_center1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +92,10 @@ public class VideoActivity extends Activity {
                 try {
                     Document doc = Jsoup.connect(uri).get();
                     Elements e = doc.getElementsByTag("li");
-
+                    //获取头部
+                    title_center1 = doc.getElementsByTag("title").text();
+                    title_center = title_center1.split("搜狐视频")[0].split("影视大全")[1];
+                    //获取内容
                     for (int i = 18; i < e.size(); i++) {
                         videoUtil = new VideoUtil();
                         Element element = e.get(i);
@@ -132,6 +138,7 @@ public class VideoActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 234:
+                    tv_video_title_center.setText(title_center);
                     loadInfo();
                     break;
                 case 235:
