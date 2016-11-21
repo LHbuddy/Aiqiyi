@@ -55,12 +55,8 @@ public class VideoPlayer extends Activity {
             layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         }
-
-        // ~~~ 获取播放地址和标题
         Bundle bundle = getIntent().getExtras();
         playVideoFile = (Video) bundle.getSerializable("video");
-
-
         File video = new File(playVideoFile.getPath());
         if (video.exists()) {
             videoView.setLayoutParams(layoutParams);
@@ -69,7 +65,6 @@ public class VideoPlayer extends Activity {
             mController.setMediaPlayer(videoView);
             videoView.start();
             videoView.requestFocus();
-
         }
 
     }
