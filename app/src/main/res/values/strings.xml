@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Aiqiyi</string>
 
-
+    <string name="cont">con</string>
+    <string name="title">titile</string>
+    <string name="time">time</string>
 </resources>
