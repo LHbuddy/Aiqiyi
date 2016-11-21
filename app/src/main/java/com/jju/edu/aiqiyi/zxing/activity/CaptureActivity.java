@@ -126,7 +126,7 @@ public class CaptureActivity extends Activity implements Callback {
 //			System.out.println("Result:"+resultString);
 //			Intent resultIntent = new Intent();
 			TuiJianActivity.scan_info = resultString;
-			Intent resultIntent = new Intent(CaptureActivity.this, PageActivity.class);
+			Intent resultIntent = new Intent(CaptureActivity.this,PageActivity.class);
 //			Bundle bundle = new Bundle();
 //			bundle.putString("result", resultString);
 //			resultIntent.putExtras(bundle);
