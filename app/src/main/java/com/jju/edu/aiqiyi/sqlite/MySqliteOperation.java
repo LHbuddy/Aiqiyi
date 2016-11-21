@@ -2,8 +2,10 @@ package com.jju.edu.aiqiyi.sqlite;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.jju.edu.aiqiyi.util.HistoryUtil;
+import com.jju.edu.aiqiyi.util.NewsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,42 @@ public class MySqliteOperation {
             util.setDesc(desc);
             util.setTime(time);
             util.setPath(path);
+            list.add(util);
+        }
+        return list;
+    }
+
+
+    //搜索历史添加数据操作
+    public static void search_add(SQLiteDatabase db,String name,String username){
+       // Log.e("%%%%%%%%%%%%11111","'"+name+"******"+username);
+        db.execSQL("insert into search_history(name,username) values(?,?)",new String[]{name,username});
+    }
+    //判断数据是否存在
+    public static boolean search_exist(SQLiteDatabase db,String name,String username){
+        boolean exist=false;
+        Cursor cursor = db.rawQuery("select * from search_history where name =? and username=?",new String[]{name,username});
+        if (cursor.moveToNext()){
+            exist = true;
+        }
+        return exist;
+    }
+    //删除所有查找记录
+    public static void search_delete(SQLiteDatabase db,String username){
+        db.execSQL("delete  from search_history where username=?",new String[]{username});
+
+    }
+    //查找所有记录
+    public static List<NewsUtil> search_all(SQLiteDatabase db, String username){
+        List<NewsUtil> list = new ArrayList<NewsUtil>();
+        Cursor cursor = db.rawQuery("select * from search_history where username=?",new String[]{username});
+        while(cursor.moveToNext()){
+            NewsUtil util = new NewsUtil();
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String path = cursor.getString(cursor.getColumnIndex("username"));
+            util.setName(name);
+            util.setPath(path);
+           // Log.e("%%%%%%%%%%%%22222","'"+name+"******"+path);
             list.add(util);
         }
         return list;

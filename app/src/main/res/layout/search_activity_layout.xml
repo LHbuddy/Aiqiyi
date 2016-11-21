@@ -119,6 +119,14 @@
                 android:layout_alignParentRight="true"
                 android:textColor="#debb3f"/>
         </RelativeLayout>
+        <ListView
+            android:id="@+id/search_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:divider="@null"
+            ></ListView>
 
     </LinearLayout>
 

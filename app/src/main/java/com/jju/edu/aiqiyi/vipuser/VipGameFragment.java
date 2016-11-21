@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,12 +70,15 @@ public class VipGameFragment extends Fragment {
     private boolean isReflash;
     //判断是否是搞笑界面，如果是就加载另一个布局
     private boolean isGaoXiao = false;
+    private LinearLayout progress;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.viphome_vipuser_fragment_layout, container, false);
         gv_video = (GridView) view.findViewById(R.id.gridview_vipgame);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
+
         http_(path);
         return view;
     }
@@ -135,6 +139,7 @@ public class VipGameFragment extends Fragment {
                     break;
                 case 235:
                     isReady = true;
+                    progress.setVisibility(View.GONE);
                     break;
             }
         }
