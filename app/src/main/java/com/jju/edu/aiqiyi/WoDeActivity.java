@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
+import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 /**
@@ -88,6 +90,12 @@ public class WoDeActivity extends BaseActivity{
                     break;
                 case R.id.denglu:
                     Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.lixianguankan:
+                    startActivity(new Intent(WoDeActivity.this, LocalVideoActivity.class));
+                    break;
+                case R.id.bofangjilu:
+                    startActivity(new Intent(WoDeActivity.this, PlayHistoryActivity.class));
                     break;
 
             }
