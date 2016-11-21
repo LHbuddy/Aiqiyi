@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
@@ -61,6 +62,8 @@ public class ZongYiFragment extends Fragment {
     private TextView text_head;
     private TextView text_more01,text_more02,text_more03;
 
+    private LinearLayout progress;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dreamvoice_fragment_layout, container, false);
@@ -73,6 +76,7 @@ public class ZongYiFragment extends Fragment {
         text_more01 = (TextView) view.findViewById(R.id.text_more01);
         text_more02 = (TextView) view.findViewById(R.id.text_more02);
         text_more03 = (TextView) view.findViewById(R.id.text_more03);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
 
         text_more01.setOnClickListener(new myonclick());
         text_more02.setOnClickListener(new myonclick());
@@ -212,6 +216,8 @@ public class ZongYiFragment extends Fragment {
                         }
                     });
                     grid_view04.setOnItemClickListener(listener);
+
+                    progress.setVisibility(View.GONE);
                     break;
             }
         }
