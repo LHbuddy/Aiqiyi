@@ -16,7 +16,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
-import com.jju.edu.aiqiyi.tuijian.DingyueFragment;
 import com.jju.edu.aiqiyi.tuijian.DongManFragment;
 import com.jju.edu.aiqiyi.tuijian.ZongYiFragment;
 import com.jju.edu.aiqiyi.tuijian.GaoxiaoFragment;
@@ -25,6 +24,8 @@ import com.jju.edu.aiqiyi.tuijian.TuijianFragment;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
+import com.jju.edu.aiqiyi.wode.SearchResultActivity;
+import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,9 +172,24 @@ public class TuiJianActivity extends BaseFragmentActivity {
                     Toast.makeText(TuiJianActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pop_ll_scan:
-
+                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
                     break;
             }
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String info=data.getStringExtra("result");
+        System.out.println("info----"+info);
+        if (requestCode==0 && resultCode==RESULT_OK) {
+//            String info=data.getStringExtra("result");
+//            System.out.println("info----"+info);
+//            Intent intent_scan = new Intent(TuiJianActivity.this, SearchResultActivity.class);
+//            intent_scan.putExtra("path",info);
+//            startActivity(intent_scan);
+        }
+
+    }
 }

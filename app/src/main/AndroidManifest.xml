@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".app.MyApplication"
@@ -33,6 +35,10 @@
         <activity android:name=".wode.PlayHistoryActivity"></activity>
         <activity android:name=".wode.SearchActivity"></activity>
         <activity android:name=".wode.SearchResultActivity"></activity>
+        <activity android:name=".zxing.activity.CaptureActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.jju.edu.aiqiyi.wode;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -42,5 +43,14 @@ public class SearchResultActivity extends Activity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && search_webview.canGoBack()) {
+            search_webview.goBack();// 返回前一个页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
