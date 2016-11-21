@@ -1,5 +1,7 @@
 package com.jju.edu.aiqiyi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -127,5 +130,25 @@ public class HuiYuanActivity extends BaseFragmentActivity {
 
             }
         }
+    }
+    /**
+     * 双击退出操作
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(HuiYuanActivity.this);
+            dialog.setTitle("提示");
+            dialog.setMessage("确定退出么？");
+            dialog.setNegativeButton("再看看", null);
+            dialog.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
+        return true;
     }
 }

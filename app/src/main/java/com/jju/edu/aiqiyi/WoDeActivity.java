@@ -1,14 +1,19 @@
 package com.jju.edu.aiqiyi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
+import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 /**
@@ -86,10 +91,36 @@ public class WoDeActivity extends BaseActivity{
                 case R.id.denglu:
                     Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
                     break;
+                case R.id.lixianguankan:
+                    startActivity(new Intent(WoDeActivity.this, LocalVideoActivity.class));
+                    break;
+                case R.id.bofangjilu:
+                    startActivity(new Intent(WoDeActivity.this, PlayHistoryActivity.class));
+                    break;
 
             }
 
         }
+    }
+    /**
+     * 双击退出操作
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(WoDeActivity.this);
+            dialog.setTitle("提示");
+            dialog.setMessage("确定退出么？");
+            dialog.setNegativeButton("再看看", null);
+            dialog.setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
+        return true;
     }
 
 }
