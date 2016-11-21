@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.TuiJianActivity;
 import com.jju.edu.aiqiyi.zxing.camera.CameraManager;
 import com.jju.edu.aiqiyi.zxing.decoding.CaptureActivityHandler;
 import com.jju.edu.aiqiyi.zxing.decoding.InactivityTimer;
@@ -122,11 +123,15 @@ public class CaptureActivity extends Activity implements Callback {
 			Toast.makeText(CaptureActivity.this, "Scan failed!", Toast.LENGTH_SHORT).show();
 		}else {
 //			System.out.println("Result:"+resultString);
-			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
-			bundle.putString("result", resultString);
-			resultIntent.putExtras(bundle);
-			this.setResult(RESULT_OK, resultIntent);
+//			Intent resultIntent = new Intent();
+			TuiJianActivity.scan_info = resultString;
+			Intent resultIntent = new Intent(CaptureActivity.this, TuiJianActivity.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putString("result", resultString);
+//			resultIntent.putExtras(bundle);
+//			this.setResult(RESULT_OK, resultIntent);
+			startActivity(resultIntent);
+			finish();
 		}
 		CaptureActivity.this.finish();
 	}

@@ -56,6 +56,8 @@ public class TuiJianActivity extends BaseFragmentActivity {
     private LinearLayout pop_ll_upload;
     private LinearLayout pop_ll_scan;
 
+    public static String scan_info = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,14 @@ public class TuiJianActivity extends BaseFragmentActivity {
         ll_search.setOnClickListener(new myclick());
 
         initView();
+
+        if (scan_info.equals("")){
+
+        }else {
+            Intent intent_search_result = new Intent(TuiJianActivity.this,SearchResultActivity.class);
+            intent_search_result.putExtra("path",scan_info);
+            startActivity(intent_search_result);
+        }
     }
 
     private void initView() {
@@ -172,24 +182,12 @@ public class TuiJianActivity extends BaseFragmentActivity {
                     Toast.makeText(TuiJianActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pop_ll_scan:
-                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
+                    Intent intent_scan = new Intent(TuiJianActivity.this,CaptureActivity.class);
+                    startActivity(intent_scan);
+//                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
                     break;
             }
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        String info=data.getStringExtra("result");
-        System.out.println("info----"+info);
-        if (requestCode==0 && resultCode==RESULT_OK) {
-//            String info=data.getStringExtra("result");
-//            System.out.println("info----"+info);
-//            Intent intent_scan = new Intent(TuiJianActivity.this, SearchResultActivity.class);
-//            intent_scan.putExtra("path",info);
-//            startActivity(intent_scan);
-        }
-
-    }
 }
