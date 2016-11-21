@@ -33,7 +33,7 @@ import java.util.List;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class TuiJianActivity extends BaseFragmentActivity{
+public class TuiJianActivity extends BaseFragmentActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -47,11 +47,13 @@ public class TuiJianActivity extends BaseFragmentActivity{
     private Fragment movie_fragment;
     private Fragment gaoxiao_fragment;
 
-    private ImageView search,history,outline,more;
+    private ImageView search, history, outline, more;
     private LinearLayout ll_search;
     private PopupWindow popupWindow;
 
-    private static final String[] titles = new String[]{"推荐","综艺","动漫","电视剧","电影","搞笑"};
+    private static final String[] titles = new String[]{"推荐", "综艺", "动漫", "电视剧", "电影", "搞笑"};
+    private LinearLayout pop_ll_upload;
+    private LinearLayout pop_ll_scan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +98,8 @@ public class TuiJianActivity extends BaseFragmentActivity{
 
         viewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setSelectedTabIndicatorColor(Color.argb(255,16,225,37));
-        tabLayout.setTabTextColors(Color.BLACK,Color.argb(255,16,225,37));
+        tabLayout.setSelectedTabIndicatorColor(Color.argb(255, 16, 225, 37));
+        tabLayout.setTabTextColors(Color.BLACK, Color.argb(255, 16, 225, 37));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
     }
@@ -126,10 +128,10 @@ public class TuiJianActivity extends BaseFragmentActivity{
     }
 
     //标题栏监听事件
-    class myclick implements View.OnClickListener{
+    class myclick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.search:  //搜索
                     startActivity(new Intent(TuiJianActivity.this, SearchActivity.class));
                     break;
@@ -141,6 +143,8 @@ public class TuiJianActivity extends BaseFragmentActivity{
                     break;
                 case R.id.more:  //pop_window
                     View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);
+                    pop_ll_upload = (LinearLayout) view.findViewById(R.id.pop_ll_upload);
+                    pop_ll_scan = (LinearLayout) view.findViewById(R.id.pop_ll_scan);
                     popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     //设置背景
                     popupWindow.setBackgroundDrawable(new ColorDrawable());
@@ -149,13 +153,27 @@ public class TuiJianActivity extends BaseFragmentActivity{
                     popupWindow.setContentView(view);
                     //设置出现在当前点击控件的正下方
                     popupWindow.showAsDropDown(more);
+                    pop_ll_upload.setOnClickListener(popOnClick);
+                    pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.ll_search:
-                    Toast.makeText(TuiJianActivity.this,"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TuiJianActivity.this, "", Toast.LENGTH_SHORT).show();
                     break;
-
             }
-
         }
     }
+
+    private View.OnClickListener popOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.pop_ll_upload:
+                    Toast.makeText(TuiJianActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.pop_ll_scan:
+
+                    break;
+            }
+        }
+    };
 }
