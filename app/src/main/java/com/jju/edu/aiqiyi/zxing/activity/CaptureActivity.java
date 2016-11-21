@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+import com.jju.edu.aiqiyi.PageActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.TuiJianActivity;
 import com.jju.edu.aiqiyi.zxing.camera.CameraManager;
@@ -125,7 +126,7 @@ public class CaptureActivity extends Activity implements Callback {
 //			System.out.println("Result:"+resultString);
 //			Intent resultIntent = new Intent();
 			TuiJianActivity.scan_info = resultString;
-			Intent resultIntent = new Intent(CaptureActivity.this, TuiJianActivity.class);
+			Intent resultIntent = new Intent(CaptureActivity.this,PageActivity.class);
 //			Bundle bundle = new Bundle();
 //			bundle.putString("result", resultString);
 //			resultIntent.putExtras(bundle);
