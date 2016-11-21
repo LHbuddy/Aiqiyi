@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Xml;
 import android.view.KeyEvent;
@@ -58,7 +60,25 @@ public class SearchActivity extends BaseActivity {
         text_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                String text_search = text_button.getText().toString();
+                if (text_search.equals("取消")){
+                    finish();
+                }else if (text_search.equals("搜索")){
+                    Intent intent_search = new Intent(SearchActivity.this,SearchResultActivity.class);
+
+                    String search_text = et_search.getText().toString();
+                    byte[] b = search_text.getBytes();
+                    String search = "";
+                    try {
+                        search = new String(b,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    String path = "http://m.tv.sohu.com/upload/h5/m/mso.html?key=" + search;
+                    intent_search.putExtra("path",path);
+                    startActivity(intent_search);
+                }
+
             }
         });
         //设置输入框的监听事件
@@ -85,8 +105,29 @@ public class SearchActivity extends BaseActivity {
                 return false;
             }
         });
+
+        et_search.addTextChangedListener(mTextWatcher);
+
         getmessage_01();
     }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            text_button.setText("搜索");
+        }
+    };
+
     //信息爬取方法
     public void getmessage_01() {
         new Thread() {
