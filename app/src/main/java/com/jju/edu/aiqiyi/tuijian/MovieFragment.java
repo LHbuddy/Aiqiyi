@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
@@ -37,10 +38,12 @@ public class MovieFragment extends Fragment {
     private View view;
     private ListView m_list;
     private DisplayImageOptions options;
+    private LinearLayout progress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.movie_fragment_layout, container, false);
         m_list = (ListView)view.findViewById(R.id.m_list);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
                 getContext()).denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileCount(100)
@@ -85,6 +88,8 @@ public class MovieFragment extends Fragment {
 //                }
                 m_list.setAdapter(new MovieGridAdapter(olist,getContext()));
                 m_list.setOnItemClickListener(listener);
+
+                progress.setVisibility(View.GONE);
             }
         }
     };

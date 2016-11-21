@@ -103,6 +103,8 @@ public class TuijianFragment extends Fragment {
     private GridView gv_tuijian_gaoxiao;
     private VideoGridAdapter adapter_gaoxiao;
 
+    private LinearLayout progress;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tuijian_fragment_layout, container, false);
@@ -143,6 +145,9 @@ public class TuijianFragment extends Fragment {
         btn_tuijian_gaoxiao_more = (Button) view.findViewById(R.id.btn_tuijian_gaoxiao_more);
         gv_tuijian_gaoxiao = (GridView) view.findViewById(R.id.gv_tuijian_gaoxiao);
         btn_tuijian_gaoxiao_more.setOnClickListener(onClickMoreInfo);
+
+        //初始化进度条
+        progress = (LinearLayout) view.findViewById(R.id.progress);
 
         return view;
     }
@@ -452,6 +457,7 @@ public class TuijianFragment extends Fragment {
             switch (msg.what) {
                 case 123:
                     operation_();
+                    progress.setVisibility(View.GONE);
                     break;
                 case 124:
                     viewPager.setCurrentItem(index % image_list.size());

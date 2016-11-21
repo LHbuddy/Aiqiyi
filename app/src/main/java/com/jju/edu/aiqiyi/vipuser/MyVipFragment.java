@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,11 +66,13 @@ public class MyVipFragment extends Fragment {
     private int flag = 0;
     //判断是否是刷新，如果是就清空list集合中的内容
     private boolean isReflash;
+    private LinearLayout progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.myvip_vipuser_fragment_layout, container, false);
         gv_video = (GridView) view.findViewById(R.id.gridview_vipsports);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
         http_(path);
         return view;
     }
@@ -124,6 +127,7 @@ public class MyVipFragment extends Fragment {
                     break;
                 case 235:
                     isReady = true;
+                    progress.setVisibility(View.GONE);
                     break;
             }
         }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
@@ -59,11 +60,14 @@ public class VipTechnologyFragment extends Fragment {
     //判断是否是搞笑界面，如果是就加载另一个布局
     private boolean isGaoXiao = false;
 
+    private LinearLayout progress;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.vipmovie_vipuser_fragment_layout, container, false);
         gv_video = (GridView) view.findViewById(R.id.gridview_viptechnolog);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
         http_(path);
         return view;
     }
@@ -124,6 +128,7 @@ public class VipTechnologyFragment extends Fragment {
                     break;
                 case 235:
                     isReady = true;
+                    progress.setVisibility(View.GONE);
                     break;
             }
         }

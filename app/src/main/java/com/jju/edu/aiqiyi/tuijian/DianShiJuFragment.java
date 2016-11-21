@@ -57,6 +57,7 @@ public class DianShiJuFragment extends Fragment {
     private VideoGridAdapter dianshiju_adapter;
     private VideoUtil video_first;
     private static String path_more;
+    private LinearLayout progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -142,6 +143,8 @@ public class DianShiJuFragment extends Fragment {
                     }
                 });
 
+                progress.setVisibility(View.GONE);
+
             }
         }
     };
@@ -166,6 +169,7 @@ public class DianShiJuFragment extends Fragment {
         gridView = (GridView) view.findViewById(R.id.gridview_dianshiju_USdrama);
         linear_dianshiju = (LinearLayout) view.findViewById(R.id.linear_dianshiju);
         btn_more = (Button) view.findViewById(R.id.btn_dianshiju_quanqiu_more);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

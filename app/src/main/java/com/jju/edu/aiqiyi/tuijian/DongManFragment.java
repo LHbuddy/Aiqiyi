@@ -66,6 +66,7 @@ public class DongManFragment extends Fragment {
     private VideoGridAdapter adapter03;
     private VideoGridAdapter adapter04;
     private TextView text_more01, text_more02, text_more03;
+    private LinearLayout progress;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dongman_fragment_layout, container, false);
@@ -208,6 +209,8 @@ public class DongManFragment extends Fragment {
                         }
                     });
                     grid_view02.setOnItemClickListener(listener);
+
+                    progress.setVisibility(View.GONE);
             }
         }
     };
@@ -236,10 +239,9 @@ public class DongManFragment extends Fragment {
 
 
         text_more01 = (TextView) view.findViewById(R.id.dm_text_more01);
-//        text_more02 = (TextView) view.findViewById(R.id.dm_text_more02);
         text_more01.setOnClickListener(listenter_more);
-//        text_more02.setOnClickListener(new ZongYiFragment.myonclick());
-//        text_more03.setOnClickListener(new ZongYiFragment.myonclick());
+
+        progress = (LinearLayout) view.findViewById(R.id.progress);
 
         //配置文件初始化
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(

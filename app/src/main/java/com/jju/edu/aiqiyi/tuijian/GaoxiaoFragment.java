@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class GaoxiaoFragment extends Fragment {
     private ImageView first_head_img;
     private TextView text_head;
     private TextView text_more01,text_more02,text_more03;
+    private LinearLayout progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class GaoxiaoFragment extends Fragment {
         text_head = (TextView) view.findViewById(R.id.text_head);
         text_more01 = (TextView) view.findViewById(R.id.text_more01);
         text_more02 = (TextView) view.findViewById(R.id.text_more02);
+        progress = (LinearLayout) view.findViewById(R.id.progress);
 
         text_more01.setOnClickListener(new myonclick());
         text_more02.setOnClickListener(new myonclick());
@@ -200,6 +203,7 @@ public class GaoxiaoFragment extends Fragment {
                                     : false;
                         }
                     });
+                    progress.setVisibility(View.GONE);
                     break;
             }
         }

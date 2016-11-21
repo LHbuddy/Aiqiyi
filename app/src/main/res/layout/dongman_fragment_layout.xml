@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 <ImageView
                     android:id="@+id/img_dongman"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/tv_dongman"
@@ -34,7 +34,7 @@
                     android:layout_gravity="center"
                     android:text="动漫"
                     android:textColor="#b6000000"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <GridView
@@ -47,39 +47,44 @@
                 android:verticalSpacing="20dp">
 
             </GridView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
-                android:background="#dcd5d5"/>
+                android:background="#dcd5d5" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="#161616"
+                        android:layout_marginTop="10dp"
                         android:text="最近更新"
-                        android:textSize="15sp"/>
+                        android:textColor="#161616"
+                        android:textSize="15sp" />
+
                     <TextView
+                        android:id="@+id/dm_text_more01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"
-                        android:id="@+id/dm_text_more01" />
+                        android:layout_centerVertical="true"
+                        android:text="更多" />
                 </RelativeLayout>
+
                 <GridView
                     android:id="@+id/dm_grid_view01"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="441dp"
+                    android:layout_marginTop="10dp"
                     android:numColumns="auto_fit"></GridView>
             </LinearLayout>
 
@@ -87,35 +92,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textColor="#161616"
+                        android:layout_marginTop="10dp"
                         android:text="少儿剧场"
-                        android:textSize="15sp"/>
+                        android:textColor="#161616"
+                        android:textSize="15sp" />
+
                     <TextView
+                        android:id="@+id/dm_text_more02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:text="更多"
-                        android:id="@+id/dm_text_more02" />
+                        android:layout_centerVertical="true"
+                        android:text="更多" />
                 </RelativeLayout>
+
                 <GridView
                     android:id="@+id/dm_grid_view02"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="441dp"
+                    android:layout_marginTop="10dp"
                     android:numColumns="3"></GridView>
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <include layout="@layout/progress_item"></include>
+</RelativeLayout>
