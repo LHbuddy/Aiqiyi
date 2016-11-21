@@ -17,16 +17,16 @@
             android:layout_centerInParent="true"
             android:text="导航"
             android:textColor="#ffffff"
-            android:textSize="22sp"/>
+            android:textSize="18sp"/>
 
         <ImageView
             android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/pinned_search"/>
+            android:background="@drawable/title_search"/>
     </RelativeLayout>
 
     <GridView

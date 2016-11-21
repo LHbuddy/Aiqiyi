@@ -3,12 +3,10 @@ package com.jju.edu.aiqiyi;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOperation;
 
