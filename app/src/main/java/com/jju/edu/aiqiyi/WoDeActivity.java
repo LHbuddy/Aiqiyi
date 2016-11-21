@@ -1,5 +1,6 @@
 package com.jju.edu.aiqiyi;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 /**
  * Created by 凌浩 on 2016/11/14.
@@ -31,7 +34,7 @@ public class WoDeActivity extends BaseActivity{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.search:
-                    Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(WoDeActivity.this, SearchActivity.class));
                     break;
                 case R.id.plus:
                     View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);

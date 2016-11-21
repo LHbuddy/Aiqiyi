@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.jju.edu.aiqiyi.adapter.GridAdapter;
 import com.jju.edu.aiqiyi.entity.DaohangUtil;
 import com.jju.edu.aiqiyi.tuijian.DianShiJuFragment;
+import com.jju.edu.aiqiyi.wode.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class DaoHangActivity extends BaseActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.search:
-                    Toast.makeText(DaoHangActivity.this, "", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DaoHangActivity.this, SearchActivity.class));
                     break;
 
             }

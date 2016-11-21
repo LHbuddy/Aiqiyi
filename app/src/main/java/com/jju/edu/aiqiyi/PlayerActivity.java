@@ -9,7 +9,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOperation;
 
@@ -99,9 +98,9 @@ public class PlayerActivity extends BaseActivity {
                 case 123:
                     //Log.e("-----------",img+"**********"+name+"**********"+desc);
                     //数据库操作
-                    if (MySqliteOperation.history_exist(PageActivity.db,path)){
+                    if (MySqliteOperation.history_exist(PageActivity.db,path,"")){
                     }else {
-                        MySqliteOperation.history_add(PageActivity.db,img,name,desc,path,gettime());
+                        MySqliteOperation.history_add(PageActivity.db,img,name,desc,path,gettime(),"");
                        // Log.e("@@@@@@@@@@@@@@@@@@@@","添加成功**");
                     }
                     break;
