@@ -1,7 +1,9 @@
 package com.jju.edu.aiqiyi.zxing.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -10,6 +12,8 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -49,6 +53,9 @@ public class CaptureActivity extends Activity implements Callback {
 	private boolean vibrate;
 	private Button cancelScanButton;
 
+	//是否拥有权限
+	private boolean isHasPermission = false;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +67,47 @@ public class CaptureActivity extends Activity implements Callback {
 		cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
+
+		//权限申请
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+				!= PackageManager.PERMISSION_GRANTED){
+			//做权限处理
+			ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+		}else {
+			isHasPermission = true;
+		}
+
+	}
+
+	/**
+	 * 权限回调处理
+	 * @param requestCode
+	 * @param permissions
+	 * @param grantResults
+     */
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		 switch (requestCode){
+		             case 1:
+		             //相机权限回调处理
+			             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+				             isHasPermission = true;
+			             }else {
+				             isHasPermission = false;
+//				             Toast.makeText(this, "相机权限未被授予，扫一扫功能开启失败！", Toast.LENGTH_SHORT).show();
+			             }
+		                break;
+		             default:
+		                 break;
+		         }
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (!isHasPermission){
+			Toast.makeText(this, "相机权限未授予，您可以在设置中开启权限！", Toast.LENGTH_SHORT).show();
+		}
 		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
