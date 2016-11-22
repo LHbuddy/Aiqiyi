@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOpenHelper;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created by 凌浩 on 2016/11/14.
@@ -168,5 +170,12 @@ public class PageActivity extends BaseActivity{
     protected void onResume() {
         super.onResume();
         manager.dispatchResume();
+
+        if (LoginActivity.img_get.equals("")){
+        }else {
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get,WoDeActivity.user_img);
+            WoDeActivity.user_name.setText(LoginActivity.name_get);
+            WoDeActivity.user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
+        }
     }
 }

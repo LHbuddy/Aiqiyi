@@ -38,6 +38,7 @@ public class PlayHistoryActivity extends BaseActivity {
     private HistoryAdapter adapter;
     private TextView clear_all;
     private TextView text01;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class PlayHistoryActivity extends BaseActivity {
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    MySqliteOperation.history_delete_one(PageActivity.db, list.get(position).getPath(), "");
+                    MySqliteOperation.history_delete_one(PageActivity.db, list.get(position).getPath(), uid);
                     adapter.notifyDataSetChanged();
                     history_list.setSelection(0);
                     onResume();
@@ -100,8 +101,9 @@ public class PlayHistoryActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        uid = LoginActivity.uid_get;
         //获取列表
-        list = MySqliteOperation.history_get_all(PageActivity.db, "");
+        list = MySqliteOperation.history_get_all(PageActivity.db, uid);
         // Log.e("*************",""+list.size());
         adapter = new HistoryAdapter(list, PlayHistoryActivity.this);
         history_list.setAdapter(adapter);
@@ -137,7 +139,7 @@ public class PlayHistoryActivity extends BaseActivity {
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MySqliteOperation.history_delete_all(PageActivity.db, "");
+                            MySqliteOperation.history_delete_all(PageActivity.db, uid);
                             adapter.notifyDataSetChanged();
                             history_list.setSelection(0);
                             onResume();

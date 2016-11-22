@@ -58,6 +58,7 @@ public class SearchActivity extends BaseActivity {
     private NewsAdapter adapter03;
     private List<NewsUtil> list03;
     private TextView news_more02;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +107,9 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        list03 = MySqliteOperation.search_all(PageActivity.db, "");
-        Log.e("************", "" + list03.size());
+        uid = LoginActivity.uid_get;
+        list03 = MySqliteOperation.search_all(PageActivity.db, uid);
+        //Log.e("************", "" + list03.size());
         adapter03 = new NewsAdapter(list03, SearchActivity.this);
         search_list.setAdapter(adapter03);
     }
@@ -196,9 +198,9 @@ public class SearchActivity extends BaseActivity {
     };
 
     public void history() {
-        if (MySqliteOperation.search_exist(PageActivity.db, search, "")) {
+        if (MySqliteOperation.search_exist(PageActivity.db, search, uid)) {
         } else {
-            MySqliteOperation.search_add(PageActivity.db, search, "");
+            MySqliteOperation.search_add(PageActivity.db, search, uid);
             Toast.makeText(SearchActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
         }
         et_search.setText("");
@@ -216,7 +218,7 @@ public class SearchActivity extends BaseActivity {
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MySqliteOperation.search_delete(PageActivity.db, "");
+                            MySqliteOperation.search_delete(PageActivity.db, uid);
                             onResume();
                             Toast.makeText(SearchActivity.this, "清除成功！", Toast.LENGTH_SHORT).show();
                         }
