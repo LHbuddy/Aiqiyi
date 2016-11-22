@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,9 +16,18 @@ import android.widget.Toast;
 import com.jju.edu.aiqiyi.wode.CollectActivity;
 import com.jju.edu.aiqiyi.wode.HelpBack_Activity;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
+import com.jju.edu.aiqiyi.wode.WallPaperActivity;
+import com.jju.edu.aiqiyi.wode.XiaoXIActivity;
+import com.jju.edu.aiqiyi.wode.SettingActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 /**
  * Created by 凌浩 on 2016/11/14.
@@ -25,6 +35,9 @@ import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 
 public class WoDeActivity extends BaseActivity {
     private ImageView search, plus;
+public class WoDeActivity extends BaseActivity{
+
+    private ImageView search,plus;
     private PopupWindow popupWindow;
     private LinearLayout denglu, kaitongvip, xiaoxi, lixianguankan, bofangjilu, shoucang, shangchuan, shebei,
             yue, pifu, bangzhu, diqu, shezhi;
@@ -36,6 +49,7 @@ public class WoDeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wode_layout);
+
         initview();
     }
 
@@ -103,6 +117,7 @@ public class WoDeActivity extends BaseActivity {
                     break;
                 case R.id.denglu:
                     Toast.makeText(WoDeActivity.this, "", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(WoDeActivity.this, LoginActivity.class));
                     break;
                 case R.id.lixianguankan:
                     startActivity(new Intent(WoDeActivity.this, LocalVideoActivity.class));
@@ -115,6 +130,15 @@ public class WoDeActivity extends BaseActivity {
                     break;
                 case R.id.bangzhu:
                     startActivity(new Intent(WoDeActivity.this, HelpBack_Activity.class));
+                    break;
+                case R.id.pifu:
+                    startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
+                    break;
+                case R.id.xiaoxi:
+                    startActivity(new Intent(WoDeActivity.this,XiaoXIActivity.class));
+                    break;
+                case R.id.shezhi:
+                    startActivity(new Intent(WoDeActivity.this, SettingActivity.class));
                     break;
 
             }
@@ -161,5 +185,4 @@ public class WoDeActivity extends BaseActivity {
         }
         return true;
     }
-
 }
