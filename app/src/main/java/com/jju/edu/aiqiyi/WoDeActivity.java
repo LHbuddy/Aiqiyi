@@ -34,9 +34,6 @@ import java.util.Map;
 
 public class WoDeActivity extends BaseActivity{
 
-    private UMShareAPI mShareAPI = null;
-    private SHARE_MEDIA platform = null;
-
     private ImageView search,plus;
     private PopupWindow popupWindow;
     private LinearLayout denglu,kaitongvip,xiaoxi,lixianguankan,bofangjilu,shoucang,shangchuan,shebei,
@@ -49,15 +46,7 @@ public class WoDeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wode_layout);
 
-        mShareAPI = UMShareAPI.get( WoDeActivity.this );
-
         initview();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     //控件初始化
@@ -122,10 +111,6 @@ public class WoDeActivity extends BaseActivity{
                     pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.denglu:
-                    Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
-                    //platform = SHARE_MEDIA.QQ;
-                    //mShareAPI.getPlatformInfo(WoDeActivity.this, platform, umAuthListener);
-
                     startActivity(new Intent(WoDeActivity.this, LoginActivity.class));
                     break;
                 case R.id.lixianguankan:
@@ -190,25 +175,4 @@ public class WoDeActivity extends BaseActivity{
         }
         return true;
     }
-
-    private UMAuthListener umAuthListener = new UMAuthListener() {
-
-        @Override
-        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            Log.e("**********",""+map.toString());
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-            Log.e("*****onError*****","onError");
-
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA share_media, int i) {
-            Log.e("*****onCancel*****","onCancel");
-
-        }
-    };
-
 }
