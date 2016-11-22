@@ -16,6 +16,17 @@ import java.util.List;
 
 public class MySqliteOperation {
 
+    /***
+     * 播放历史数据库操作
+     * @param db
+     * @param img
+     * @param name
+     * @param desc
+     * @param path
+     * @param time
+     * @param username
+     */
+
     //播放历史数据添加操作
     public static void history_add(SQLiteDatabase db,String img,String name,String desc,String path,String time,String username){
         db.execSQL("insert into play_history(img,name,desc,path,time,username) values(?,?,?,?,?,?)",new String[]{img,name,desc,path,time,username});
@@ -60,6 +71,12 @@ public class MySqliteOperation {
         return list;
     }
 
+    /****
+     * 搜索记录数据库操作
+     * @param db
+     * @param name
+     * @param username
+     */
 
     //搜索历史添加数据操作
     public static void search_add(SQLiteDatabase db,String name,String username){
@@ -91,6 +108,49 @@ public class MySqliteOperation {
             util.setName(name);
             util.setPath(path);
            // Log.e("%%%%%%%%%%%%22222","'"+name+"******"+path);
+            list.add(util);
+        }
+        return list;
+    }
+
+    /*****
+     * 收藏记录数据库操作
+     */
+    //添加收藏记录
+    public static void collect_add(SQLiteDatabase db,String img,String name,String desc,String path,String username){
+        db.execSQL("insert into collect_video(img,name,desc,path,username) values(?,?,?,?,?)",new String[]{img,name,desc,path,username});
+    }
+    //判断该数据是否已存在
+    public static boolean collect_exist(SQLiteDatabase db,String path,String username){
+        boolean exist=false;
+        Cursor cursor = db.rawQuery("select * from collect_video where path =? and username=?",new String[]{path,username});
+        if (cursor.moveToNext()){
+            exist = true;
+        }
+        return exist;
+    }
+    //删除单个数据
+    public static void collect_delete_one(SQLiteDatabase db,String path,String username){
+        db.execSQL("delete from collect_video where path=? and username=?", new String[]{path,username});
+    }
+    //删除所有数据
+    public static void collect_delete_all(SQLiteDatabase db,String username){
+        db.execSQL("delete  from collect_video where username=?",new String[]{username});
+    }
+    //查找所有数据
+    public static List<HistoryUtil> collect_select_all(SQLiteDatabase db,String username){
+        List<HistoryUtil> list = new ArrayList<HistoryUtil>();
+        Cursor cursor = db.rawQuery("select * from collect_video where username=?",new String[]{username});
+        while(cursor.moveToNext()){
+            HistoryUtil util = new HistoryUtil();
+            String img = cursor.getString(cursor.getColumnIndex("img"));
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String desc = cursor.getString(cursor.getColumnIndex("desc"));
+            String path = cursor.getString(cursor.getColumnIndex("path"));
+            util.setImg(img);
+            util.setName(name);
+            util.setDesc(desc);
+            util.setPath(path);
             list.add(util);
         }
         return list;

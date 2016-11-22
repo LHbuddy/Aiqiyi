@@ -18,6 +18,7 @@ public class MySqliteOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table play_history(id integer primary key autoincrement,img,name,desc,path,time,username)");
+        db.execSQL("create table collect_video(id integer primary key autoincrement,img,name,desc,path,username)");
         db.execSQL("create table search_history(id integer primary key autoincrement,name,username)");
 
     }
