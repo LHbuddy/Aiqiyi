@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.wode.CollectActivity;
+import com.jju.edu.aiqiyi.wode.HelpBack_Activity;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
@@ -22,22 +23,24 @@ import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class WoDeActivity extends BaseActivity{
-    private ImageView search,plus;
+public class WoDeActivity extends BaseActivity {
+    private ImageView search, plus;
     private PopupWindow popupWindow;
-    private LinearLayout denglu,kaitongvip,xiaoxi,lixianguankan,bofangjilu,shoucang,shangchuan,shebei,
-            yue,pifu,bangzhu,diqu,shezhi;
+    private LinearLayout denglu, kaitongvip, xiaoxi, lixianguankan, bofangjilu, shoucang, shangchuan, shebei,
+            yue, pifu, bangzhu, diqu, shezhi;
 
     private LinearLayout pop_ll_upload;
     private LinearLayout pop_ll_scan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wode_layout);
         initview();
     }
+
     //控件初始化
-    public void initview(){
+    public void initview() {
 
         denglu = (LinearLayout) findViewById(R.id.denglu);
         kaitongvip = (LinearLayout) findViewById(R.id.kaitongvip);
@@ -74,11 +77,12 @@ public class WoDeActivity extends BaseActivity{
         plus.setOnClickListener(new myclick());
 
     }
+
     //标题按钮监听事件
-    class myclick implements View.OnClickListener{
+    class myclick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.search:
                     startActivity(new Intent(WoDeActivity.this, SearchActivity.class));
                     break;
@@ -98,7 +102,7 @@ public class WoDeActivity extends BaseActivity{
                     pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.denglu:
-                    Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WoDeActivity.this, "", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.lixianguankan:
                     startActivity(new Intent(WoDeActivity.this, LocalVideoActivity.class));
@@ -108,6 +112,9 @@ public class WoDeActivity extends BaseActivity{
                     break;
                 case R.id.shoucang:
                     startActivity(new Intent(WoDeActivity.this, CollectActivity.class));
+                    break;
+                case R.id.bangzhu:
+                    startActivity(new Intent(WoDeActivity.this, HelpBack_Activity.class));
                     break;
 
             }
@@ -126,13 +133,14 @@ public class WoDeActivity extends BaseActivity{
                     Toast.makeText(WoDeActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pop_ll_scan:
-                    Intent intent_scan = new Intent(WoDeActivity.this,CaptureActivity.class);
+                    Intent intent_scan = new Intent(WoDeActivity.this, CaptureActivity.class);
                     startActivity(intent_scan);
 //                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
                     break;
             }
         }
     };
+
     /**
      * 双击退出操作
      */
