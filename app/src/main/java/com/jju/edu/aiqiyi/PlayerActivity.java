@@ -9,6 +9,8 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOperation;
 
@@ -23,6 +25,8 @@ import java.util.Calendar;
  */
 
 public class PlayerActivity extends BaseActivity {
+
+    private ImageView iv_video_title_back,iv_video_title_shoucang;
     private WebView webview;
     private String phone_path;
     private String path;
@@ -36,6 +40,10 @@ public class PlayerActivity extends BaseActivity {
         setContentView(R.layout.player_layout);
 
         webview = (WebView) findViewById(R.id.webview);
+        iv_video_title_back = (ImageView) findViewById(R.id.iv_video_title_back);
+        iv_video_title_shoucang = (ImageView) findViewById(R.id.iv_video_title_shoucang);
+        iv_video_title_back.setOnClickListener(new myonclick());
+        iv_video_title_shoucang.setOnClickListener(new myonclick());
 
         // 设置WebView属性，能够执行Javascript脚本
         webview.getSettings().setJavaScriptEnabled(true);
@@ -52,6 +60,14 @@ public class PlayerActivity extends BaseActivity {
             phone_path = "http://m."+path_phone[1];
         }else {
             phone_path = path;
+        }
+
+
+        //判断是否修改标题栏收藏图标
+        if (MySqliteOperation.collect_exist(PageActivity.db,path,"")){
+            iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt_selected);
+        }else {
+            iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt);
         }
 
         webview.loadUrl(phone_path);
@@ -96,12 +112,10 @@ public class PlayerActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 123:
-                    //Log.e("-----------",img+"**********"+name+"**********"+desc);
                     //数据库操作
                     if (MySqliteOperation.history_exist(PageActivity.db,path,"")){
                     }else {
                         MySqliteOperation.history_add(PageActivity.db,img,name,desc,path,gettime(),"");
-                       // Log.e("@@@@@@@@@@@@@@@@@@@@","添加成功**");
                     }
                     break;
 
@@ -109,6 +123,7 @@ public class PlayerActivity extends BaseActivity {
         }
     };
 
+    //获取当前时间
     public String gettime(){
         Calendar calendar = Calendar.getInstance();
         String time = calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
@@ -122,6 +137,29 @@ public class PlayerActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    //图片按钮点击事件
+    class myonclick implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.iv_video_title_back:
+                    finish();
+                    break;
+                case R.id.iv_video_title_shoucang:
+                    if (MySqliteOperation.collect_exist(PageActivity.db,path,"")){
+                        MySqliteOperation.collect_delete_one(PageActivity.db,path,"");
+                        Toast.makeText(PlayerActivity.this,"取消收藏",Toast.LENGTH_SHORT).show();
+                        iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt);
+                    }else {
+                        MySqliteOperation.collect_add(PageActivity.db,img,name,desc,path,"");
+                        Toast.makeText(PlayerActivity.this,"已添加到收藏夹",Toast.LENGTH_SHORT).show();
+                        iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt_selected);
+                    }
+                    break;
+            }
+        }
     }
 
 }
