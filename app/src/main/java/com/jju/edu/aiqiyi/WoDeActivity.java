@@ -34,10 +34,8 @@ import java.util.Map;
  */
 
 public class WoDeActivity extends BaseActivity {
-    private ImageView search, plus;
-public class WoDeActivity extends BaseActivity{
 
-    private ImageView search,plus;
+    private ImageView search, plus;
     private PopupWindow popupWindow;
     private LinearLayout denglu, kaitongvip, xiaoxi, lixianguankan, bofangjilu, shoucang, shangchuan, shebei,
             yue, pifu, bangzhu, diqu, shezhi;
@@ -135,7 +133,7 @@ public class WoDeActivity extends BaseActivity{
                     startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
                     break;
                 case R.id.xiaoxi:
-                    startActivity(new Intent(WoDeActivity.this,XiaoXIActivity.class));
+                    startActivity(new Intent(WoDeActivity.this, XiaoXIActivity.class));
                     break;
                 case R.id.shezhi:
                     startActivity(new Intent(WoDeActivity.this, SettingActivity.class));

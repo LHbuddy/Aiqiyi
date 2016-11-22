@@ -41,7 +41,7 @@ import java.util.List;
  * Created by Administrator on 2016/11/17.
  */
 
-public class VideoActivity extends Activity {
+public class VideoActivity extends BaseActivity {
 
     private ImageView iv_video_title_left;
     private TextView tv_video_title_center;
