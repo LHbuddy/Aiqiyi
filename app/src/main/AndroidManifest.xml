@@ -36,6 +36,7 @@
         <activity android:name=".wode.SearchActivity"></activity>
         <activity android:name=".wode.SearchResultActivity"></activity>
         <activity android:name=".VideoPlayer"></activity>
+        <activity android:name=".wode.CollectActivity"></activity>
         <activity android:name=".zxing.activity.CaptureActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:screenOrientation="portrait"

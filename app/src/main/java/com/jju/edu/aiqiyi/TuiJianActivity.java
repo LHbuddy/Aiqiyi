@@ -178,6 +178,9 @@ public class TuiJianActivity extends BaseFragmentActivity {
         }
     }
 
+    /**
+     * PopWindow的点击事件
+     */
     private View.OnClickListener popOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
