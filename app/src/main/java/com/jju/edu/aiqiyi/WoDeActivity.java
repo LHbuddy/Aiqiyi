@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
+import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 
 /**
  * Created by 凌浩 on 2016/11/14.
@@ -25,6 +26,9 @@ public class WoDeActivity extends BaseActivity{
     private PopupWindow popupWindow;
     private LinearLayout denglu,kaitongvip,xiaoxi,lixianguankan,bofangjilu,shoucang,shangchuan,shebei,
             yue,pifu,bangzhu,diqu,shezhi;
+
+    private LinearLayout pop_ll_upload;
+    private LinearLayout pop_ll_scan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,8 @@ public class WoDeActivity extends BaseActivity{
                     break;
                 case R.id.plus:
                     View view = getLayoutInflater().inflate(R.layout.popupwindow_layout, null);
+                    pop_ll_upload = (LinearLayout) view.findViewById(R.id.pop_ll_upload);
+                    pop_ll_scan = (LinearLayout) view.findViewById(R.id.pop_ll_scan);
                     popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     //设置背景
                     popupWindow.setBackgroundDrawable(new ColorDrawable());
@@ -87,6 +93,8 @@ public class WoDeActivity extends BaseActivity{
                     popupWindow.setContentView(view);
                     //设置出现在当前点击控件的正下方
                     popupWindow.showAsDropDown(plus);
+                    pop_ll_upload.setOnClickListener(popOnClick);
+                    pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.denglu:
                     Toast.makeText(WoDeActivity.this,"",Toast.LENGTH_SHORT).show();
@@ -102,6 +110,25 @@ public class WoDeActivity extends BaseActivity{
 
         }
     }
+
+    /**
+     * PopWindow的点击事件
+     */
+    private View.OnClickListener popOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.pop_ll_upload:
+                    Toast.makeText(WoDeActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.pop_ll_scan:
+                    Intent intent_scan = new Intent(WoDeActivity.this,CaptureActivity.class);
+                    startActivity(intent_scan);
+//                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
+                    break;
+            }
+        }
+    };
     /**
      * 双击退出操作
      */
