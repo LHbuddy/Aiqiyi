@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.WoDeActivity;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -20,12 +22,14 @@ import java.util.Map;
 public class LoginActivity extends Activity{
     private UMShareAPI mShareAPI = null;
     private SHARE_MEDIA platform = null;
+    public static String img_get = "";
+    public static String name_get = "";
+    public static String uid_get= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
         mShareAPI = UMShareAPI.get( LoginActivity.this );
 
     }
@@ -42,7 +46,11 @@ public class LoginActivity extends Activity{
 
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            Log.e("**********",""+map.toString());
+            img_get = map.get("profile_image_url");
+            name_get = map.get("screen_name");
+            uid_get = map.get("uid");
+            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         @Override

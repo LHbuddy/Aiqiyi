@@ -38,6 +38,7 @@ public class CollectActivity extends BaseActivity{
     private HistoryAdapter adapter;
     private TextView clear_all;
     private TextView text01;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class CollectActivity extends BaseActivity{
                 .diskCacheSize(50 * 1024 * 1024)
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(configuration);
+
+
     }
 
     //列表点击事件
@@ -83,7 +86,7 @@ public class CollectActivity extends BaseActivity{
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    MySqliteOperation.collect_delete_one(PageActivity.db, list.get(position).getPath(),"");
+                    MySqliteOperation.collect_delete_one(PageActivity.db, list.get(position).getPath(),uid);
                     adapter.notifyDataSetChanged();
                     history_list.setSelection(0);
                     onResume();
@@ -98,8 +101,10 @@ public class CollectActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        uid = LoginActivity.uid_get;
+
         //获取列表
-        list = MySqliteOperation.collect_select_all(PageActivity.db,"");
+        list = MySqliteOperation.collect_select_all(PageActivity.db,uid);
         // Log.e("*************",""+list.size());
         adapter = new HistoryAdapter(list, CollectActivity.this);
         history_list.setAdapter(adapter);
@@ -134,7 +139,7 @@ public class CollectActivity extends BaseActivity{
                     dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MySqliteOperation.collect_delete_all(PageActivity.db,"");
+                            MySqliteOperation.collect_delete_all(PageActivity.db,uid);
                             adapter.notifyDataSetChanged();
                             history_list.setSelection(0);
                             onResume();

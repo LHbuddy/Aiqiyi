@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.wode.CollectActivity;
@@ -23,6 +24,10 @@ import com.jju.edu.aiqiyi.wode.WallPaperActivity;
 import com.jju.edu.aiqiyi.wode.XiaoXIActivity;
 import com.jju.edu.aiqiyi.wode.SettingActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -43,16 +48,43 @@ public class WoDeActivity extends BaseActivity {
     private LinearLayout pop_ll_upload;
     private LinearLayout pop_ll_scan;
 
+    public static ImageView user_img;
+    public static  TextView user_name,user_desc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wode_layout);
 
+        ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(
+                WoDeActivity.this).denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileCount(100)
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024)
+                .tasksProcessingOrder(QueueProcessingType.LIFO).build();
+        ImageLoader.getInstance().init(configuration);
+
         initview();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("$$$$$$$$$$$$$$$$$$",LoginActivity.img_get+""+LoginActivity.name_get);
+        if (LoginActivity.img_get.equals("")){
+        }else {
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get,user_img);
+            user_name.setText(LoginActivity.name_get);
+            user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
+        }
     }
 
     //控件初始化
     public void initview() {
+
+        user_img = (ImageView) findViewById(R.id.user_img);
+        user_name = (TextView) findViewById(R.id.user_name);
+        user_desc = (TextView) findViewById(R.id.user_desc);
 
         denglu = (LinearLayout) findViewById(R.id.denglu);
         kaitongvip = (LinearLayout) findViewById(R.id.kaitongvip);
