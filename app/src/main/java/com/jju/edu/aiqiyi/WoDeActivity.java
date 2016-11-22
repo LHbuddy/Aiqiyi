@@ -18,6 +18,8 @@ import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
+import com.jju.edu.aiqiyi.wode.WallPaperActivity;
+import com.jju.edu.aiqiyi.wode.XiaoXIActivity;
 import com.jju.edu.aiqiyi.wode.SettingActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 import com.umeng.socialize.UMAuthListener;
@@ -134,6 +136,12 @@ public class WoDeActivity extends BaseActivity{
                     break;
                 case R.id.shoucang:
                     startActivity(new Intent(WoDeActivity.this, CollectActivity.class));
+                    break;
+                case R.id.pifu:
+                    startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
+                    break;
+                case R.id.xiaoxi:
+                    startActivity(new Intent(WoDeActivity.this,XiaoXIActivity.class));
                     break;
                 case R.id.shezhi:
                     startActivity(new Intent(WoDeActivity.this, SettingActivity.class));

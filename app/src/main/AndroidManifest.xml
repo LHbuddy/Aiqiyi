@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
         android:name=".app.MyApplication"
@@ -86,6 +87,7 @@
             android:value="5833f4711c5dd0715a001af7" >
         </meta-data>
 
+        <activity android:name=".wode.WallPaperActivity"></activity>
     </application>
 
 </manifest>
