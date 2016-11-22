@@ -128,6 +128,7 @@ public class JiaoYouActivity extends BaseActivity{
         for (int i = 0;i<video.length;i++){
             util02 = new NewsUtil();
             util02.setName(video[i]);
+            util02.setPath(video_path[i]);
             list02.add(util02);
         }
         adapter02 = new NewsAdapter(list02,JiaoYouActivity.this);
