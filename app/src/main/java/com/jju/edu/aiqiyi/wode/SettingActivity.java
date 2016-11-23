@@ -13,6 +13,7 @@ import com.jju.edu.aiqiyi.BaseActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.wode.settings.MessagePush;
 import com.jju.edu.aiqiyi.wode.settings.PlayAndDownloadActivity;
+import com.jju.edu.aiqiyi.wode.settings.PluginActivity;
 import com.jju.edu.aiqiyi.wode.settings.UsefulActivity;
 import com.jju.edu.aiqiyi.wode.settings.UserManagerActivity;
 
@@ -25,6 +26,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private ImageView iv_setting_back;
     private RelativeLayout rl_user_manager;
     private RelativeLayout rl_useful;
+    private RelativeLayout rl_plugin;
     private RelativeLayout rl_play_download, relative_message_, relative_clear, relative_update;
 
     @Override
@@ -43,6 +45,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         relative_message_ = (RelativeLayout) findViewById(R.id.relative_message_);
         relative_clear = (RelativeLayout) findViewById(R.id.relative_clear);
         relative_update = (RelativeLayout) findViewById(R.id.relative_update);
+        rl_plugin = (RelativeLayout) findViewById(R.id.rl_plugin);
 
         iv_setting_back.setOnClickListener(this);
         rl_user_manager.setOnClickListener(this);
@@ -51,6 +54,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         relative_clear.setOnClickListener(this);
         relative_update.setOnClickListener(this);
         rl_useful.setOnClickListener(this);
+        rl_plugin.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +102,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.rl_useful:
                 startActivity(new Intent(SettingActivity.this, UsefulActivity.class));
+                break;
+            case R.id.rl_plugin:
+                startActivity(new Intent(SettingActivity.this,PluginActivity.class));
                 break;
         }
     }

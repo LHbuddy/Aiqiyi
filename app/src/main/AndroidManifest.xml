@@ -97,6 +97,8 @@
         </activity>
         <activity android:name=".wode.settings.MessagePush">
         </activity>
+        <activity android:name=".wode.settings.PluginActivity"></activity>
+        <activity android:name=".wode.XiaoXIActivity"></activity>
     </application>
 
 </manifest>
