@@ -21,7 +21,7 @@ import java.io.File;
  * Created by Administrator on 2016/11/20 0020.
  */
 
-public class VideoPlayer extends Activity {
+public class VideoPlayer extends BaseActivity {
     private ImageView img_full;
     private VideoView videoView;
     private MediaController mController;
