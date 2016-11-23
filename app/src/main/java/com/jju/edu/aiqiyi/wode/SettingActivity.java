@@ -25,7 +25,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private ImageView iv_setting_back;
     private RelativeLayout rl_user_manager;
     private RelativeLayout rl_useful;
-    private RelativeLayout rl_play_download, relative_message_;
     private RelativeLayout rl_play_download, relative_message_, relative_clear, relative_update;
 
     @Override
