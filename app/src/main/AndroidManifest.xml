@@ -2,28 +2,27 @@
 <manifest package="com.jju.edu.aiqiyi"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
 
     <application
@@ -42,6 +41,48 @@
         </activity>
         <activity android:name=".PageActivity">
         </activity>
+        <activity android:name=".DaoHangActivity"/>
+        <activity android:name=".HuiYuanActivity"/>
+        <activity android:name=".TuiJianActivity"/>
+        <activity android:name=".JiaoYouActivity"/>
+        <activity android:name=".WoDeActivity"/>
+        <activity android:name=".PlayerActivity"/>
+        <activity android:name=".VideoActivity"/>
+        <activity android:name=".wode.LocalVideoActivity"/>
+        <activity android:name=".wode.PlayHistoryActivity"/>
+        <activity android:name=".wode.SearchActivity"/>
+        <activity android:name=".wode.SearchResultActivity"/>
+        <activity android:name=".VideoPlayer"/>
+        <activity android:name=".wode.CollectActivity"/>
+        <activity
+            android:name=".zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".wode.HelpBack_Activity">
+        </activity>
+        <activity android:name=".DaoHangActivity"/>
+        <activity android:name=".HuiYuanActivity"/>
+        <activity android:name=".TuiJianActivity"/>
+        <activity android:name=".JiaoYouActivity"/>
+        <activity android:name=".WoDeActivity"/>
+        <activity android:name=".PlayerActivity"/>
+        <activity android:name=".VideoActivity"/>
+        <activity android:name=".wode.LocalVideoActivity"/>
+        <activity android:name=".wode.PlayHistoryActivity"/>
+        <activity android:name=".wode.SearchActivity"/>
+        <activity android:name=".wode.SearchResultActivity"/>
+        <activity android:name=".VideoPlayer"/>
+        <activity android:name=".wode.CollectActivity"/>
+        <activity android:name=".wode.SettingActivity"/>
+        <activity android:name=".wode.LoginActivity"/>
+        <activity
+            android:name=".zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".wode.settings.UserManagerActivity"/>
+        <activity android:name=".wode.settings.PlayAndDownloadActivity"/>
         <activity android:name=".DaoHangActivity"></activity>
         <activity android:name=".HuiYuanActivity"></activity>
         <activity android:name=".TuiJianActivity"></activity>
@@ -69,28 +110,32 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="tencent100424468" />
+                <data android:scheme="tencent100424468"/>
             </intent-filter>
         </activity>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5833f4711c5dd0715a001af7" >
+            android:value="5833f4711c5dd0715a001af7">
         </meta-data>
 
-        <activity android:name=".wode.WallPaperActivity"></activity>
+        <activity android:name=".wode.WallPaperActivity"/>
+        <activity android:name=".wode.MyEquipment">
+        </activity>
+        <activity android:name=".wode.settings.MessagePush">
+        </activity>
     </application>
 
 </manifest>

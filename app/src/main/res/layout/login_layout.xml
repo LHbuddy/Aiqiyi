@@ -110,14 +110,154 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_alignParentBottom="true">
-            <include
-                layout="@layout/else_login_layout"
-                ></include>
+            <SlidingDrawer
+                android:id="@+id/sliding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:handle="@+id/handle"
+                android:content="@+id/content">
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+                    <LinearLayout
+                        android:id="@id/handle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:background="@drawable/phone_card_player_style_bg_top_more"
+                                android:layout_centerHorizontal="true"/>
+                            <ImageView
+                                android:id="@+id/handle_img"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/player_common_collapse_normal"/>
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:background="#FFFFFF">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:textSize="15sp"
+                                android:text="其他方式登录"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="160dp"
+                                    android:layout_height="50dp"
+                                    android:background="@drawable/login_vx_more"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    android:layout_width="160dp"
+                                    android:layout_height="50dp"
+                                    android:background="@drawable/login_qq_more"
+                                    android:id="@+id/qq_img_login" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:gravity="center_vertical"
+                            android:background="#FFFFFF"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/icon_sina"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/icon_xiaomi"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/icon_renren"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/icon_baidu"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/icon_zhifubao"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                <!--</LinearLayout>-->
+            </SlidingDrawer>
+
         </LinearLayout>
 
     </RelativeLayout>
