@@ -155,6 +155,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/relative_clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -183,6 +184,7 @@
         />
 
     <RelativeLayout
+        android:id="@+id/relative_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
