@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import com.jju.edu.aiqiyi.BaseActivity;
 import com.jju.edu.aiqiyi.R;
+import com.jju.edu.aiqiyi.wode.settings.MessagePush;
 import com.jju.edu.aiqiyi.wode.settings.PlayAndDownloadActivity;
 import com.jju.edu.aiqiyi.wode.settings.UserManagerActivity;
 
@@ -19,7 +20,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     private ImageView iv_setting_back;
     private RelativeLayout rl_user_manager;
-    private RelativeLayout rl_play_download;
+    private RelativeLayout rl_play_download, relative_message_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         iv_setting_back = (ImageView) findViewById(R.id.iv_setting_back);
         rl_user_manager = (RelativeLayout) findViewById(R.id.rl_user_manager);
         rl_play_download = (RelativeLayout) findViewById(R.id.rl_play_download);
+        relative_message_ = (RelativeLayout) findViewById(R.id.relative_message_);
 
         iv_setting_back.setOnClickListener(this);
         rl_user_manager.setOnClickListener(this);
         rl_play_download.setOnClickListener(this);
+        relative_message_.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +53,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.rl_play_download:
                 startActivity(new Intent(SettingActivity.this, PlayAndDownloadActivity.class));
+                break;
+            case R.id.relative_message_:
+                startActivity(new Intent(SettingActivity.this, MessagePush.class));
                 break;
         }
     }

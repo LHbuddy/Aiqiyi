@@ -110,6 +110,8 @@
         <activity android:name=".wode.WallPaperActivity"/>
         <activity android:name=".wode.MyEquipment">
         </activity>
+        <activity android:name=".wode.settings.MessagePush">
+        </activity>
     </application>
 
 </manifest>
