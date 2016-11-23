@@ -52,7 +52,9 @@
         <activity android:name=".wode.PlayHistoryActivity"/>
         <activity android:name=".wode.SearchActivity"/>
         <activity android:name=".wode.SearchResultActivity"/>
-        <activity android:name=".VideoPlayer"/>
+        <activity
+            android:name=".VideoPlayer"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name=".wode.CollectActivity"/>
         <activity
             android:name=".zxing.activity.CaptureActivity"
@@ -66,8 +68,6 @@
         <activity android:name=".wode.settings.UserManagerActivity"/>
         <activity android:name=".wode.settings.PlayAndDownloadActivity"/>
         <activity android:name=".wode.settings.UsefulActivity"></activity>
-
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
