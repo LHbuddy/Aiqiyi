@@ -3,6 +3,7 @@ package com.jju.edu.aiqiyi.wode.settings;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
@@ -13,6 +14,7 @@ public class MessagePush extends BaseActivity {
     private RelativeLayout relative1, relative2, relative3;
     private ToggleButton togbtn1, togbtn2, togbtn3;
     private boolean ischecked1, ischecked2, ischecked3;
+    private ImageView img_message_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,9 @@ public class MessagePush extends BaseActivity {
                         );
                     }
                     break;
+                case R.id.img_message_back:
+                    finish();
+                    break;
             }
 
         }
@@ -77,6 +82,8 @@ public class MessagePush extends BaseActivity {
         togbtn1 = (ToggleButton) findViewById(R.id.togglebtn1);
         togbtn2 = (ToggleButton) findViewById(R.id.togglebtn2);
         togbtn3 = (ToggleButton) findViewById(R.id.togglebtn3);
+        img_message_back = (ImageView) findViewById(R.id.img_message_back);
+        img_message_back.setOnClickListener(listener);
 
         relative1.setOnClickListener(listener);
         relative2.setOnClickListener(listener);

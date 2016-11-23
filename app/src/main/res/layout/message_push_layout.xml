@@ -10,6 +10,26 @@
     tools:context="com.jju.edu.aiqiyi.wode.settings.MessagePush">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/img_message_back"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone_account_back_small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="消息推送"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/relative_message_push"
         android:layout_width="match_parent"
         android:layout_height="50dp"

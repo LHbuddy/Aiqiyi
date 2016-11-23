@@ -147,7 +147,6 @@ public class WoDeActivity extends BaseActivity {
                     pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.denglu:
-                    Toast.makeText(WoDeActivity.this, "", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(WoDeActivity.this, LoginActivity.class));
                     break;
                 case R.id.lixianguankan:
@@ -173,6 +172,15 @@ public class WoDeActivity extends BaseActivity {
                     break;
                 case R.id.shebei:
                     startActivity(new Intent(WoDeActivity.this, MyEquipment.class));
+                    break;
+                case R.id.diqu:
+                    show_toast_short("功能尚未开启");
+                    break;
+                case R.id.kaitongvip:
+                    show_toast_short("您已经是VIP");
+                    break;
+                case R.id.shangchuan:
+                    show_toast_short("功能尚未开启");
                     break;
 
             }
