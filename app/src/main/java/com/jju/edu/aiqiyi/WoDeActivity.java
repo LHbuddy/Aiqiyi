@@ -18,6 +18,7 @@ import com.jju.edu.aiqiyi.wode.CollectActivity;
 import com.jju.edu.aiqiyi.wode.HelpBack_Activity;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.LoginActivity;
+import com.jju.edu.aiqiyi.wode.MyEquipment;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 import com.jju.edu.aiqiyi.wode.WallPaperActivity;
@@ -49,7 +50,7 @@ public class WoDeActivity extends BaseActivity {
     private LinearLayout pop_ll_scan;
 
     public static ImageView user_img;
-    public static  TextView user_name,user_desc;
+    public static TextView user_name, user_desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +71,12 @@ public class WoDeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("$$$$$$$$$$$$$$$$$$",LoginActivity.img_get+""+LoginActivity.name_get);
-        if (LoginActivity.img_get.equals("")){
-        }else {
-            ImageLoader.getInstance().displayImage(LoginActivity.img_get,user_img);
+        Log.e("$$$$$$$$$$$$$$$$$$", LoginActivity.img_get + "" + LoginActivity.name_get);
+        if (LoginActivity.img_get.equals("")) {
+        } else {
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get, user_img);
             user_name.setText(LoginActivity.name_get);
-            user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
+            user_desc.setText("尊敬的VIP会员 " + LoginActivity.name_get + " 欢迎你！");
         }
     }
 
@@ -169,6 +170,9 @@ public class WoDeActivity extends BaseActivity {
                     break;
                 case R.id.shezhi:
                     startActivity(new Intent(WoDeActivity.this, SettingActivity.class));
+                    break;
+                case R.id.shebei:
+                    startActivity(new Intent(WoDeActivity.this, MyEquipment.class));
                     break;
 
             }
