@@ -207,27 +207,6 @@
             android:layout_centerVertical="true"
             android:background="@drawable/arrow_right"/>
     </RelativeLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        />
-    <LinearLayout
-        android:id="@+id/login_out"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:visibility="gone"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="退出登录"
-            android:textColor="#FFE48B6F"
-            android:textSize="15sp"/>
 
-    </LinearLayout>
 
 </LinearLayout>

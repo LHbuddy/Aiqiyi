@@ -177,11 +177,7 @@ public class WoDeActivity extends BaseActivity {
                     show_toast_short("功能尚未开启");
                     break;
                 case R.id.kaitongvip:
-                    if (LoginActivity.uid_get.equals("")) {
-                        show_toast_short("请登录");
-                    } else {
-                        show_toast_short("您已经是VIP");
-                    }
+                    show_toast_short("您已经是VIP");
                     break;
                 case R.id.shangchuan:
                     show_toast_short("功能尚未开启");
