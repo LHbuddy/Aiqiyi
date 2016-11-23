@@ -15,15 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.wode.CollectActivity;
-import com.jju.edu.aiqiyi.wode.HelpBack_Activity;
 import com.jju.edu.aiqiyi.wode.LocalVideoActivity;
 import com.jju.edu.aiqiyi.wode.LoginActivity;
-import com.jju.edu.aiqiyi.wode.MyEquipment;
 import com.jju.edu.aiqiyi.wode.PlayHistoryActivity;
 import com.jju.edu.aiqiyi.wode.SearchActivity;
 import com.jju.edu.aiqiyi.wode.WallPaperActivity;
 import com.jju.edu.aiqiyi.wode.XiaoXIActivity;
 import com.jju.edu.aiqiyi.wode.SettingActivity;
+import com.jju.edu.aiqiyi.wode.settings.YuEActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -39,19 +38,18 @@ import java.util.Map;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class WoDeActivity extends BaseActivity {
+public class WoDeActivity extends BaseActivity{
 
-    private ImageView search, plus;
+    private ImageView search,plus;
     private PopupWindow popupWindow;
-    private LinearLayout denglu, kaitongvip, xiaoxi, lixianguankan, bofangjilu, shoucang, shangchuan, shebei,
-            yue, pifu, bangzhu, diqu, shezhi;
+    private LinearLayout denglu,kaitongvip,xiaoxi,lixianguankan,bofangjilu,shoucang,shangchuan,shebei,
+            yue,pifu,bangzhu,diqu,shezhi;
 
     private LinearLayout pop_ll_upload;
     private LinearLayout pop_ll_scan;
 
     public static ImageView user_img;
-    public static TextView user_name, user_desc;
-
+    public static  TextView user_name,user_desc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +69,17 @@ public class WoDeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("$$$$$$$$$$$$$$$$$$", LoginActivity.img_get + "" + LoginActivity.name_get);
-        if (LoginActivity.img_get.equals("")) {
-        } else {
-            ImageLoader.getInstance().displayImage(LoginActivity.img_get, user_img);
+        Log.e("$$$$$$$$$$$$$$$$$$",LoginActivity.img_get+""+LoginActivity.name_get);
+        if (LoginActivity.img_get.equals("")){
+        }else {
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get,user_img);
             user_name.setText(LoginActivity.name_get);
-            user_desc.setText("尊敬的VIP会员 " + LoginActivity.name_get + " 欢迎你！");
+            user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
         }
     }
 
     //控件初始化
-    public void initview() {
+    public void initview(){
 
         user_img = (ImageView) findViewById(R.id.user_img);
         user_name = (TextView) findViewById(R.id.user_name);
@@ -122,12 +120,11 @@ public class WoDeActivity extends BaseActivity {
         plus.setOnClickListener(new myclick());
 
     }
-
     //标题按钮监听事件
-    class myclick implements View.OnClickListener {
+    class myclick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
-            switch (v.getId()) {
+            switch (v.getId()){
                 case R.id.search:
                     startActivity(new Intent(WoDeActivity.this, SearchActivity.class));
                     break;
@@ -158,31 +155,17 @@ public class WoDeActivity extends BaseActivity {
                 case R.id.shoucang:
                     startActivity(new Intent(WoDeActivity.this, CollectActivity.class));
                     break;
-                case R.id.bangzhu:
-                    startActivity(new Intent(WoDeActivity.this, HelpBack_Activity.class));
-                    break;
                 case R.id.pifu:
                     startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
                     break;
                 case R.id.xiaoxi:
-                    startActivity(new Intent(WoDeActivity.this, XiaoXIActivity.class));
+                    startActivity(new Intent(WoDeActivity.this,XiaoXIActivity.class));
                     break;
                 case R.id.shezhi:
                     startActivity(new Intent(WoDeActivity.this, SettingActivity.class));
                     break;
-                case R.id.shebei:
-                    startActivity(new Intent(WoDeActivity.this, MyEquipment.class));
-                    break;
-                case R.id.diqu:
-                    show_toast_short("功能尚未开启");
-                    break;
-                case R.id.kaitongvip:
-                    show_toast_short("您已经是VIP");
-                    break;
-                case R.id.shangchuan:
-                    show_toast_short("功能尚未开启");
-                    break;
-
+                case R.id.yue:
+                    startActivity(new Intent(WoDeActivity.this, YuEActivity.class));
             }
 
         }
@@ -199,14 +182,13 @@ public class WoDeActivity extends BaseActivity {
                     Toast.makeText(WoDeActivity.this, "该功能尚未实现！", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.pop_ll_scan:
-                    Intent intent_scan = new Intent(WoDeActivity.this, CaptureActivity.class);
+                    Intent intent_scan = new Intent(WoDeActivity.this,CaptureActivity.class);
                     startActivity(intent_scan);
 //                    startActivityForResult(new Intent(TuiJianActivity.this, CaptureActivity.class), 0);
                     break;
             }
         }
     };
-
     /**
      * 双击退出操作
      */

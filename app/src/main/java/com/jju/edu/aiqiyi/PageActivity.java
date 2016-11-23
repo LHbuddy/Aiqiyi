@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOpenHelper;
 import com.jju.edu.aiqiyi.wode.LoginActivity;
+import com.jju.edu.aiqiyi.wode.SettingActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -171,11 +172,17 @@ public class PageActivity extends BaseActivity{
         super.onResume();
         manager.dispatchResume();
 
-        if (LoginActivity.img_get.equals("")){
-        }else {
+        if (LoginActivity.islogin ){
             ImageLoader.getInstance().displayImage(LoginActivity.img_get,WoDeActivity.user_img);
             WoDeActivity.user_name.setText(LoginActivity.name_get);
             WoDeActivity.user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
+        }else {
+            LoginActivity.islogin = false;
+            if (WoDeActivity.user_img != null) {
+                WoDeActivity.user_img.setImageResource(R.drawable.phone_my_main_icon_avatar);
+                WoDeActivity.user_name.setText("未登录");
+                WoDeActivity.user_desc.setText("登陆后可享受更多云服务");
+            }
         }
     }
 }
