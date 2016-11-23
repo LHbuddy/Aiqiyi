@@ -24,6 +24,7 @@ import com.jju.edu.aiqiyi.adapter.SportsAdapter;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.SportUtil;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -67,6 +68,7 @@ public class MyVipFragment extends Fragment {
     //判断是否是刷新，如果是就清空list集合中的内容
     private boolean isReflash;
     private LinearLayout progress;
+    private String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,6 +77,12 @@ public class MyVipFragment extends Fragment {
         progress = (LinearLayout) view.findViewById(R.id.progress);
         http_(path);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uid = LoginActivity.uid_get;
     }
 
     //加载视频信息
@@ -216,16 +224,25 @@ public class MyVipFragment extends Fragment {
     private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            //判断视频播放地址是否加载完成
-            if (isReady) {  //加载完成跳转
-                String play_path = list.get(i).getVideo_path();
-                System.out.println("视频播放地址：-----" + play_path);
-                Intent intent_play = new Intent(getContext(), PlayerActivity.class);
-                intent_play.putExtra("path", play_path);
-                startActivity(intent_play);
-            } else {   //加载未完成提示
-                Toast.makeText(getContext(), "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
+
+            if (uid.equals("")){
+                //未登录操作
+                Toast.makeText(getContext(), "您还没有登录！请登录...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),LoginActivity.class));
+            }else{
+                //判断视频播放地址是否加载完成
+                if (isReady) {  //加载完成跳转
+                    String play_path = list.get(i).getVideo_path();
+                    System.out.println("视频播放地址：-----" + play_path);
+                    Intent intent_play = new Intent(getContext(), PlayerActivity.class);
+                    intent_play.putExtra("path", play_path);
+                    startActivity(intent_play);
+                } else {   //加载未完成提示
+                    Toast.makeText(getContext(), "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
+                }
             }
+
+
         }
     };
 

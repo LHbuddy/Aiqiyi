@@ -18,6 +18,7 @@ import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import org.jsoup.Jsoup;
@@ -61,6 +62,7 @@ public class VipTechnologyFragment extends Fragment {
     private boolean isGaoXiao = false;
 
     private LinearLayout progress;
+    private String uid;
 
 
     @Override
@@ -72,6 +74,11 @@ public class VipTechnologyFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        uid = LoginActivity.uid_get;
+    }
 
     //加载视频信息
     private void http_(final String uri) {
@@ -219,16 +226,26 @@ public class VipTechnologyFragment extends Fragment {
     private AdapterView.OnItemClickListener gridViewOnItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            //判断视频播放地址是否加载完成
-            if (isReady) {  //加载完成跳转
-                String play_path = list.get(i).getVideo_path();
-                System.out.println("视频播放地址：-----" + play_path);
-                Intent intent_play = new Intent(getContext(), PlayerActivity.class);
-                intent_play.putExtra("path", play_path);
-                startActivity(intent_play);
-            } else {   //加载未完成提示
-                Toast.makeText(getContext(), "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
+
+            if (uid.equals("")){
+                //未登录操作
+                Toast.makeText(getContext(), "您还没有登录！请登录...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),LoginActivity.class));
+            }else{
+                //判断视频播放地址是否加载完成
+                if (isReady) {  //加载完成跳转
+                    String play_path = list.get(i).getVideo_path();
+                    System.out.println("视频播放地址：-----" + play_path);
+                    Intent intent_play = new Intent(getContext(), PlayerActivity.class);
+                    intent_play.putExtra("path", play_path);
+                    startActivity(intent_play);
+                } else {   //加载未完成提示
+                    Toast.makeText(getContext(), "正在加载中,请稍候！", Toast.LENGTH_SHORT).show();
+                }
             }
+
+
+
         }
     };
 

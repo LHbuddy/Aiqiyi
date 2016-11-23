@@ -59,10 +59,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_weight="1">
+
                 <ImageView
                     android:layout_width="160dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/login_qq_more"/>
+                    android:background="@drawable/login_qq_more"
+                    android:id="@+id/qq_img_login" />
             </LinearLayout>
         </LinearLayout>
 
@@ -78,8 +80,8 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/icon_sina"/>
             </LinearLayout>
             <LinearLayout
@@ -88,8 +90,8 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/icon_xiaomi"/>
             </LinearLayout>
             <LinearLayout
@@ -98,8 +100,8 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/icon_renren"/>
             </LinearLayout>
             <LinearLayout
@@ -108,8 +110,8 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/icon_baidu"/>
             </LinearLayout>
             <LinearLayout
@@ -118,8 +120,8 @@
                 android:gravity="center"
                 android:layout_weight="1">
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/icon_zhifubao"/>
             </LinearLayout>
         </LinearLayout>
