@@ -63,6 +63,7 @@
                   android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity android:name=".wode.settings.UserManagerActivity"></activity>
         <activity android:name=".wode.settings.PlayAndDownloadActivity"></activity>
+        <activity android:name=".wode.settings.UsefulActivity"></activity>
 
 
         <activity

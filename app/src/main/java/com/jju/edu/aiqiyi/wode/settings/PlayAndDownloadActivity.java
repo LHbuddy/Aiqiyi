@@ -103,16 +103,16 @@ public class PlayAndDownloadActivity extends Activity {
                     break;
                 case R.id.rl_playanddownload_play:
                     if (isChecked_play){
-                        tb_playanddownload_play.setChecked(false);
-                        tb_playanddownload_play.setBackground(
-                                getResources().getDrawable(R.drawable.phone_my_setting_switch_new)
-                        );
-                    }else {
-                        tb_playanddownload_play.setChecked(true);
-                        tb_playanddownload_play.setBackground(
-                                getResources().getDrawable(R.drawable.phone_my_setting_switch_selected_new)
-                        );
-                    }
+                    tb_playanddownload_play.setChecked(false);
+                    tb_playanddownload_play.setBackground(
+                            getResources().getDrawable(R.drawable.phone_my_setting_switch_new)
+                    );
+                }else {
+                    tb_playanddownload_play.setChecked(true);
+                    tb_playanddownload_play.setBackground(
+                            getResources().getDrawable(R.drawable.phone_my_setting_switch_selected_new)
+                    );
+                }
                     break;
                 case R.id.rl_playanddownload_wifi:
                     if (isChecked_wifi){
