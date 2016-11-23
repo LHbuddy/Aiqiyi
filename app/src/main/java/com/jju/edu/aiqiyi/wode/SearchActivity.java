@@ -201,7 +201,7 @@ public class SearchActivity extends BaseActivity {
         if (MySqliteOperation.search_exist(PageActivity.db, search, uid)) {
         } else {
             MySqliteOperation.search_add(PageActivity.db, search, uid);
-            Toast.makeText(SearchActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(SearchActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
         }
         et_search.setText("");
     }

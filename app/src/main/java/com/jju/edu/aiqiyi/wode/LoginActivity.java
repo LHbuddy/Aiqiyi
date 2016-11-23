@@ -129,7 +129,7 @@ public class LoginActivity extends Activity implements TextWatcher{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.qq_img_login:
-                    Toast.makeText(LoginActivity.this,"功能暂未开启...",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this,"功能暂未开启...",Toast.LENGTH_SHORT).show();
                     platform = SHARE_MEDIA.QQ;
                     mShareAPI.getPlatformInfo(LoginActivity.this, platform, umAuthListener);
                     break;
