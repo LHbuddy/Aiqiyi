@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
+            android:id="@+id/iv_xiaoxi_back"
             android:src="@drawable/phone_account_back_small"
             android:layout_width="40dp"
             android:layout_height="wrap_content"/>

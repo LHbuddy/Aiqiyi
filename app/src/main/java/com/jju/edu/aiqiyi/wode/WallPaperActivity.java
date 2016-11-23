@@ -12,11 +12,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.R;
@@ -37,7 +41,7 @@ public class WallPaperActivity extends Activity {
     private List<Bitmap> list = new ArrayList<Bitmap>();
     private WallPaperAdapter adapter;
     private ImageView iv_aiqiyi;
-    private ImageView search,history,outline,more;
+    private ImageView search, history, outline, more;
     private GridView gv_wallpaper;
 
 
@@ -48,14 +52,20 @@ public class WallPaperActivity extends Activity {
         setContentView(R.layout.wallpaper_activity_layout);
         initView();
         initData();
+
         //初始化适配器
-        adapter = new WallPaperAdapter(WallPaperActivity.this,list);
+        adapter = new WallPaperAdapter(WallPaperActivity.this, list);
         //给GridView添加适配器
         gv_wallpaper.setAdapter(adapter);
         //设置爱奇艺点击事件
         iv_aiqiyi.setOnClickListener(onClick);
         //设置GridView的Item点击事件
         gv_wallpaper.setOnItemLongClickListener(onItemLongClick);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     /**
@@ -77,7 +87,7 @@ public class WallPaperActivity extends Activity {
                     }
                 }
             });
-            builder.setNegativeButton("取消",null);
+            builder.setNegativeButton("取消", null);
             builder.show();
             return true;
         }
@@ -95,28 +105,32 @@ public class WallPaperActivity extends Activity {
 
     private void initData() {
         String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)){
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
             Intent intent_getData = new Intent();
             intent_getData.addCategory(Intent.CATEGORY_OPENABLE);
             intent_getData.setType("image/*");
             intent_getData.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent_getData,1);
-        }else {
+            startActivityForResult(intent_getData, 1);
+        } else {
             Toast.makeText(WallPaperActivity.this, "未检测到SD卡...", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==1){
-            Uri uri = data.getData();
-            try {
-                Bitmap bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(
-                        Uri.parse(uri.toString())
-                ));
-                list.add(bitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
+        if (data == null) {
+            Toast.makeText(WallPaperActivity.this, "您未做出选择，无法设置壁纸！", Toast.LENGTH_SHORT).show();
+        } else {
+            if (requestCode == 1) {
+                Uri uri = data.getData();
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(
+                            Uri.parse(uri.toString())
+                    ));
+                    list.add(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
