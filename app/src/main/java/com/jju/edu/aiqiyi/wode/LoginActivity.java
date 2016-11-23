@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.R;
-import com.jju.edu.aiqiyi.WoDeActivity;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
