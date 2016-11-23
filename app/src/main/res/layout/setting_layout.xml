@@ -12,7 +12,7 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/setting_back"
+            android:id="@+id/iv_setting_back"
             android:layout_width="35dp"
             android:layout_height="45dp"
             android:background="@drawable/phone_account_back_small_selected" />
@@ -51,6 +51,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_play_download"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"

@@ -11,6 +11,7 @@
         android:background="#000000">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:src="@drawable/phone_account_back_small"/>
@@ -34,36 +35,65 @@
         android:text="非wifi网络播放提醒"
         android:textColor="#838080"
         android:textSize="14sp"/>
-
-    <RadioGroup
-        android:id="@+id/rg_playanddown"
+    <LinearLayout
+        android:id="@+id/ll_ever"
         android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:background="@null"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:button="@null"
             android:text="每次提醒"
             android:textSize="16sp"
             android:textColor="#e3261818"
-            android:drawableRight="@drawable/phone_radio_selected"/>
-        <RadioButton
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_width="match_parent"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+        <ImageView
+            android:id="@+id/iv_ever"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/phone_radio_selected"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_one"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:background="@null"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center_vertical"
-            android:button="@null"
             android:text="提醒一次"
             android:textSize="16sp"
             android:textColor="#e3261818"
-            android:drawableRight="@drawable/phone_radio_selected"/>
-    </RadioGroup>
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/phone_radio_selected"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_playanddownload_play"
@@ -86,8 +116,12 @@
         <ToggleButton
             android:id="@+id/tb_playanddownload_play"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:textOn=""
+            android:textOff=""
+            android:layout_centerVertical="true"
+            android:background="@drawable/phone_my_setting_switch_new"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -111,8 +145,12 @@
         <ToggleButton
             android:id="@+id/tb_playanddownload_wifi"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:textOn=""
+            android:textOff=""
+            android:layout_centerVertical="true"
+            android:background="@drawable/phone_my_setting_switch_new"/>
     </RelativeLayout>
 
     <TextView
@@ -156,8 +194,8 @@
             android:orientation="horizontal"></LinearLayout>
         <ImageView
             android:id="@+id/iv_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/phone_radio_selected"/>
     </LinearLayout>
 </LinearLayout>
