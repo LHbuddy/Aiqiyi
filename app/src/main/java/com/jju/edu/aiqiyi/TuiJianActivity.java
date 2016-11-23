@@ -172,7 +172,7 @@ public class TuiJianActivity extends BaseFragmentActivity {
                     pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.ll_search:
-                    Toast.makeText(TuiJianActivity.this, "", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(TuiJianActivity.this,SearchActivity.class));
                     break;
             }
         }

@@ -101,14 +101,21 @@ public class VideoActivity extends BaseActivity {
                         Element element = e.get(i);
                         String path = element.getElementsByTag("a").get(0).attr("href");
                         String image_path = element.getElementsByTag("img").attr("src");
-                        String video_name = element.getElementsByTag("a").get(2).attr("title");
+                        String video_name = "";
                         String video_desc = "";
-                        if (element.getElementsByTag("p").size() !=0 ){
+                        if (title_center1.split("娱乐").length>=2 || title_center1.split("新闻").length>=2
+                                || title_center1.split("体育").length>=2 ||title_center1.split("搞笑").length>=2){
+                            video_name = element.getElementsByTag("img").attr("alt");
+                            isGaoXiao = true;
+                        }else {
                             isGaoXiao = false;
+                            video_name = element.getElementsByTag("a").get(2).attr("title");
+                        }
+                        if (element.getElementsByTag("p").size() !=0 ){
                             video_desc = element.getElementsByTag("p").first().text();
                         }else {
                             isGaoXiao = true;
-                            video_desc = element.getElementsByTag("h3").text();
+                            video_desc = "阅读："+element.getElementsByTag("h3").text();
                         }
                         videoUtil.setVideo_name(video_name);
                         videoUtil.setVideo_image(image_path);

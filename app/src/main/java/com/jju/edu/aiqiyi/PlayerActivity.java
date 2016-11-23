@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOperation;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -33,11 +34,14 @@ public class PlayerActivity extends BaseActivity {
     private String img;
     private String name;
     private String desc;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player_layout);
+
+        uid = LoginActivity.uid_get;
 
         webview = (WebView) findViewById(R.id.webview);
         iv_video_title_back = (ImageView) findViewById(R.id.iv_video_title_back);
@@ -48,7 +52,6 @@ public class PlayerActivity extends BaseActivity {
         // 设置WebView属性，能够执行Javascript脚本
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setPluginState(WebSettings.PluginState.ON);
-
         webview.setVisibility(View.VISIBLE);
         webview.getSettings().setUseWideViewPort(true);
 
@@ -64,7 +67,7 @@ public class PlayerActivity extends BaseActivity {
 
 
         //判断是否修改标题栏收藏图标
-        if (MySqliteOperation.collect_exist(PageActivity.db,path,"")){
+        if (MySqliteOperation.collect_exist(PageActivity.db,path,uid)){
             iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt_selected);
         }else {
             iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt);
@@ -81,9 +84,11 @@ public class PlayerActivity extends BaseActivity {
             }
         });
 
+
         getmessage_();
 
     }
+
     //获取播放视频的信息
     public void getmessage_(){
         new Thread() {
@@ -113,9 +118,9 @@ public class PlayerActivity extends BaseActivity {
             switch (msg.what){
                 case 123:
                     //数据库操作
-                    if (MySqliteOperation.history_exist(PageActivity.db,path,"")){
+                    if (MySqliteOperation.history_exist(PageActivity.db,path,uid)){
                     }else {
-                        MySqliteOperation.history_add(PageActivity.db,img,name,desc,path,gettime(),"");
+                        MySqliteOperation.history_add(PageActivity.db,img,name,desc,path,gettime(),uid);
                     }
                     break;
 
@@ -148,12 +153,12 @@ public class PlayerActivity extends BaseActivity {
                     finish();
                     break;
                 case R.id.iv_video_title_shoucang:
-                    if (MySqliteOperation.collect_exist(PageActivity.db,path,"")){
-                        MySqliteOperation.collect_delete_one(PageActivity.db,path,"");
+                    if (MySqliteOperation.collect_exist(PageActivity.db,path,uid)){
+                        MySqliteOperation.collect_delete_one(PageActivity.db,path,uid);
                         Toast.makeText(PlayerActivity.this,"取消收藏",Toast.LENGTH_SHORT).show();
                         iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt);
                     }else {
-                        MySqliteOperation.collect_add(PageActivity.db,img,name,desc,path,"");
+                        MySqliteOperation.collect_add(PageActivity.db,img,name,desc,path,uid);
                         Toast.makeText(PlayerActivity.this,"已添加到收藏夹",Toast.LENGTH_SHORT).show();
                         iv_video_title_shoucang.setBackgroundResource(R.drawable.ic_comment_favour_bt_selected);
                     }

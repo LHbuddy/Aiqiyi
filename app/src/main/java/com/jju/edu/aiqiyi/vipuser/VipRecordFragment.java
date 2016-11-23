@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.PlayerActivity;
 import com.jju.edu.aiqiyi.R;
@@ -22,6 +23,7 @@ import com.jju.edu.aiqiyi.adapter.SportsAdapter;
 import com.jju.edu.aiqiyi.adapter.VideoGridAdapter;
 import com.jju.edu.aiqiyi.entity.VideoUtil;
 import com.jju.edu.aiqiyi.util.SportUtil;
+import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.jsoup.Jsoup;
@@ -59,6 +61,7 @@ public class VipRecordFragment extends Fragment {
     private TextView text_more03;
     private LinearLayout progress;
 
+    private String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +80,12 @@ public class VipRecordFragment extends Fragment {
 
         getmessage_();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uid = LoginActivity.uid_get;
     }
 
     //信息爬取方法
@@ -185,21 +194,28 @@ public class VipRecordFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             // Toast.makeText(getActivity(),""+parent,Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(),PlayerActivity.class);
-            String info = "";
-            switch (parent.getId()){
-                case R.id.grid_view01:
-                    info = list01.get(position).getVideo_path();
-                    break;
-                case R.id.grid_view02:
-                    info = list02.get(position).getVideo_path();
-                    break;
-                case R.id.grid_view03:
-                    info = list03.get(position).getVideo_path();
-                    break;
+
+            if (uid.equals("")){
+                //未登录操作
+                Toast.makeText(getContext(), "您还没有登录！请登录...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),LoginActivity.class));
+            }else{
+                Intent intent = new Intent(getActivity(),PlayerActivity.class);
+                String info = "";
+                switch (parent.getId()){
+                    case R.id.grid_view01:
+                        info = list01.get(position).getVideo_path();
+                        break;
+                    case R.id.grid_view02:
+                        info = list02.get(position).getVideo_path();
+                        break;
+                    case R.id.grid_view03:
+                        info = list03.get(position).getVideo_path();
+                        break;
+                }
+                intent.putExtra("path",info);
+                startActivity(intent);
             }
-            intent.putExtra("path",info);
-            startActivity(intent);
 
         }
     };
