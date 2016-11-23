@@ -2,7 +2,6 @@ package com.jju.edu.aiqiyi.wode;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,10 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SlidingDrawer;
 import android.widget.Toast;
-
 import com.jju.edu.aiqiyi.R;
-import com.jju.edu.aiqiyi.WoDeActivity;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -35,6 +33,8 @@ public class LoginActivity extends Activity implements TextWatcher{
     private ImageView qq_img_login;
     private Button button_login;
     private EditText et_username,et_password;
+    private SlidingDrawer sliding;
+    private ImageView handle_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,27 @@ public class LoginActivity extends Activity implements TextWatcher{
         setContentView(R.layout.login_layout);
         mShareAPI = UMShareAPI.get( LoginActivity.this );
 
+        init_view();
+
+        sliding = (SlidingDrawer) findViewById(R.id.sliding);
+        handle_img = (ImageView) findViewById(R.id.handle_img);
+        sliding.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
+            @Override
+            public void onDrawerOpened() {
+                handle_img.setBackgroundResource(R.drawable.player_common_expand_normal);
+            }
+        });
+        sliding.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                handle_img.setBackgroundResource(R.drawable.player_common_collapse_normal);
+            }
+        });
+
+
+    }
+
+    public void init_view(){
         login_back = (ImageView) findViewById(R.id.login_back);
         qq_img_login = (ImageView) findViewById(R.id.qq_img_login);
         button_login = (Button) findViewById(R.id.button_login);
@@ -52,9 +73,7 @@ public class LoginActivity extends Activity implements TextWatcher{
         login_back.setOnClickListener(new myonclick());
         qq_img_login.setOnClickListener(new myonclick());
         button_login.setOnClickListener(new myonclick());
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -110,6 +129,7 @@ public class LoginActivity extends Activity implements TextWatcher{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.qq_img_login:
+                    Toast.makeText(LoginActivity.this,"功能暂未开启...",Toast.LENGTH_SHORT).show();
                     platform = SHARE_MEDIA.QQ;
                     mShareAPI.getPlatformInfo(LoginActivity.this, platform, umAuthListener);
                     break;
