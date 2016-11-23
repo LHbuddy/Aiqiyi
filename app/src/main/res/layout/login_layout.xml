@@ -12,7 +12,7 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/setting_back"
+            android:id="@+id/login_back"
             android:layout_width="35dp"
             android:layout_height="45dp"
             android:background="@drawable/phone_account_back_small_selected" />
@@ -43,8 +43,10 @@
             android:textSize="15sp"
             android:text="账号："/>
         <EditText
+            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape02"
             android:hint="手机号或邮箱"
             android:textSize="13sp"/>
     </LinearLayout>
@@ -67,9 +69,11 @@
             android:textSize="15sp"
             android:text="密码："/>
         <EditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="6-20位数字、字母或字符，区分大小写"
+            android:background="@drawable/shape02"
             android:textSize="13sp"/>
     </LinearLayout>
     <RelativeLayout
@@ -97,9 +101,11 @@
             android:text="扫描二维码登录"/>
     </RelativeLayout>
     <Button
-        android:onClick="qq"
+        android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape05"
+        android:textColor="#FFFFFF"
         android:text="登录"/>
 
     <RelativeLayout
