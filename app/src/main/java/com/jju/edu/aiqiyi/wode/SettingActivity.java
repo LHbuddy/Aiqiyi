@@ -138,7 +138,18 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(SettingActivity.this,PluginActivity.class));
                 break;
             case R.id.login_out:
-                mShareAPI.deleteOauth(SettingActivity.this, SHARE_MEDIA.QQ, umdelAuthListener);
+                AlertDialog.Builder dialog_out = new AlertDialog.Builder(this);
+                dialog_out.setTitle("提示");
+                dialog_out.setMessage("您确定退出吗?");
+                dialog_out.setCancelable(false);
+                dialog_out.setNegativeButton("取消", null);
+                dialog_out.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mShareAPI.deleteOauth(SettingActivity.this, SHARE_MEDIA.QQ, umdelAuthListener);
+                    }
+                });
+                dialog_out.show();
             default:
                 break;
         }
