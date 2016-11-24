@@ -29,6 +29,9 @@ public class LoginActivity extends Activity implements TextWatcher{
     public static String img_get = "";
     public static String name_get = "";
     public static String uid_get= "";
+    public  static  String gender_get = "";
+    public static String where_get="";
+    public static boolean islogin = false;
     private ImageView login_back;
     private ImageView qq_img_login;
     private Button button_login;
@@ -84,10 +87,15 @@ public class LoginActivity extends Activity implements TextWatcher{
 
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            if(map.toString()!=null){
+                islogin =true;
+            }
             img_get = map.get("profile_image_url");
             name_get = map.get("screen_name");
             uid_get = map.get("uid");
-            Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
+            gender_get = map.get("gender");
+            where_get = map.get("province") + map.get("city");
+            //    Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
             finish();
         }
 
