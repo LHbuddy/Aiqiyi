@@ -180,7 +180,7 @@ public class DongManFragment extends Fragment {
                         public void onClick(View v) {
 
                             Intent intent_dongmna = new Intent(getActivity(), PlayerActivity.class);
-                            //intent_dongmna.putExtra("path", path_dianshiju);
+                            intent_dongmna.putExtra("path", olist.get(0).getVideo_path());
                             startActivity(intent_dongmna);
                         }
                     });
@@ -219,11 +219,23 @@ public class DongManFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (parent.getId()) {
-                case R.id.gridview_dianshiju_USdrama:
-                    String path_dianshiju = olist.get(position).getVideo_path();
-                    Intent intent_dianshiju = new Intent(getActivity(), PlayerActivity.class);
-                    intent_dianshiju.putExtra("path", path_dianshiju);
-                    startActivity(intent_dianshiju);
+                case R.id.gridview_dongman:
+                    String path_dongman = olist_.get(position).getVideo_path();
+                    Intent intent_dongman = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dongman.putExtra("path", path_dongman);
+                    startActivity(intent_dongman);
+                    break;
+                case R.id.dm_grid_view02:
+                    String path_dongman02 = list02.get(position).getVideo_path();
+                    Intent intent_dongman02 = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dongman02.putExtra("path", path_dongman02);
+                    startActivity(intent_dongman02);
+                    break;
+                case R.id.dm_grid_view01:
+                    String path_dongman01 = list01.get(position).getVideo_path();
+                    Intent intent_dongman01 = new Intent(getActivity(), PlayerActivity.class);
+                    intent_dongman01.putExtra("path", path_dongman01);
+                    startActivity(intent_dongman01);
                     break;
             }
         }
