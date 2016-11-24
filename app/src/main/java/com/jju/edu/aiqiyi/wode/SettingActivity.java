@@ -85,7 +85,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 if(LoginActivity.islogin) {
                     startActivity(new Intent(SettingActivity.this, UserManagerActivity.class));
                 }else {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(SettingActivity.this);
+                    dialog.setTitle("提示");
+                    dialog.setMessage("您还没有登录！");
+                    dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    });
+                    dialog.show();
                 }
                 break;
             case R.id.rl_play_download:
