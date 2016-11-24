@@ -24,6 +24,8 @@ import com.jju.edu.aiqiyi.wode.SearchActivity;
 import com.jju.edu.aiqiyi.wode.WallPaperActivity;
 import com.jju.edu.aiqiyi.wode.XiaoXIActivity;
 import com.jju.edu.aiqiyi.wode.SettingActivity;
+import com.jju.edu.aiqiyi.wode.settings.UserManagerActivity;
+import com.jju.edu.aiqiyi.wode.settings.YuEActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -71,7 +73,7 @@ public class WoDeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("$$$$$$$$$$$$$$$$$$", LoginActivity.img_get + "" + LoginActivity.name_get);
+    //    Log.e("$$$$$$$$$$$$$$$$$$", LoginActivity.img_get + "" + LoginActivity.name_get);
         if (LoginActivity.img_get.equals("")) {
         } else {
             ImageLoader.getInstance().displayImage(LoginActivity.img_get, user_img);
@@ -147,7 +149,11 @@ public class WoDeActivity extends BaseActivity {
                     pop_ll_scan.setOnClickListener(popOnClick);
                     break;
                 case R.id.denglu:
-                    startActivity(new Intent(WoDeActivity.this, LoginActivity.class));
+                    if (!LoginActivity.islogin) {
+                        startActivity(new Intent(WoDeActivity.this, LoginActivity.class));
+                    }else {
+                        startActivity(new Intent(WoDeActivity.this, UserManagerActivity.class));
+                    }
                     break;
                 case R.id.lixianguankan:
                     startActivity(new Intent(WoDeActivity.this, LocalVideoActivity.class));
@@ -161,6 +167,8 @@ public class WoDeActivity extends BaseActivity {
                 case R.id.bangzhu:
                     startActivity(new Intent(WoDeActivity.this, HelpBack_Activity.class));
                     break;
+                case R.id.yue:
+                    startActivity(new Intent(WoDeActivity.this, YuEActivity.class));
                 case R.id.pifu:
                     startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
                     break;
@@ -177,7 +185,11 @@ public class WoDeActivity extends BaseActivity {
                     show_toast_short("功能尚未开启");
                     break;
                 case R.id.kaitongvip:
-                    show_toast_short("您已经是VIP");
+                    if (!LoginActivity.islogin) {
+                        show_toast_short("请登录");
+                    } else {
+                        show_toast_short("您已经是VIP");
+                    }
                     break;
                 case R.id.shangchuan:
                     show_toast_short("功能尚未开启");

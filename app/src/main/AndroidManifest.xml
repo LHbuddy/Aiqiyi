@@ -68,6 +68,7 @@
         <activity android:name=".wode.settings.UserManagerActivity"/>
         <activity android:name=".wode.settings.PlayAndDownloadActivity"/>
         <activity android:name=".wode.settings.UsefulActivity"></activity>
+        <activity android:name=".wode.settings.YuEActivity"></activity>
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

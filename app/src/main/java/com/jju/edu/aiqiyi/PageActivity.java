@@ -20,11 +20,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by 凌浩 on 2016/11/14.
  */
 
-public class PageActivity extends BaseActivity{
+public class PageActivity extends BaseActivity {
 
     private TabHost tab_host;
-    private ImageView image1, image2, image3, image4,image5;
-    private TextView text1, text2, text3, text4,text5;
+    private ImageView image1, image2, image3, image4, image5;
+    private TextView text1, text2, text3, text4, text5;
     public static LocalActivityManager manager;
     private MySqliteOpenHelper mySqliteOpenHelper;
     public static SQLiteDatabase db;
@@ -34,7 +34,7 @@ public class PageActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page_layout);
 
-        mySqliteOpenHelper = new MySqliteOpenHelper(PageActivity.this,"message.db",null,1);
+        mySqliteOpenHelper = new MySqliteOpenHelper(PageActivity.this, "message.db", null, 1);
         db = mySqliteOpenHelper.getReadableDatabase();
 
 
@@ -145,7 +145,7 @@ public class PageActivity extends BaseActivity{
                     text4.setTextColor(Color.GREEN);
                     image5.setBackgroundResource(R.drawable.phone_navi_friend);
                     text5.setTextColor(Color.GRAY);
-                }else if (tabId.equals("fivespec")) {
+                } else if (tabId.equals("fivespec")) {
                     image1.setBackgroundResource(R.drawable.phone_navi_recom);
                     text1.setTextColor(Color.GRAY);
                     image2.setBackgroundResource(R.drawable.phone_navi_cate);
@@ -166,16 +166,23 @@ public class PageActivity extends BaseActivity{
         return super.onTouchEvent(event);
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         manager.dispatchResume();
 
-        if (LoginActivity.img_get.equals("")){
-        }else {
-            ImageLoader.getInstance().displayImage(LoginActivity.img_get,WoDeActivity.user_img);
+        if (LoginActivity.islogin) {
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get, WoDeActivity.user_img);
             WoDeActivity.user_name.setText(LoginActivity.name_get);
-            WoDeActivity.user_desc.setText("尊敬的VIP会员 "+LoginActivity.name_get+" 欢迎你！");
+            WoDeActivity.user_desc.setText("尊敬的VIP会员 " + LoginActivity.name_get + " 欢迎你！");
+        } else {
+            LoginActivity.islogin = false;
+            if (WoDeActivity.user_img != null) {
+                WoDeActivity.user_img.setImageResource(R.drawable.phone_my_main_icon_avatar);
+                WoDeActivity.user_name.setText("未登录");
+                WoDeActivity.user_desc.setText("登陆后可享受更多云服务");
+            }
         }
     }
 }
