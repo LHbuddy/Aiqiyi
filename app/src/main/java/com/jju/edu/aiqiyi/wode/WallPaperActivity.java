@@ -52,28 +52,21 @@ public class WallPaperActivity extends Activity {
         setContentView(R.layout.wallpaper_activity_layout);
         initView();
         initData();
+
+        //初始化适配器
+        adapter = new WallPaperAdapter(WallPaperActivity.this,list);
+        //给GridView添加适配器
+        gv_wallpaper.setAdapter(adapter);
+        //设置爱奇艺点击事件
+        iv_aiqiyi.setOnClickListener(onClick);
+        //设置GridView的Item点击事件
+        gv_wallpaper.setOnItemLongClickListener(onItemLongClick);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (list.size()==0){
-            gv_wallpaper.setVisibility(View.GONE);
-            TextView textView = new TextView(WallPaperActivity.this);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            textView.setLayoutParams(params);
-            textView.setGravity(Gravity.CENTER);
-        }else {
-            //初始化适配器
-            adapter = new WallPaperAdapter(WallPaperActivity.this,list);
-            //给GridView添加适配器
-            gv_wallpaper.setAdapter(adapter);
-            //设置爱奇艺点击事件
-            iv_aiqiyi.setOnClickListener(onClick);
-            //设置GridView的Item点击事件
-            gv_wallpaper.setOnItemLongClickListener(onItemLongClick);
-        }
+
     }
 
     /**
