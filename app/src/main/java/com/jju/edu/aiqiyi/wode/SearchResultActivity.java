@@ -47,10 +47,13 @@ public class SearchResultActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && search_webview.canGoBack()) {
-            search_webview.goBack();// 返回前一个页面
-            return true;
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            if (search_webview.canGoBack()){
+                search_webview.goBack();// 返回前一个页面
+            }else {
+                SearchResultActivity.this.finish();
+            }
         }
-        return super.onKeyDown(keyCode, event);
+        return true;
     }
 }

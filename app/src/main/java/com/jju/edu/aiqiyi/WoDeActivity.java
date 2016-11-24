@@ -169,6 +169,7 @@ public class WoDeActivity extends BaseActivity {
                     break;
                 case R.id.yue:
                     startActivity(new Intent(WoDeActivity.this, YuEActivity.class));
+                    break;
                 case R.id.pifu:
                     startActivity(new Intent(WoDeActivity.this, WallPaperActivity.class));
                     break;
