@@ -120,6 +120,7 @@ public class SearchActivity extends BaseActivity {
                 intent.putExtra("path",path_);
                 startActivity(intent);
 
+
             }
         });
     }
