@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jju.edu.aiqiyi.sqlite.MySqliteOpenHelper;
+import com.jju.edu.aiqiyi.vipuser.MyVipFragment;
+import com.jju.edu.aiqiyi.vipuser.VipGameFragment;
+import com.jju.edu.aiqiyi.vipuser.VipRecordFragment;
+import com.jju.edu.aiqiyi.vipuser.VipTechnologyFragment;
 import com.jju.edu.aiqiyi.wode.LoginActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -176,6 +180,11 @@ public class PageActivity extends BaseActivity {
             ImageLoader.getInstance().displayImage(LoginActivity.img_get, WoDeActivity.user_img);
             WoDeActivity.user_name.setText(LoginActivity.name_get);
             WoDeActivity.user_desc.setText("尊敬的VIP会员 " + LoginActivity.name_get + " 欢迎你！");
+            VipGameFragment.uid = LoginActivity.uid_get;
+            MyVipFragment.uid = LoginActivity.uid_get;
+            VipRecordFragment.uid = LoginActivity.uid_get;
+            VipTechnologyFragment.uid = LoginActivity.uid_get;
+
         } else {
             LoginActivity.islogin = false;
             if (WoDeActivity.user_img != null) {

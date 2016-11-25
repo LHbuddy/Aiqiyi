@@ -68,7 +68,7 @@ public class MyVipFragment extends Fragment {
     //判断是否是刷新，如果是就清空list集合中的内容
     private boolean isReflash;
     private LinearLayout progress;
-    private String uid;
+    public static String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

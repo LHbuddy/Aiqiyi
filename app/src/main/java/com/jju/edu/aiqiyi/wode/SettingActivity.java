@@ -147,9 +147,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mShareAPI.deleteOauth(SettingActivity.this, SHARE_MEDIA.QQ, umdelAuthListener);
+                        LoginActivity.uid_get = "";
+                        LoginActivity.islogin = false;
+                        LoginActivity.img_get = "";
+                        LoginActivity.gender_get = "";
+                        LoginActivity.name_get = "";
+                        LoginActivity.where_get = "";
                     }
                 });
                 dialog_out.show();
+
             default:
                 break;
         }

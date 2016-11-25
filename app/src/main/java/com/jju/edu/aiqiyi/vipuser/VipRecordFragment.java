@@ -61,7 +61,7 @@ public class VipRecordFragment extends Fragment {
     private TextView text_more03;
     private LinearLayout progress;
 
-    private String uid;
+    public static String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

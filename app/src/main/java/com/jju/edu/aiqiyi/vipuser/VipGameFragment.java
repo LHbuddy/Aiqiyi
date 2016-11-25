@@ -72,7 +72,7 @@ public class VipGameFragment extends Fragment {
     //判断是否是搞笑界面，如果是就加载另一个布局
     private boolean isGaoXiao = false;
     private LinearLayout progress;
-    private String uid;
+    public static String uid;
 
 
     @Override

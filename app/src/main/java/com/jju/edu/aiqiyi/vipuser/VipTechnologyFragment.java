@@ -62,7 +62,7 @@ public class VipTechnologyFragment extends Fragment {
     private boolean isGaoXiao = false;
 
     private LinearLayout progress;
-    private String uid;
+    public static String uid;
 
 
     @Override
