@@ -3,6 +3,7 @@ package com.jju.edu.aiqiyi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +29,13 @@ import com.jju.edu.aiqiyi.wode.settings.UserManagerActivity;
 import com.jju.edu.aiqiyi.wode.settings.YuEActivity;
 import com.jju.edu.aiqiyi.zxing.activity.CaptureActivity;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedVignetteBitmapDisplayer;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -53,7 +58,7 @@ public class WoDeActivity extends BaseActivity {
 
     public static ImageView user_img;
     public static TextView user_name, user_desc;
-
+    private DisplayImageOptions options;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +71,13 @@ public class WoDeActivity extends BaseActivity {
                 .diskCacheSize(50 * 1024 * 1024)
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(configuration);
-
+        options = new DisplayImageOptions.Builder()
+                .bitmapConfig(Bitmap.Config.ARGB_8888).cacheInMemory(true)
+                .cacheOnDisk(true).imageScaleType(ImageScaleType.EXACTLY)
+                .showImageForEmptyUri(R.drawable.phone_my_main_icon_avatar)
+                .showImageOnFail(R.drawable.phone_my_main_icon_avatar)
+                .showImageOnLoading(R.drawable.phone_my_main_icon_avatar)
+                .displayer(new RoundedBitmapDisplayer(10)).build();
         initview();
     }
 
@@ -76,7 +87,7 @@ public class WoDeActivity extends BaseActivity {
     //    Log.e("$$$$$$$$$$$$$$$$$$", LoginActivity.img_get + "" + LoginActivity.name_get);
         if (LoginActivity.img_get.equals("")) {
         } else {
-            ImageLoader.getInstance().displayImage(LoginActivity.img_get, user_img);
+            ImageLoader.getInstance().displayImage(LoginActivity.img_get, user_img,options);
             user_name.setText(LoginActivity.name_get);
             user_desc.setText("尊敬的VIP会员 " + LoginActivity.name_get + " 欢迎你！");
         }
