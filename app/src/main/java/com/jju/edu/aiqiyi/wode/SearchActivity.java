@@ -112,6 +112,16 @@ public class SearchActivity extends BaseActivity {
         //Log.e("************", "" + list03.size());
         adapter03 = new NewsAdapter(list03, SearchActivity.this);
         search_list.setAdapter(adapter03);
+        search_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String path_ = "http://m.tv.sohu.com/upload/h5/m/mso.html?key="+list03.get(position).getName();
+                Intent intent = new Intent(SearchActivity.this,SearchResultActivity.class);
+                intent.putExtra("path",path_);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private TextWatcher mTextWatcher = new TextWatcher() {
